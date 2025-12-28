@@ -84,6 +84,14 @@ export interface NavigationRootItemBasicType {
   iconName: DynamicIconNameType
 }
 
+export interface FileType {
+  id: string
+  name: string
+  size: number
+  type: string
+  url: string
+}
+
 export interface NavigationRootItemWithHrefType
   extends NavigationRootItemBasicType {
   href: string

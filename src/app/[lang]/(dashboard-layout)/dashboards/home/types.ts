@@ -103,3 +103,11 @@ export interface RetentionVsChurnType {
   period: string
   summary: { retention: number; churn: number; total: number }
 }
+
+export interface CustomerInsightsType {
+  period: string
+  totalCustomers: number
+  newCustomers: number
+  returningCustomers: number
+  vipCustomers: number
+}
