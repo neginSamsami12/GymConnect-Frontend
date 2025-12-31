@@ -14,6 +14,10 @@ import type {
 import { teamMembersData } from "../_data/team-members"
 
 import { KanbanReducer } from "../_reducers/kanban-reducer"
+import { CreateUserRequest } from "@/services/users/mutations/createUsers"
+import { useCreateUser, useUpdateUser } from "@/services/users/useUsersApis"
+import { useQueryClient } from "@tanstack/react-query"
+import { UpdateUserRequest } from "@/services/users/mutations/updateUsers"
 
 // Create Kanban context
 export const KanbanContext = createContext<KanbanContextType | undefined>(
@@ -58,15 +62,34 @@ export function KanbanProvider({ kanbanData, children }: KanbanProviderProps) {
   }
 
   // Handlers for task actions
+  const queryClient = useQueryClient()
+  const addUserMutation = useCreateUser()
+  const updateUserMutation = useUpdateUser()
+
   const handleAddTask = (
-    task: TaskWithoutIdAndOrderAndColumnIdType,
-    columnId: ColumnType["id"]
+    user: CreateUserRequest
   ) => {
-    dispatch({ type: "addTask", task, columnId })
+    addUserMutation.mutate(user, {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries({ queryKey: ["GetUserInfo"] })
+      },
+      onError: (error) => {
+        console.error("Error adding user:", error)
+      },
+    })
   }
 
-  const handleUpdateTask = (task: TaskType) => {
-    dispatch({ type: "updateTask", task })
+  const handleUpdateTask = (
+    user:  UpdateUserRequest
+  ) => {
+    updateUserMutation.mutate(user, {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries({ queryKey: ["GetUserInfo"] })
+      },
+      onError: (error) => {
+        console.error("Error adding user:", error)
+      },
+    })
   }
 
   const handleDeleteTask = (taskId: TaskType["id"]) => {

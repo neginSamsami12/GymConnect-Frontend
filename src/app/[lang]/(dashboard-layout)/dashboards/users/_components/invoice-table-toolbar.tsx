@@ -18,9 +18,9 @@ export function InvoiceTableToolbar<TTable>({
       <Input
         placeholder=" جستجو توسط کدملی..."
         className="border border-input bg-background hover:bg-accent hover:text-accent-foreground"
-        value={(table.getColumn("invoiceId")?.getFilterValue() as string) ?? ""}
+        value={(table.getColumn("nationalId")?.getFilterValue() as string) ?? ""}
         onChange={(event) =>
-          table.getColumn("invoiceId")?.setFilterValue(event.target.value)
+          table.getColumn("nationalId")?.setFilterValue(event.target.value)
         }
       />
     </div>

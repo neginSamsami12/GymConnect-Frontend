@@ -38,9 +38,11 @@ export interface TrafficSourcesType {
 
 export interface EngagementByDeviceType {
   deviceType: string
-  sessionDuration: number
+  lastName: string,
+  leaveTime: string,
+  sessionDuration: string
   pagesPerSession: number
-  bounceRate: number
+  bounceRate: string
   userPercentage: number
   conversionRate: number
 }

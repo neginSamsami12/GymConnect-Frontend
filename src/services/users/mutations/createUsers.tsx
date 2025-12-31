@@ -7,7 +7,7 @@ import { ApiResponse } from "../../apiTypes"
 export interface CreateUserRequest {
   firstName: string
   lastName: string
-  phone: number
+  phone: string
   nationalId: string
   birthDate: string
   email: string
@@ -25,6 +25,7 @@ export async function createUser(
     lastName: data.lastName,
     phone: data.phone,
     nationalId: data.nationalId,
+    birthDate: data.birthDate,
     email: data.email,
     address: data.address,
   })
