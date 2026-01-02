@@ -23,6 +23,9 @@ importers:
       '@radix-ui/react-alert-dialog':
         specifier: 1.1.1
         version: 1.1.1(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.1.3(react@19.1.3))(react@19.1.3)
+      '@radix-ui/react-aspect-ratio':
+        specifier: 1.1.0
+        version: 1.1.0(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.1.3(react@19.1.3))(react@19.1.3)
       '@radix-ui/react-avatar':
         specifier: 1.1.0
         version: 1.1.0(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.1.3(react@19.1.3))(react@19.1.3)
@@ -137,6 +140,9 @@ importers:
       react-icons:
         specifier: 5.5.0
         version: 5.5.0(react@19.1.3)
+      react-phone-number-input:
+        specifier: 3.4.5
+        version: 3.4.5(react-dom@19.1.3(react@19.1.3))(react@19.1.3)
       react-use:
         specifier: 17.5.1
         version: 17.5.1(react-dom@19.1.3(react@19.1.3))(react@19.1.3)
@@ -620,6 +626,19 @@ packages:
 
   '@radix-ui/react-arrow@1.1.1':
     resolution: {integrity: sha512-NaVpZfmv8SKeZbn4ijN2V3jlHA9ngBG16VnIIm22nUR0Yk8KUALyBxT3KYEUnNuch9sTE8UTsS3whzBgKOL30w==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+
+  '@radix-ui/react-aspect-ratio@1.1.0':
+    resolution: {integrity: sha512-dP87DM/Y7jFlPgUZTlhx6FF5CEzOiaxp2rBCKlaXlpH5Ip/9Fg5zZ9lDOQ5o/MOfUlf36eak14zoWYpgcgGoOg==}
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
@@ -1869,6 +1888,9 @@ packages:
   class-variance-authority@0.7.1:
     resolution: {integrity: sha512-Ka+9Trutv7G8M6WT6SeiRWz792K5qEqIGEGzXKhAE6xOWAY6pPH8U+9IY3oCMv6kqTmLsv7Xh/2w2RigkePMsg==}
 
+  classnames@2.5.1:
+    resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
+
   client-only@0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
 
@@ -1905,6 +1927,9 @@ packages:
 
   copy-to-clipboard@3.3.3:
     resolution: {integrity: sha512-2KV8NhB5JqC3ky0r9PMCAZKbUHSwtEo4CwCs0KXgruG43gX5PMqDEBbVU4OUzw2MuAWUfsuFmWvEKG5QRfSnJA==}
+
+  country-flag-icons@1.6.4:
+    resolution: {integrity: sha512-Z3Zi419FI889tlElMsVhCIS5eRkiLDWixr576J5DPiTe5RGxpbRi+enMpHdYVp5iK5WFjr8P/RgyIFAGhFsiFg==}
 
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
@@ -2441,6 +2466,17 @@ packages:
   inline-style-prefixer@7.0.1:
     resolution: {integrity: sha512-lhYo5qNTQp3EvSSp3sRvXMbVQTLrvGV6DycRMJ5dm2BLMiJ30wpXKdDdgX+GmJZ5uQMucwRKHamXSst3Sj/Giw==}
 
+  input-format@0.3.14:
+    resolution: {integrity: sha512-gHMrgrbCgmT4uK5Um5eVDUohuV9lcs95ZUUN9Px2Y0VIfjTzT2wF8Q3Z4fwLFm7c5Z2OXCm53FHoovj6SlOKdg==}
+    peerDependencies:
+      react: '>=18.1.0'
+      react-dom: '>=18.1.0'
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
   input-otp@1.4.2:
     resolution: {integrity: sha512-l3jWwYNvrEa6NTCt7BECfCm48GvwuZzkoeG3gBL2w4CHeOXW3eKFmf9UNYkNfYc3mxMrthMnxjIE07MT0zLBQA==}
     peerDependencies:
@@ -2620,6 +2656,9 @@ packages:
   levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
+
+  libphonenumber-js@1.12.33:
+    resolution: {integrity: sha512-r9kw4OA6oDO4dPXkOrXTkArQAafIKAU71hChInV4FxZ69dxCfbwQGDPzqR5/vea94wU705/3AZroEbSoeVWrQw==}
 
   lightningcss-darwin-arm64@1.29.2:
     resolution: {integrity: sha512-cK/eMabSViKn/PG8U/a7aCorpeKLMlK0bQeNHmdb7qUnBkNPnL+oV5DjJUo0kqWsJUapZsM4jCfYItbqBDvlcA==}
@@ -2994,6 +3033,12 @@ packages:
 
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
+
+  react-phone-number-input@3.4.5:
+    resolution: {integrity: sha512-IlLTG0F/2P+72drqGNiYaguV3KOD4EVxQWGJ7YSofbOb6vyCWWLJqQIQsFFNpfrMrXzYtB3G+aHL9tprGfisFw==}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
 
   react-remove-scroll-bar@2.3.8:
     resolution: {integrity: sha512-9r+yi9+mgU33AKcj6IbT9oRCO78WriSj6t/cF8DWBZJ9aOGPOTEDvdUDz1FwKim7QXWwmHqtdHnRJfhAxEG46Q==}
@@ -3801,6 +3846,15 @@ snapshots:
   '@radix-ui/react-arrow@1.1.1(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.1.3(react@19.1.3))(react@19.1.3)':
     dependencies:
       '@radix-ui/react-primitive': 2.0.1(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.1.3(react@19.1.3))(react@19.1.3)
+      react: 19.1.3
+      react-dom: 19.1.3(react@19.1.3)
+    optionalDependencies:
+      '@types/react': 19.0.12
+      '@types/react-dom': 19.0.4(@types/react@19.0.12)
+
+  '@radix-ui/react-aspect-ratio@1.1.0(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.1.3(react@19.1.3))(react@19.1.3)':
+    dependencies:
+      '@radix-ui/react-primitive': 2.0.0(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.1.3(react@19.1.3))(react@19.1.3)
       react: 19.1.3
       react-dom: 19.1.3(react@19.1.3)
     optionalDependencies:
@@ -5038,6 +5092,8 @@ snapshots:
     dependencies:
       clsx: 2.1.1
 
+  classnames@2.5.1: {}
+
   client-only@0.0.1: {}
 
   clsx@2.1.1: {}
@@ -5081,6 +5137,8 @@ snapshots:
   copy-to-clipboard@3.3.3:
     dependencies:
       toggle-selection: 1.0.6
+
+  country-flag-icons@1.6.4: {}
 
   cross-spawn@7.0.6:
     dependencies:
@@ -5730,6 +5788,13 @@ snapshots:
     dependencies:
       css-in-js-utils: 3.1.0
 
+  input-format@0.3.14(react-dom@19.1.3(react@19.1.3))(react@19.1.3):
+    dependencies:
+      prop-types: 15.8.1
+    optionalDependencies:
+      react: 19.1.3
+      react-dom: 19.1.3(react@19.1.3)
+
   input-otp@1.4.2(react-dom@19.1.3(react@19.1.3))(react@19.1.3):
     dependencies:
       react: 19.1.3
@@ -5914,6 +5979,8 @@ snapshots:
     dependencies:
       prelude-ls: 1.2.1
       type-check: 0.4.0
+
+  libphonenumber-js@1.12.33: {}
 
   lightningcss-darwin-arm64@1.29.2:
     optional: true
@@ -6211,6 +6278,16 @@ snapshots:
   react-is@16.13.1: {}
 
   react-is@18.3.1: {}
+
+  react-phone-number-input@3.4.5(react-dom@19.1.3(react@19.1.3))(react@19.1.3):
+    dependencies:
+      classnames: 2.5.1
+      country-flag-icons: 1.6.4
+      input-format: 0.3.14(react-dom@19.1.3(react@19.1.3))(react@19.1.3)
+      libphonenumber-js: 1.12.33
+      prop-types: 15.8.1
+      react: 19.1.3
+      react-dom: 19.1.3(react@19.1.3)
 
   react-remove-scroll-bar@2.3.8(@types/react@19.0.12)(react@19.1.3):
     dependencies:
