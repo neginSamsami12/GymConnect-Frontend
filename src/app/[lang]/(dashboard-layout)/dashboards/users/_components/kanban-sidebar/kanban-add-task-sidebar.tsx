@@ -5,11 +5,11 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Grid2x2Plus } from "lucide-react"
 
-import type { KanbanTaskFormType } from "../../types"
+import type { AddUserFormType } from "../../types"
 
 import { labelsData } from "../../_data/labels"
 
-import { KanbanTaskSchema } from "../../_schemas/kanban-task-schema"
+import { AddUserSchema } from "../../_schemas/add-user-schema"
 
 import { useKanbanContext } from "../../_hooks/use-kanban-context"
 import { ButtonLoading } from "@/components/ui/button"
@@ -43,12 +43,13 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 
 const defaultValues = {
-  title: "",
-  description: "",
-  label: "Development",
+  firstName: "",
+  lastName: "",
+  phone: "",
+  nationalId: "",
+  email: "",
+  address: "",
   dueDate: new Date(),
-  assigned: [],
-  comments: [],
   attachments: [],
 }
 
@@ -61,8 +62,8 @@ export function KanbanAddTaskSidebar() {
     handleSelectTask,
   } = useKanbanContext()
 
-  const form = useForm<KanbanTaskFormType>({
-    resolver: zodResolver(KanbanTaskSchema),
+  const form = useForm<AddUserFormType>({
+    resolver: zodResolver(AddUserSchema),
     defaultValues,
   })
 
@@ -70,10 +71,12 @@ export function KanbanAddTaskSidebar() {
   const { isSubmitting, isDirty } = form.formState
   const isDisabled = isSubmitting || !isDirty // Disable button if form is unchanged or submitting
 
-  function onSubmit(data: KanbanTaskFormType) {
-    if (selectedColumn) {
-      handleAddTask(data, selectedColumn.id)
+  function onSubmit(data: AddUserFormType) {
+    const payload = {
+      ...data,
+      birthDate: data.birthDate ? data.birthDate.toISOString() : '',
     }
+    handleAddTask(payload)
 
     handleSidebarClose()
   }
@@ -114,13 +117,13 @@ export function KanbanAddTaskSidebar() {
             >
               <FormField
                 control={form.control}
-                name="title"
+                name="firstName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>نام و نام خانوادگی</FormLabel>
+                    <FormLabel>نام</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="نام و نام خانوادگی کاربر"
+                        placeholder="نام کاربر"
                         {...field}
                       />
                     </FormControl>
@@ -130,10 +133,26 @@ export function KanbanAddTaskSidebar() {
               />
               <FormField
                 control={form.control}
-                name="title"
+                name="lastName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel> کدملی</FormLabel>
+                    <FormLabel>نام خانوادگی</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="نام خانوادگی کاربر"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="nationalId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>کدملی</FormLabel>
                     <FormControl>
                       <Input placeholder="کدملی کاربر" {...field} />
                     </FormControl>
@@ -143,21 +162,41 @@ export function KanbanAddTaskSidebar() {
               />
               <FormField
                 control={form.control}
-                name="assigned"
+                name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>شماره تلفن</FormLabel>
+                    <FormLabel>شماره تلقن</FormLabel>
                     <FormControl>
-                      <InputTagsWithSuggestions
-                        suggestions={teamMembers.map(({ name }) => name)}
-                        tags={field.value.map(({ name }) => name)}
-                        onTagsChange={(tags) =>
-                          field.onChange(
-                            teamMembers.filter((member) =>
-                              tags.includes(member.name)
-                            )
-                          )
-                        }
+                      <Input placeholder="شماره تلفن" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>ایمیل</FormLabel>
+                    <FormControl>
+                      <Input placeholder="ایمیل" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="birthDate"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>تاریخ تولد</FormLabel>
+                    <FormControl>
+                      <DatePicker
+                        formatStr="PPP"
+                        onValueChange={field.onChange}
+                        {...field}
                       />
                     </FormControl>
                     <FormMessage />
@@ -166,16 +205,12 @@ export function KanbanAddTaskSidebar() {
               />
               <FormField
                 control={form.control}
-                name="dueDate"
+                name="address"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col">
-                    <FormLabel>تاریخ ثبت‌ نام</FormLabel>
+                  <FormItem>
+                    <FormLabel>آدرس</FormLabel>
                     <FormControl>
-                      <DatePicker
-                        formatStr="PPP"
-                        onValueChange={field.onChange}
-                        {...field}
-                      />
+                      <Input placeholder="آدرس" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

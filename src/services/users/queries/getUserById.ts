@@ -5,7 +5,7 @@ import { ApiResponse } from "../../apiTypes"
 
 export interface UserInfoById {
   id: string
-  name: string
+  firstName: string
   lastName: string
   email: string
   phone: string

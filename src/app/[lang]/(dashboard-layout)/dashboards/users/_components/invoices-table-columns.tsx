@@ -44,7 +44,7 @@ export const invoicesTableColumns: ColumnDef<UserInfo>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "تصویر کاربر",
+    accessorKey: "profilePicture",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="تصویر کاربر" />
     ),
@@ -55,12 +55,13 @@ export const invoicesTableColumns: ColumnDef<UserInfo>[] = [
     },
   },
   {
-    accessorKey: "نام و نام خانوادگی",
+    accessorKey: "fullName",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="نام خانوادگی" />
     ),
     cell: ({ row }) => {
-      const customerName = row.getValue("firstName") as string
+      const customerName = // row.original.firstName as string
+      `${row.original.firstName} ${row.original.lastName}`
 
       return (
         <span className="inline-block max-w-44 break-all truncate">
@@ -70,53 +71,52 @@ export const invoicesTableColumns: ColumnDef<UserInfo>[] = [
     },
   },
   {
-    accessorKey: "orderDate",
+    accessorKey: "createdAt",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="تاریخ ثبت نام" />
     ),
     cell: ({ row }) => {
-      const orderDate = row.getValue("orderDate") as string
+      const registerDate = row.original.createdAt as string
 
-      return formatDate(orderDate)
+      return registerDate ? formatDate(registerDate) : null
     },
   },
   {
-    accessorKey: "dueDate",
+    accessorKey: "phone",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="شماره تلفن" />
     ),
     cell: ({ row }) => {
-      const dueDate = row.getValue("dueDate") as string
+      const dueDate = row.getValue("phone") as string
 
-      return <span>{formatDate(dueDate)}</span>
+      return dueDate
     },
   },
   {
-    accessorKey: "totalAmount",
+    accessorKey: "nationalId",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="کدملی" />
     ),
     cell: ({ row }) => {
-      const totalAmount = row.getValue("totalAmount") as number
+      const totalAmount = row.getValue("nationalId") as number
 
-      return <span>{formatCurrency(totalAmount)}</span>
+      return totalAmount
     },
   },
   {
-    accessorKey: "deliveryStatus",
+    accessorKey: "firstName",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="وضعیت" />
     ),
     cell: ({ row }) => {
-      const deliveryStatus = row.getValue(
-        "deliveryStatus"
-      ) as InvoiceType["deliveryStatus"]
-      const Icon = deliveryStatusIcons[deliveryStatus]
+      const st = row.original.createdAt
+      const status = st ? "Active" : "DeActive"
+      const Icon = deliveryStatusIcons[status]
 
       return (
         <Badge>
           <Icon className="me-2 h-4 w-4" />
-          <span>{deliveryStatus}</span>
+          <span>{status}</span>
         </Badge>
       )
     },

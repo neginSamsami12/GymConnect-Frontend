@@ -51,8 +51,8 @@ export const engagementByDeviceTableColumns: ColumnDef<EngagementByDeviceType>[]
       },
     },
     {
-      id: "deviceType",
-      accessorKey: "deviceType",
+      id: "lastName",
+      accessorKey: "lastName",
       header: ({ column }) => (
         <DataTableColumnHeader
           column={column}
@@ -61,14 +61,14 @@ export const engagementByDeviceTableColumns: ColumnDef<EngagementByDeviceType>[]
         />
       ),
       cell: ({ row }) => {
-        const deviceType = row.getValue("deviceType") as string
+        const lastName = row.getValue("lastName") as string
 
-        return <span className="ms-4 text-primary">{deviceType}</span>
+        return <span className="ms-4 text-primary">{lastName}</span>
       },
     },
     {
-      id: "deviceType",
-      accessorKey: "deviceType",
+      id: "bounceRate",
+      accessorKey: "bounceRate",
       header: ({ column }) => (
         <DataTableColumnHeader
           column={column}
@@ -77,9 +77,9 @@ export const engagementByDeviceTableColumns: ColumnDef<EngagementByDeviceType>[]
         />
       ),
       cell: ({ row }) => {
-        const deviceType = row.getValue("deviceType") as string
+        const bounceRate = row.getValue("bounceRate") as string
 
-        return <span className="ms-4 text-primary">{deviceType}</span>
+        return <span className="ms-4 text-primary">{bounceRate}</span>
       },
     },
     {
@@ -93,24 +93,24 @@ export const engagementByDeviceTableColumns: ColumnDef<EngagementByDeviceType>[]
 
         return (
           <RenderValueWithIcon
-            value={formatDuration(sessionDuration)}
+            value={sessionDuration}
             iconName="Clock"
           />
         )
       },
     },
     {
-      id: "sessionDuration",
-      accessorKey: "sessionDuration",
+      id: "leaveTime",
+      accessorKey: "leaveTime",
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="زمان خروج" />
       ),
       cell: ({ row }) => {
-        const sessionDuration = row.getValue("sessionDuration") as number
+        const leaveTime = row.getValue("leaveTime") as number
 
         return (
           <RenderValueWithIcon
-            value={formatDuration(sessionDuration)}
+            value={leaveTime}
             iconName="Clock"
           />
         )

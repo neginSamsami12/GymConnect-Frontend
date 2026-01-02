@@ -5,11 +5,11 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Grid2x2Plus } from "lucide-react"
 
-import type { KanbanTaskFormType } from "../../types"
+import type { AddUserFormType } from "../../types"
 
 import { labelsData } from "../../_data/labels"
 
-import { KanbanTaskSchema } from "../../_schemas/kanban-task-schema"
+import { AddUserSchema } from "../../_schemas/add-user-schema"
 
 import { useKanbanContext } from "../../_hooks/use-kanban-context"
 import { ButtonLoading } from "@/components/ui/button"
@@ -43,12 +43,13 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 
 const defaultValues = {
-  title: "",
-  description: "",
-  label: "Development",
+  firstName: "",
+  lastName: "",
+  phone: "",
+  nationalId: "",
+  email: "",
+  address: "",
   dueDate: new Date(),
-  assigned: [],
-  comments: [],
   attachments: [],
 }
 
@@ -61,8 +62,8 @@ export function KanbanUpdateTaskSidebar() {
     handleSelectTask,
   } = useKanbanContext()
 
-  const form = useForm<KanbanTaskFormType>({
-    resolver: zodResolver(KanbanTaskSchema),
+  const form = useForm<AddUserFormType>({
+    resolver: zodResolver(AddUserSchema),
     defaultValues,
   })
 
@@ -74,27 +75,24 @@ export function KanbanUpdateTaskSidebar() {
   useEffect(() => {
     if (selectedTask) {
       form.reset({
-        title: selectedTask?.title,
-        description: selectedTask?.description,
-        label: selectedTask?.label,
-        assigned: selectedTask?.assigned || [],
-        comments: selectedTask?.comments || [],
-        dueDate: selectedTask?.dueDate,
-        attachments: selectedTask?.attachments || [],
+        firstName: selectedTask.firstName,
+        lastName: selectedTask.lastName,
+        nationalId: selectedTask.nationalId,
+        phone: selectedTask.phone,
+        email: selectedTask.email,
+        birthDate: selectedTask.birthDate,
+        address: selectedTask.address,
+        attachments: selectedTask.attachments,
       })
     }
   }, [selectedTask, form])
 
-  function onSubmit(data: KanbanTaskFormType) {
-    if (selectedTask) {
-      handleUpdateTask({
-        ...data,
-        id: selectedTask.id,
-        columnId: selectedTask.columnId,
-        order: selectedTask.order,
-        comments: selectedTask.comments,
-      })
+  function onSubmit(data: AddUserFormType) {
+    const payload = {
+      ...data,
+      birthDate: data.birthDate ? data.birthDate.toISOString() : '',
     }
+    handleUpdateTask(payload)
 
     handleSidebarClose()
   }
@@ -113,9 +111,9 @@ export function KanbanUpdateTaskSidebar() {
       <SheetContent className="p-0" side="end">
         <ScrollArea className="h-full p-4">
           <SheetHeader>
-            <SheetTitle>Update Task</SheetTitle>
+            <SheetTitle>افزوردن کاربر</SheetTitle>
             <SheetDescription>
-              Modify the details of the {selectedTask?.title} task.
+              ویرایش اطلاعات
             </SheetDescription>
           </SheetHeader>
           <Form {...form}>
@@ -125,61 +123,14 @@ export function KanbanUpdateTaskSidebar() {
             >
               <FormField
                 control={form.control}
-                name="title"
+                name="firstName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Title</FormLabel>
+                    <FormLabel>نام</FormLabel>
                     <FormControl>
-                      <Input placeholder="Task title" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="label"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Label</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a label" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {labelsData.map((label) => (
-                          <SelectItem key={label.id} value={label.name}>
-                            {label.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="assigned"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Assigned Team Members</FormLabel>
-                    <FormControl>
-                      <InputTagsWithSuggestions
-                        suggestions={teamMembers.map(({ name }) => name)}
-                        tags={field.value.map(({ name }) => name)}
-                        onTagsChange={(tags) =>
-                          field.onChange(
-                            teamMembers.filter((member) =>
-                              tags.includes(member.name)
-                            )
-                          )
-                        }
+                      <Input
+                        placeholder="نام کاربر"
+                        {...field}
                       />
                     </FormControl>
                     <FormMessage />
@@ -188,10 +139,65 @@ export function KanbanUpdateTaskSidebar() {
               />
               <FormField
                 control={form.control}
-                name="dueDate"
+                name="lastName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>نام خانوادگی</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="نام خانوادگی کاربر"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="nationalId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>کدملی</FormLabel>
+                    <FormControl>
+                      <Input placeholder="کدملی کاربر" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>شماره تلقن</FormLabel>
+                    <FormControl>
+                      <Input placeholder="شماره تلفن" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>ایمیل</FormLabel>
+                    <FormControl>
+                      <Input placeholder="ایمیل" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="birthDate"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel>Due Date</FormLabel>
+                    <FormLabel>تاریخ تولد</FormLabel>
                     <FormControl>
                       <DatePicker
                         formatStr="PPP"
@@ -205,16 +211,12 @@ export function KanbanUpdateTaskSidebar() {
               />
               <FormField
                 control={form.control}
-                name="description"
+                name="address"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>آدرس</FormLabel>
                     <FormControl>
-                      <Textarea
-                        placeholder="Event description"
-                        className="resize-none"
-                        {...field}
-                      />
+                      <Input placeholder="آدرس" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -225,7 +227,7 @@ export function KanbanUpdateTaskSidebar() {
                 name="attachments"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Attachments</FormLabel>
+                    <FormLabel>تصویر کاربر</FormLabel>
                     <FormControl>
                       <FileDropzone
                         multiple
@@ -244,7 +246,7 @@ export function KanbanUpdateTaskSidebar() {
                 className="w-full"
                 icon={Grid2x2Plus}
               >
-                Save
+                ذخیره کردن
               </ButtonLoading>
             </form>
           </Form>

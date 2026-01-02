@@ -1,7 +1,8 @@
 import type { FileType } from "@/types"
 import type { z } from "zod"
 import type { KanbanColumnSchema } from "./_schemas/kanban-column-schema"
-import type { KanbanTaskSchema } from "./_schemas/kanban-task-schema"
+import type { AddUserSchema } from "./_schemas/add-user-schema"
+import { CreateUserRequest } from "@/services/users/mutations/createUsers"
 
 export interface UserType {
   id: string
@@ -93,8 +94,7 @@ export interface KanbanContextType {
   handleUpdateColumn: (column: ColumnType) => void
   handleDeleteColumn: (columnId: ColumnType["id"]) => void
   handleAddTask: (
-    task: TaskWithoutIdAndOrderAndColumnIdType,
-    columnId: ColumnType["id"]
+    task: CreateUserRequest,
   ) => void
   handleUpdateTask: (task: TaskType) => void
   handleDeleteTask: (taskId: TaskType["id"]) => void
@@ -111,7 +111,7 @@ export interface KanbanContextType {
 
 export type KanbanColumnFormType = z.infer<typeof KanbanColumnSchema>
 
-export type KanbanTaskFormType = z.infer<typeof KanbanTaskSchema>
+export type AddUserFormType = Omit<z.infer<typeof AddUserSchema> , "attachments">
 
 export interface MetricType {
   value: number

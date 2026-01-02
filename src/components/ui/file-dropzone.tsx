@@ -151,7 +151,7 @@ export function FileDropzone({
           <div className="h-56 flex flex-col justify-center items-center gap-2 text-center p-4">
             <UploadCloud className="h-8 w-8 text-muted-foreground" />
             <p className="text-sm text-muted-foreground">
-              Drag and drop some files here, or click to select files
+              فایل‌ها را اینجا بکشید و رها کنید، یا برای انتخاب کلیک کنید.
             </p>
           </div>
         )}
