@@ -2,9 +2,9 @@
 // More info: https://nextjs.org/docs/app/building-your-application/optimizing/metadata
 
 import { CustomerInsights } from "./_components/customer-insights"
-import { EngagementByDevice } from "./_components/engagement-by-device"
+import { UserEnterance } from "./_components/users-enterance"
 import { GenderDistribution } from "./_components/gender-distribution"
-import { PerformanceOverTime } from "./_components/performance-over-time"
+import { VisitOverTime } from "./_components/visitOverTime"
 
 export default function HomePage() {
   return (
@@ -13,9 +13,9 @@ export default function HomePage() {
         <CustomerInsights />
         <GenderDistribution />
       </div>
-      <EngagementByDevice />
+      <UserEnterance />
       <div className="col-span-2">
-        <PerformanceOverTime />
+        <VisitOverTime />
       </div>
     </section>
   )

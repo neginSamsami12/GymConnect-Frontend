@@ -2,7 +2,7 @@
 
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts"
 
-import type { PerformanceOverTimeType } from "../types"
+import type { VisitOverTimeType } from "../types"
 
 import { useIsRtl } from "@/hooks/use-is-rtl"
 import {
@@ -11,10 +11,10 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 
-export function PerformanceOverTimeChart({
+export function VisitCharts({
   data,
 }: {
-  data: PerformanceOverTimeType["performance"]
+  data: VisitOverTimeType["performance"]
 }) {
   const isRtl = useIsRtl()
 
@@ -24,8 +24,8 @@ export function PerformanceOverTimeChart({
         accessibilityLayer
         data={data}
         margin={{
-          left: 12,
-          right: 12,
+          left: 40,
+          right: 40,
         }}
       >
         <CartesianGrid vertical={false} />
@@ -41,7 +41,7 @@ export function PerformanceOverTimeChart({
         <YAxis yAxisId="right" orientation="right" hide />
         <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
         <Line
-          dataKey="visitors"
+          dataKey="بازدیدکنندگان"
           yAxisId="left"
           type="linear"
           stroke="hsl(var(--chart-1))"
@@ -49,7 +49,7 @@ export function PerformanceOverTimeChart({
           dot={false}
         />
         <Line
-          dataKey="conversions"
+          dataKey="پیام‌ها"
           yAxisId="right"
           type="linear"
           stroke="hsl(var(--chart-2))"

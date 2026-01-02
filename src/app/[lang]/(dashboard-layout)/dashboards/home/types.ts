@@ -36,10 +36,10 @@ export interface TrafficSourcesType {
   }>
 }
 
-export interface EngagementByDeviceType {
+export interface UserEnteranceType {
   deviceType: string
-  lastName: string,
-  leaveTime: string,
+  lastName: string
+  leaveTime: string
   sessionDuration: string
   pagesPerSession: number
   bounceRate: string
@@ -55,25 +55,15 @@ export type ConversionFunnelType = {
   }>
 }
 
-export interface PerformanceOverTimeType {
+export interface VisitOverTimeType {
   summary: {
     totalVisitors: number
     totalConversions: number
   }
   performance: Array<{
     month: string
-    visitors: number
-    conversions: number
-  }>
-}
-
-export interface TopPagesType {
-  period: string
-  pages: Array<{
-    name: string
-    views: number
-    avgTimeOnPage: number
-    bounceRate: number
+    بازدیدکنندگان: number
+    پیام‌ها: number
   }>
 }
 
@@ -99,11 +89,6 @@ export interface GenderDistributionType {
   fill: string
   x: number
   y: number
-}
-
-export interface RetentionVsChurnType {
-  period: string
-  summary: { retention: number; churn: number; total: number }
 }
 
 export interface CustomerInsightsType {

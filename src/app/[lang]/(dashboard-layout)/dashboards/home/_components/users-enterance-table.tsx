@@ -15,7 +15,7 @@ import type {
   SortingState,
   VisibilityState,
 } from "@tanstack/react-table"
-import type { EngagementByDeviceType } from "../types"
+import type { UserEnteranceType } from "../types"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -27,16 +27,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { engagementByDeviceTableColumns } from "./engagement-by-device-table-columns"
-import { EngagementByDeviceTableToolbar } from "./engagement-by-device-table-toolbar"
+import { UserEnteranceTableColumns } from "./users-enterance-table-columns"
+import { UserEnteranceTableToolbar } from "./users-enterance-table-toolbar"
 
-interface EngagementByDeviceTableProps {
-  data: EngagementByDeviceType[]
+interface UserEnteranceTableProps {
+  data: UserEnteranceType[]
 }
 
-export function EngagementByDeviceTable({
+export function UserEnteranceTable({
   data,
-}: EngagementByDeviceTableProps) {
+}: UserEnteranceTableProps) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -44,7 +44,7 @@ export function EngagementByDeviceTable({
 
   const table = useReactTable({
     data: data,
-    columns: engagementByDeviceTableColumns,
+    columns: UserEnteranceTableColumns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
@@ -65,7 +65,7 @@ export function EngagementByDeviceTable({
     <Card>
       <CardHeader className="flex-row justify-between items-center gap-x-1.5 space-y-0">
         <CardTitle>آمار حضور کاربران</CardTitle>
-        <EngagementByDeviceTableToolbar table={table} />
+        <UserEnteranceTableToolbar table={table} />
       </CardHeader>
       <CardContent className="p-0">
         <ScrollArea
@@ -109,7 +109,7 @@ export function EngagementByDeviceTable({
               ) : (
                 <TableRow>
                   <TableCell
-                    colSpan={engagementByDeviceTableColumns.length}
+                    colSpan={UserEnteranceTableColumns.length}
                     className="h-24 text-center"
                   >
                     No results.

@@ -2,7 +2,7 @@
 
 import type { DynamicIconNameType } from "@/types"
 import type { ColumnDef } from "@tanstack/react-table"
-import type { EngagementByDeviceType } from "../types"
+import type { UserEnteranceType } from "../types"
 
 import { formatDuration, formatPercent } from "@/lib/utils"
 
@@ -36,7 +36,7 @@ function RenderValueWithIcon({
   )
 }
 
-export const engagementByDeviceTableColumns: ColumnDef<EngagementByDeviceType>[] =
+export const UserEnteranceTableColumns: ColumnDef<UserEnteranceType>[] =
   [
     {
       id: "deviceType",

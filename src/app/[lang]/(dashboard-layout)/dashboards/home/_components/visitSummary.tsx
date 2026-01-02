@@ -2,14 +2,14 @@
 
 import { Eye, RefreshCw } from "lucide-react"
 
-import type { PerformanceOverTimeType } from "../types"
+import type { VisitOverTimeType } from "../types"
 
 import { Badge } from "@/components/ui/badge"
 
-export function PerformanceOverTimeSummary({
+export function VisitSummary({
   data,
 }: {
-  data: PerformanceOverTimeType["summary"]
+  data: VisitOverTimeType["summary"]
 }) {
   return (
     <ul className="grid grid-cols-2 place-items-center gap-x-3">

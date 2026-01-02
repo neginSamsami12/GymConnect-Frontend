@@ -1,6 +1,6 @@
-import type { EngagementByDeviceType } from "../types"
+import type { UserEnteranceType } from "../types"
 
-export const engagementByDeviceData: EngagementByDeviceType[] = [
+export const UserEnteranceData: UserEnteranceType[] = [
   {
     deviceType: "رسول",
     lastName: "باقری",

@@ -14,13 +14,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-interface EngagementByDeviceTableViewOptionsProps<TData> {
+interface UserEnteranceTableToolbarProps<TData> {
   table: Table<TData>
 }
 
-export function EngagementByDeviceTableViewOptions<TData>({
+export function UsersEnteranceTableViewOptions<TData>({
   table,
-}: EngagementByDeviceTableViewOptionsProps<TData>) {
+}: UserEnteranceTableToolbarProps<TData>) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
