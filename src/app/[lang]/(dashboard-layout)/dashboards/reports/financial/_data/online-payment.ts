@@ -1,6 +1,6 @@
-import type { CustomerSatisfactionType } from "../types"
+import type { OnlinePaymentnType } from "../types"
 
-export const customerSatisfactionData: CustomerSatisfactionType = {
+export const onlinePaymentnData: OnlinePaymentnType = {
   period: "هفته گذشته",
   summary: {
     name: "Total rating",

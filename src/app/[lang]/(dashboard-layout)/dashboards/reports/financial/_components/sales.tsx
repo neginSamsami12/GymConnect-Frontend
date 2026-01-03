@@ -1,12 +1,12 @@
-import { salesTrendData } from "../_data/sales-trend"
+import { salesTrendData } from "../_data/sales"
 
 import {
   DashboardCard,
   DashboardCardActionsDropdown,
 } from "@/components/dashboards/dashboard-card"
-import { SalesTrendChart } from "./sales-trend-chart"
+import { SalesChart } from "./sales-chart"
 
-export function SalesTrend() {
+export function Sales() {
   return (
     <DashboardCard
       title="روند فروش"
@@ -14,7 +14,7 @@ export function SalesTrend() {
       action={<DashboardCardActionsDropdown />}
       className="col-span-full md:col-span-3"
     >
-      <SalesTrendChart data={salesTrendData} />
+      <SalesChart data={salesTrendData} />
     </DashboardCard>
   )
 }

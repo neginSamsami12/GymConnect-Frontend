@@ -1,8 +1,8 @@
-import type { SalesRepresentativeType } from "../types"
+import type { RecentPaymentsItemType } from "../types"
 
-export const salesRepresentativeData: SalesRepresentativeType = {
+export const RecentPaymentsData: RecentPaymentsItemType = {
   period: "ماه گذشته",
-  representatives: [
+  payments: [
     {
       name: "John Doe",
       avatar: "/images/avatars/male-01.svg",

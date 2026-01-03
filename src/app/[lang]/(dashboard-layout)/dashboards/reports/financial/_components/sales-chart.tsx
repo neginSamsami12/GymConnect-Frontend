@@ -5,7 +5,7 @@ import { Value } from "@radix-ui/react-select"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 
 import type { ChartConfig } from "@/components/ui/chart"
-import type { SalesTrendType } from "../types"
+import type { SalesType } from "../types"
 
 import { cn } from "@/lib/utils"
 
@@ -37,7 +37,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function SalesTrendChart({ data }: { data: SalesTrendType }) {
+export function SalesChart({ data }: { data: SalesType }) {
   const [activeChart, setActiveChart] =
     useState<keyof typeof chartConfig>("lead")
   const isRtl = useIsRtl()

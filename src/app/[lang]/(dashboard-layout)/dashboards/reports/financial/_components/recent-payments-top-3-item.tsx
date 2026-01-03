@@ -1,4 +1,4 @@
-import type { SalesRepresentativeType } from "../types"
+import type { RecentPaymentsItemType } from "../types"
 
 import { cn, formatCurrency, getInitials } from "@/lib/utils"
 
@@ -18,11 +18,11 @@ const badgeColor = [
   "bg-amber-600 dark:bg-amber-700",
 ]
 
-export function TopSalesRepresentativesTop3Item({
+export function RecentPaymentsTop3Item({
   representative,
   index,
 }: {
-  representative: SalesRepresentativeType["representatives"][0]
+  representative: RecentPaymentsItemType["payments"][0]
   index: number
 }) {
   return (

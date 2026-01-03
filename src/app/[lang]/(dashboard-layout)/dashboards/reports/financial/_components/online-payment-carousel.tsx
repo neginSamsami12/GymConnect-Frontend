@@ -3,7 +3,7 @@
 import { useDirection } from "@radix-ui/react-direction"
 import Autoplay from "embla-carousel-autoplay"
 
-import type { CustomerSatisfactionType } from "../types"
+import type { OnlinePaymentnType } from "../types"
 
 import { formatDate, getInitials } from "@/lib/utils"
 
@@ -25,7 +25,7 @@ import { ShowMoreText } from "@/components/ui/show-more-text"
 export function CustomerSatisfactionCarousel({
   data,
 }: {
-  data: CustomerSatisfactionType["feedbacks"]
+  data: OnlinePaymentnType["feedbacks"]
 }) {
   const direction = useDirection()
 

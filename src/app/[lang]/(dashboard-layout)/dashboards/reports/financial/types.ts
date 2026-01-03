@@ -13,7 +13,7 @@ export interface OverviewType {
   newCustomers: MetricType
 }
 
-export interface SalesTrendType {
+export interface SalesType {
   period: string
   summary: {
     totalLead: number
@@ -30,9 +30,9 @@ export interface SalesTrendType {
   }>
 }
 
-export interface SalesRepresentativeType {
+export interface RecentPaymentsItemType {
   period: string
-  representatives: Array<{
+  payments: Array<{
     name: string
     avatar: string
     email: string
@@ -54,7 +54,7 @@ export interface LeadSourceType {
   }
 }
 
-export interface CustomerSatisfactionType {
+export interface OnlinePaymentnType {
   period: string
   summary: {
     name: string
@@ -127,7 +127,7 @@ export interface SalesByCountryType {
   }>
 }
 
-export interface RevenueTrendType {
+export interface RevenueType {
   period: string
   summary: {
     totalRevenue: number

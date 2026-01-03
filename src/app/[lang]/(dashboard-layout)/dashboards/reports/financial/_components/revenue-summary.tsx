@@ -1,6 +1,6 @@
 "use client"
 
-import type { RevenueTrendType } from "../types"
+import type { RevenueType } from "../types"
 
 import { formatCurrency } from "@/lib/utils"
 
@@ -9,7 +9,7 @@ import { PercentageChangeBadge } from "@/components/dashboards/percentage-change
 export function RevenueTrendSummary({
   data,
 }: {
-  data: RevenueTrendType["summary"]
+  data: RevenueType["summary"]
 }) {
   return (
     <div className="flex flex-col items-start bg-accent text-accent-foreground py-2 px-4 rounded-lg">

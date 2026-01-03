@@ -1,20 +1,20 @@
-import { salesRepresentativeData } from "../_data/top-sales-representatives"
+import { RecentPaymentsData } from "../_data/recent-payments"
 
 import {
   DashboardCard,
   DashboardCardActionsDropdown,
 } from "@/components/dashboards/dashboard-card"
-import { TopSalesRepresentativesList } from "./top-sales-representatives-list"
+import { TopSalesRepresentativesList } from "./recent-payments-list"
 
-export function TopSalesRepresentatives() {
+export function RecentPayments() {
   return (
     <DashboardCard
       title="پرداختی‌های اخیر "
-      period={salesRepresentativeData.period}
+      period={RecentPaymentsData.period}
       action={<DashboardCardActionsDropdown />}
     >
       <TopSalesRepresentativesList
-        data={salesRepresentativeData.representatives}
+        data={RecentPaymentsData.payments}
       />
     </DashboardCard>
   )

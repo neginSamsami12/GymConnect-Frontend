@@ -1,6 +1,6 @@
-import type { SalesTrendType } from "../types"
+import type { SalesType } from "../types"
 
-export const salesTrendData: SalesTrendType = {
+export const salesTrendData: SalesType = {
   period: "سال گذشته",
   summary: {
     totalLead: 2200,

@@ -8,7 +8,7 @@ import {
   RadialBarChart,
 } from "recharts"
 
-import type { CustomerSatisfactionType } from "../types"
+import type { OnlinePaymentnType } from "../types"
 
 import { ratingToPercentage } from "@/lib/utils"
 
@@ -18,7 +18,7 @@ import { ChartContainer } from "@/components/ui/chart"
 export function CustomerSatisfactionChart({
   data,
 }: {
-  data: CustomerSatisfactionType["summary"]
+  data: OnlinePaymentnType["summary"]
 }) {
   const radius = useRadius()
 

@@ -4,7 +4,7 @@ import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 
 import type { ChartConfig } from "@/components/ui/chart"
 import type { ComponentProps } from "react"
-import type { RevenueTrendType } from "../types"
+import type { RevenueType } from "../types"
 
 import { formatCurrency } from "@/lib/utils"
 
@@ -38,10 +38,10 @@ function ModifiedChartTooltipContent(
   )
 }
 
-export function RevenueTrendChart({
+export function RevenueChart({
   data,
 }: {
-  data: RevenueTrendType["revenueTrends"]
+  data: RevenueType["revenueTrends"]
 }) {
   const radius = useRadius()
   const isRtl = useIsRtl()
