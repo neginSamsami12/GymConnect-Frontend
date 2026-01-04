@@ -55,12 +55,8 @@ export function InputFile({
   }
 
   useEffect(() => {
-    if (value) {
-      if (value.length > 1) {
-        setFileName(`${value.length} Files`)
-      } else {
-        setFileName(value[0].name)
-      }
+    if (value && value.length > 0) {
+      setFileName(value.length > 1 ? `${value.length} Files` : value[0].name)
     } else {
       setFileName(placeholder)
     }
@@ -84,9 +80,10 @@ export function InputFile({
       >
         {buttonLabel ?? `Choose File${props.multiple ? "s" : ""}`}
       </Button>
-      <div className="flex-1 flex items-center text-muted-foreground px-3 break-all">
-        <span className="w-0 flex-1 truncate">{fileName}</span>
+      <div className="flex-1 min-w-0 flex items-center text-muted-foreground px-3">
+        <span className="flex-1 min-w-0 truncate text-right">{fileName}</span>
       </div>
+
       <input
         {...props}
         ref={inputRef}

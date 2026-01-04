@@ -17,36 +17,45 @@ export const navigationsData: NavigationType[] = [
       {
         title: "classes",
         href: "/dashboards/classes",
-        iconName: "classes",
+        iconName: "Dumbbell",
       },
 
       {
         title: "reports",
-        iconName: "Reports",
+        iconName: "ClipboardMinus",
         items: [
           {
             title: "financial",
+            iconName: "BadgeDollarSign",
             href: "/dashboards/reports/financial",
           },
           {
             title: "presence",
+            iconName: "UserCheck",
             href: "/dashboards/reports/presence",
           },
         ],
       },
       {
         title: "workouts",
-        iconName: "workouts",
+        iconName: "LayoutGrid",
         items: [
           {
             title: "design",
+            iconName: "ListTodo",
             href: "/dashboards/workouts/design",
           },
           {
             title: "list",
+            iconName: "ListFilter",
             href: "/dashboards/workouts/list",
           },
         ],
+      },
+      {
+        title: "Calendar",
+        href: "/dashboards/calendar",
+        iconName: "Calendar",
       },
     ],
   },
