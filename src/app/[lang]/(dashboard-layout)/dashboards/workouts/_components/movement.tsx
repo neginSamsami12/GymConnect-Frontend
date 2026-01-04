@@ -1,4 +1,4 @@
-import { topProductsData } from "../_data/top-products"
+import { movementData } from "../_data/movement"
 
 import {
   DashboardCard,
@@ -6,15 +6,16 @@ import {
 } from "@/components/dashboards/dashboard-card"
 import { MovementList } from "./movement-list"
 
-export function TopProducts() {
+export function Movement() {
   return (
     <DashboardCard
-      title="Top Products"
-      period={topProductsData.period}
+      title="برنامه تمرینی کاربر"
+      period={movementData.period}
       action={<DashboardCardActionsDropdown />}
       size="lg"
+      contentClassName="overflow-y-auto h-[42rem]"
     >
-      <MovementList data={topProductsData.movements} />
+      <MovementList data={movementData.movements} />
     </DashboardCard>
   )
 }

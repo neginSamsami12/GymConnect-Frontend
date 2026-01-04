@@ -9,42 +9,33 @@ import { formatCurrency } from "@/lib/utils"
 import { Card } from "@/components/ui/card"
 
 export function MovementItem({
-  product,
+  movement,
 }: {
-  product: MovementType["movements"][0]
+  movement: MovementType["movements"][0]
 }) {
   return (
-    <Card className="grid overflow-hidden" asChild>
+    <Card className="grid overflow-hidden mt-5" asChild>
       <li>
-        <div className="flex items-center gap-4 p-2">
-          <Image
-            src={product.image}
-            alt={product.name}
-            width={100}
-            height={100}
-            className="aspect-square h-12 w-12 rounded-lg object-cover"
-          />
-          <div className="flex flex-col truncate">
-            <h3 className="break-all truncate">
-              <span>#{product.order}</span>{" "}
-              <span className="font-semibold">{product.name}</span>
-            </h3>
-            <p className="text-sm text-muted-foreground">
-              Item: #{product.sku}
-            </p>
-          </div>
+        <div className="flex flex-col truncate">
+          <h3 className="break-all truncate flex justify-center mt-4">
+            <span>#{movement.order}</span>
+            <span className="font-semibold">{movement.name}</span>
+          </h3>
+          <p className="text-sm text-muted-foreground mb-5 mt-5 mr-5">
+            توضیحات حرکت:{movement.sku}
+          </p>
         </div>
         <div className="flex justify-between bg-accent p-2 truncate">
           <p className="text-accent-foreground">
-            <span className="text-muted-foreground">حرکات: </span>
+            <span className="text-muted-foreground">تعداد ست: </span>
             <span className="font-semibold">
-              {product.sales.value.toLocaleString()}
+              {movement.sales.value.toLocaleString()}
             </span>
           </p>
           <p className="text-accent-foreground">
-            <span className="text-muted-foreground">Revenue: </span>
+            <span className="text-muted-foreground">تعداد تکرار: </span>
             <span className="font-semibold">
-              {formatCurrency(product.revenue.value)}
+              {formatCurrency(movement.revenue.value)}
             </span>
           </p>
         </div>

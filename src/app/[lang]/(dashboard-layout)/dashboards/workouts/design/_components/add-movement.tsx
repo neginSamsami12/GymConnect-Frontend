@@ -36,41 +36,39 @@ export function AddMovement() {
 
   return (
     <>
-
-        {isDesktop ? (
-          <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-              <Button variant="outline">افزودن حرکت جدید </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader>
-                <DialogTitle>افرودن حرکت جدید</DialogTitle>
-              </DialogHeader>
-              <ProfileForm />
-            </DialogContent>
-          </Dialog>
-        ) : (
-          <Drawer open={open} onOpenChange={setOpen}>
-            <DrawerTrigger asChild>
-              <Button variant="outline">افزودن حرکت جدید </Button>
-            </DrawerTrigger>
-            <DrawerContent>
-              <DrawerHeader className="text-left">
-                <DrawerTitle>افزودن حرکت جدید </DrawerTitle>
-                <DrawerDescription>
-                  Make changes to your profile here. Click save when you&apos;re
-                  done.
-                </DrawerDescription>
-              </DrawerHeader>
-              <ProfileForm className="px-4" />
-              <DrawerFooter className="pt-2">
-                <DrawerClose asChild>
-                  <Button variant="outline">Cancel</Button>
-                </DrawerClose>
-              </DrawerFooter>
-            </DrawerContent>
-          </Drawer>
-        )}
+      {isDesktop ? (
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger asChild>
+            <Button variant="outline">افزودن حرکت جدید </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>افرودن حرکت جدید</DialogTitle>
+            </DialogHeader>
+            <ProfileForm />
+          </DialogContent>
+        </Dialog>
+      ) : (
+        <Drawer open={open} onOpenChange={setOpen}>
+          <DrawerTrigger asChild>
+            <Button variant="outline">افزودن حرکت جدید </Button>
+          </DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader className="text-left">
+              <DrawerTitle>افزودن حرکت جدید </DrawerTitle>
+              <DrawerDescription>
+                تغییرات خود را در فرم زیر اعمال کنید.
+              </DrawerDescription>
+            </DrawerHeader>
+            <ProfileForm className="px-4" />
+            <DrawerFooter className="pt-2">
+              <DrawerClose asChild>
+                <Button variant="outline">لغو</Button>
+              </DrawerClose>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      )}
     </>
   )
 }
@@ -79,14 +77,18 @@ function ProfileForm({ className }: ComponentProps<"form">) {
   return (
     <form className={cn("grid items-start gap-4", className)}>
       <div className="grid gap-2">
-        <Label htmlFor="email">Email</Label>
-        <Input type="email" id="email" defaultValue="shadcn@example.com" />
+        <Label htmlFor="exerciseName">نام حرکت</Label>
+        <Input type="text" id="exerciseName" />
       </div>
       <div className="grid gap-2">
-        <Label htmlFor="username">Username</Label>
-        <Input id="username" defaultValue="@shadcn" />
+        <Label htmlFor="sets">تعداد ست</Label>
+        <Input type="number" id="sets" min={1} max={3} />
       </div>
-      <Button type="submit">Save changes</Button>
+      <div className="grid gap-2">
+        <Label htmlFor="reps">تعداد تکرار</Label>
+        <Input type="number" id="reps" min={5} max={15} />
+      </div>
+      <Button type="submit">ذخیره تغییرات</Button>
     </form>
   )
 }

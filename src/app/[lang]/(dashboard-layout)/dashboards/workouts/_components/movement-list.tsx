@@ -11,8 +11,8 @@ export function MovementList({
 }) {
   return (
     <ul>
-      {data.map((movements) => (
-        <MovementItem key={movements.sku} product={movements} />
+      {data.map((movement) => (
+        <MovementItem key={movement.sku} movement={movement} />
       ))}
     </ul>
   )

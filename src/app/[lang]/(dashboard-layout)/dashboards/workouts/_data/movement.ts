@@ -1,6 +1,6 @@
 import type { MovementType } from "../types"
 
-export const topProductsData: MovementType = {
+export const movementData: MovementType = {
   period: "Last month",
   movements: [
     {

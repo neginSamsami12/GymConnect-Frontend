@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 
 import type { z } from "zod"
 
-import { topProductsData } from "../../_data/top-products"
+import { movementData } from "../../_data/movement"
 
 import { DesignFormsSchema } from "../_schemas/design-form-schema"
 
@@ -67,7 +67,7 @@ export function DesignForm() {
                       defaultValue={field.value}
                     >
                       <SelectTrigger className="col-start-3 col-span-full md:col-start-2">
-                        <SelectValue placeholder="مربی مورد نظر را انتخاب کنید" />
+                        <SelectValue placeholder="ورزشکار مورد نظر را انتخاب کنید" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="california">نگین صمصامی</SelectItem>
@@ -110,7 +110,7 @@ export function DesignForm() {
           </form>
         </Form>
         <div className="mt-6 col-span-full">
-          <MovementList data={topProductsData.movements} />
+          <MovementList data={movementData.movements} />
         </div>
         <div className="mt-6 flex justify-center align-middle">
           <AddMovement />
