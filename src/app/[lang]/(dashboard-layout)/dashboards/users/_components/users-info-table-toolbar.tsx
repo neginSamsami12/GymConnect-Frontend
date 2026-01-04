@@ -3,18 +3,18 @@
 import type { Table } from "@tanstack/react-table"
 
 import { Input } from "@/components/ui/input"
-import { InvoiceTableViewOptions } from "./invoice-table-view-options"
+import { UsersInfoTableViewOptions } from "./users-info-table-view-options"
 
-interface InvoiceTableToolbarProps<TTable> {
+interface UsersInfoTableToolbarProps<TTable> {
   table: Table<TTable>
 }
 
-export function InvoiceTableToolbar<TTable>({
+export function UsersInfoTableToolbar<TTable>({
   table,
-}: InvoiceTableToolbarProps<TTable>) {
+}: UsersInfoTableToolbarProps<TTable>) {
   return (
     <div className="flex gap-x-1.5">
-      <InvoiceTableViewOptions table={table} />
+      <UsersInfoTableViewOptions table={table} />
       <Input
         placeholder=" جستجو توسط کدملی..."
         className="border border-input bg-background hover:bg-accent hover:text-accent-foreground"

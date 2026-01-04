@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-export const KanbanColumnSchema = z.object({
+export const UserColumnSchema = z.object({
   title: z
     .string()
     .trim()

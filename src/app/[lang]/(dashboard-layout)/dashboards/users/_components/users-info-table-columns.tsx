@@ -4,21 +4,21 @@ import { UserInfo } from "@/services/users/queries/getUsersList"
 import { ShieldCheck, ShieldMinus } from "lucide-react"
 
 import type { ColumnDef } from "@tanstack/react-table"
-import type { InvoiceType } from "../types"
+import type { UsersInfoType } from "../types"
 
 import { formatCurrency, formatDate } from "@/lib/utils"
 
 import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
 import { DataTableColumnHeader } from "@/components/ui/data-table/data-table-column-header"
-import { InvoiceTableRowActions } from "./invoice-table-row-actions"
+import { UsersInfoTableRowActions } from "./users-info-table-row-actions"
 
 const deliveryStatusIcons = {
   Active: ShieldCheck,
   DeActive: ShieldMinus,
 }
 
-export const invoicesTableColumns: ColumnDef<UserInfo>[] = [
+export const UsersInfoTableColumns: ColumnDef<UserInfo>[] = [
   {
     id: "نام",
     header: ({ table }) => (
@@ -60,8 +60,9 @@ export const invoicesTableColumns: ColumnDef<UserInfo>[] = [
       <DataTableColumnHeader column={column} title="نام خانوادگی" />
     ),
     cell: ({ row }) => {
-      const customerName = // row.original.firstName as string
-      `${row.original.firstName} ${row.original.lastName}`
+      const customerName =
+        // row.original.firstName as string
+        `${row.original.firstName} ${row.original.lastName}`
 
       return (
         <span className="inline-block max-w-44 break-all truncate">
@@ -124,6 +125,6 @@ export const invoicesTableColumns: ColumnDef<UserInfo>[] = [
   {
     id: "actions",
     header: () => <span className="sr-only">Actions</span>,
-    cell: ({ row }) => <InvoiceTableRowActions row={row} />,
+    cell: ({ row }) => <UsersInfoTableRowActions row={row} />,
   },
 ]

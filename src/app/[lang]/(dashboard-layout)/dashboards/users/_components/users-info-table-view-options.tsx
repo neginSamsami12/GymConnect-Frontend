@@ -12,13 +12,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-interface InvoiceTableViewOptionsProps<TData> {
+interface UsersInfoTableViewOptionsProps<TData> {
   table: Table<TData>
 }
 
-export function InvoiceTableViewOptions<TData>({
+export function UsersInfoTableViewOptions<TData>({
   table,
-}: InvoiceTableViewOptionsProps<TData>) {
+}: UsersInfoTableViewOptionsProps<TData>) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

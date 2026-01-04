@@ -1,4 +1,4 @@
-import type { InvoiceType } from "../types"
+import type { UsersInfoType } from "../types"
 
 export const deliveryStatusesData = [
   { label: "DeActive", value: "DeActive" },
@@ -7,7 +7,7 @@ export const deliveryStatusesData = [
   { label: "Active", value: "Active" },
 ]
 
-export const invoicesData: InvoiceType[] = [
+export const usersInfoData: UsersInfoType[] = [
   {
     invoiceId: "INV-1001",
     customerName: "John Doe",

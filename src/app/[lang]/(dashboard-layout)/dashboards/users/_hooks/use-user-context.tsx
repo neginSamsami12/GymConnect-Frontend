@@ -2,10 +2,10 @@
 
 import { useContext } from "react"
 
-import { KanbanContext } from "../_contexts/kanban-context"
+import { UserContext } from "../_contexts/user-context"
 
-export function useKanbanContext() {
-  const context = useContext(KanbanContext)
+export function useUserContext() {
+  const context = useContext(UserContext)
   if (context === undefined) {
     throw new Error("useKanbanContext must be used within a KanbanProvider")
   }

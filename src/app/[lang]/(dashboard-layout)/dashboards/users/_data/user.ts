@@ -1,6 +1,6 @@
 import type { ColumnType } from "../types"
 
-export const kanbanData: ColumnType[] = [
+export const userData: ColumnType[] = [
   {
     id: "backlog",
     title: "Backlog",

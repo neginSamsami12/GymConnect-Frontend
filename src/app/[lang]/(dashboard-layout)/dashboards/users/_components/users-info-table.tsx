@@ -5,6 +5,7 @@ import {
   UserInfo,
   UserInfoListResponse,
 } from "@/services/users/queries/getUsersList"
+import { useGetUserInfo } from "@/services/users/useUsersApis"
 import {
   flexRender,
   getCoreRowModel,
@@ -19,7 +20,7 @@ import type {
   SortingState,
   VisibilityState,
 } from "@tanstack/react-table"
-import type { InvoiceType } from "../types"
+import type { UsersInfoType } from "../types"
 
 import {
   Card,
@@ -38,26 +39,24 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { InvoiceTableToolbar } from "./invoice-table-toolbar"
-import { invoicesTableColumns } from "./invoices-table-columns"
-import { KanbanAddNewTaskButton } from "./kanban-add-new-task-button"
-import { useGetUserInfo } from "@/services/users/useUsersApis"
+import { AddNewUserSidebarButton } from "./add-new-user-button"
+import { UsersInfoTableColumns } from "./users-info-table-columns"
+import { UsersInfoTableToolbar } from "./users-info-table-toolbar"
 
-interface InvoicesTableProps {
+interface UsersInfoTableProps {
   data?: UserInfo[]
 }
 
-export function InvoicesTable() {
+export function UsersInfoTable() {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = useState({})
   const { data } = useGetUserInfo()
 
-
   const table = useReactTable({
     data: data?.data ?? [],
-    columns: invoicesTableColumns,
+    columns: UsersInfoTableColumns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
@@ -79,7 +78,7 @@ export function InvoicesTable() {
       <CardHeader className="flex-row justify-between items-center gap-x-1.5 space-y-0">
         <CardTitle>اطلاعات کاربران</CardTitle>
         {/* <KanbanAddNewTaskButton /> */}
-        <InvoiceTableToolbar table={table} />
+        <UsersInfoTableToolbar table={table} />
       </CardHeader>
       <CardContent className="p-0">
         <ScrollArea
@@ -123,7 +122,7 @@ export function InvoicesTable() {
               ) : (
                 <TableRow>
                   <TableCell
-                    colSpan={invoicesTableColumns.length}
+                    colSpan={UsersInfoTableColumns.length}
                     className="h-24 text-center"
                   >
                     No results.

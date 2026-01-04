@@ -4,11 +4,11 @@ import { useState } from "react"
 import { EllipsisVertical } from "lucide-react"
 
 import type { Row } from "@tanstack/react-table"
-import type { InvoiceType } from "../types"
+import type { UsersInfoType } from "../types"
 
-import { deliveryStatusesData } from "../_data/invoices"
+import { deliveryStatusesData } from "../_data/users-info"
 
-import { useKanbanContext } from "../_hooks/use-kanban-context"
+import { useUserContext } from "../_hooks/use-user-context"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -23,21 +23,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-interface InvoiceTableRowActionsProps<TData> {
+interface UsersInfoTableRowActionsProps<TData> {
   row: Row<TData>
 }
 
-export function InvoiceTableRowActions<TData>({
+export function UsersInfoTableRowActions<TData>({
   row,
-}: InvoiceTableRowActionsProps<TData>) {
-  const invoice = row.original as InvoiceType
+}: UsersInfoTableRowActionsProps<TData>) {
+  const invoice = row.original as UsersInfoType
 
   const [open, onOpenChange] = useState(false)
   const {
-    setKanbanUpdateTaskSidebarIsOpen,
-    handleSelectTask,
-    handleDeleteTask,
-  } = useKanbanContext()
+    setUpdateUserSidebarIsOpen,
+    handleSelectUser,
+    handleDeleteUser,
+  } = useUserContext()
 
   return (
     <div className="flex justify-end me-4">
@@ -57,7 +57,7 @@ export function InvoiceTableRowActions<TData>({
             onClick={() => {
               // handleSelectTask(invoice)
               onOpenChange(false)
-              setKanbanUpdateTaskSidebarIsOpen(true)
+              setUpdateUserSidebarIsOpen(true)
             }}
           >
             ویرایش

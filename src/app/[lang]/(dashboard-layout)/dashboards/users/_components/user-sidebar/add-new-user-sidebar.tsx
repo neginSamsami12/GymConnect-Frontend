@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+import { useMemo } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Grid2x2Plus } from "lucide-react"
@@ -11,7 +11,7 @@ import { labelsData } from "../../_data/labels"
 
 import { AddUserSchema } from "../../_schemas/add-user-schema"
 
-import { useKanbanContext } from "../../_hooks/use-kanban-context"
+import { useUserContext } from "../../_hooks/use-user-context"
 import { ButtonLoading } from "@/components/ui/button"
 import { DatePicker } from "@/components/ui/date-picker"
 import { FileDropzone } from "@/components/ui/file-dropzone"
@@ -53,59 +53,53 @@ const defaultValues = {
   attachments: [],
 }
 
-export function KanbanUpdateTaskSidebar() {
+export function AddUserSidebar() {
   const {
-    kanbanState,
-    kanbanUpdateTaskSidebarIsOpen,
-    setKanbanUpdateTaskSidebarIsOpen,
-    handleUpdateTask,
-    handleSelectTask,
-  } = useKanbanContext()
+    userState,
+    addUserSidebarIsOpen,
+    setAddUserSidebarIsOpen,
+    handleAddUser,
+    handleSelectUser,
+  } = useUserContext()
 
   const form = useForm<AddUserFormType>({
     resolver: zodResolver(AddUserSchema),
     defaultValues,
   })
 
-  const { teamMembers, selectedTask } = kanbanState
+  const { teamMembers, selectedColumn } = userState
   const { isSubmitting, isDirty } = form.formState
   const isDisabled = isSubmitting || !isDirty // Disable button if form is unchanged or submitting
-
-  // Reset the form with the current selected task's values whenever `selectedTask` changes
-  useEffect(() => {
-    if (selectedTask) {
-      form.reset({
-        firstName: selectedTask.firstName,
-        lastName: selectedTask.lastName,
-        nationalId: selectedTask.nationalId,
-        phone: selectedTask.phone,
-        email: selectedTask.email,
-        birthDate: selectedTask.birthDate,
-        address: selectedTask.address,
-        attachments: selectedTask.attachments,
-      })
-    }
-  }, [selectedTask, form])
 
   function onSubmit(data: AddUserFormType) {
     const payload = {
       ...data,
-      birthDate: data.birthDate ? data.birthDate.toISOString() : '',
+      birthDate: data.birthDate ? data.birthDate.toISOString() : "",
     }
-    handleUpdateTask(payload)
+    handleAddUser(payload)
 
     handleSidebarClose()
   }
 
   const handleSidebarClose = () => {
     form.reset(defaultValues) // Reset the form to the initial values
-    handleSelectTask(undefined) // Unselect the current task
-    setKanbanUpdateTaskSidebarIsOpen(false) // Close the sidebar
+    handleSelectUser(undefined) // Unselect the current user
+    setAddUserSidebarIsOpen(false) // Close the sidebar
   }
+
+  const labelOptions = useMemo(
+    () =>
+      labelsData.map((label) => (
+        <SelectItem key={label.id} value={label.name}>
+          {label.name}
+        </SelectItem>
+      )),
+    []
+  )
 
   return (
     <Sheet
-      open={kanbanUpdateTaskSidebarIsOpen}
+      open={addUserSidebarIsOpen}
       onOpenChange={() => handleSidebarClose()}
     >
       <SheetContent className="p-0" side="end">
@@ -113,7 +107,7 @@ export function KanbanUpdateTaskSidebar() {
           <SheetHeader>
             <SheetTitle>افزوردن کاربر</SheetTitle>
             <SheetDescription>
-              ویرایش اطلاعات
+              افزودن اطلاعات کاربر جدید به جدول {selectedColumn?.title} .
             </SheetDescription>
           </SheetHeader>
           <Form {...form}>
@@ -128,10 +122,7 @@ export function KanbanUpdateTaskSidebar() {
                   <FormItem>
                     <FormLabel>نام</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="نام کاربر"
-                        {...field}
-                      />
+                      <Input placeholder="نام کاربر" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -144,10 +135,7 @@ export function KanbanUpdateTaskSidebar() {
                   <FormItem>
                     <FormLabel>نام خانوادگی</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="نام خانوادگی کاربر"
-                        {...field}
-                      />
+                      <Input placeholder="نام خانوادگی کاربر" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

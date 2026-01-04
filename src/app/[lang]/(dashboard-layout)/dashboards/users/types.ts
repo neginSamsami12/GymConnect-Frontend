@@ -1,8 +1,10 @@
-import type { FileType } from "@/types"
-import type { z } from "zod"
-import type { KanbanColumnSchema } from "./_schemas/kanban-column-schema"
-import type { AddUserSchema } from "./_schemas/add-user-schema"
 import { CreateUserRequest } from "@/services/users/mutations/createUsers"
+import { UpdateUserRequest } from "@/services/users/mutations/updateUsers"
+
+import type { FileType, UserType } from "@/types"
+import type { z } from "zod"
+import type { AddUserSchema } from "./_schemas/add-user-schema"
+import type { UserColumnSchema } from "./_schemas/user-column-schema"
 
 export interface UserType {
   id: string
@@ -48,11 +50,11 @@ export type TaskWithoutIdAndOrderAndColumnIdType = Omit<
   "id" | "order" | "columnId"
 >
 
-export interface KanbanStateType {
+export interface UserStateType {
   columns: ColumnType[]
   teamMembers: UserType[]
   selectedColumn?: ColumnType
-  selectedTask?: TaskType
+  selectedUser?: UserType
 }
 
 export interface LabelType {
@@ -60,7 +62,7 @@ export interface LabelType {
   name: string
 }
 
-export type KanbanActionType =
+export type UserActionType =
   | { type: "addColumn"; column: ColumnWithoutIdAndOrderAndTasksType }
   | { type: "updateColumn"; column: ColumnType }
   | { type: "deleteColumn"; columnId: string }
@@ -80,38 +82,19 @@ export type KanbanActionType =
   | { type: "selectColumn"; column?: ColumnType }
   | { type: "selectTask"; task?: TaskType }
 
-export interface KanbanContextType {
-  kanbanState: KanbanStateType
-  kanbanAddTaskSidebarIsOpen: boolean
-  setKanbanAddTaskSidebarIsOpen: (value: boolean) => void
-  kanbanUpdateTaskSidebarIsOpen: boolean
-  setKanbanUpdateTaskSidebarIsOpen: (value: boolean) => void
-  kanbanAddColumnSidebarIsOpen: boolean
-  setKanbanAddColumnSidebarIsOpen: (value: boolean) => void
-  kanbanUpdateColumnSidebarIsOpen: boolean
-  setKanbanUpdateColumnSidebarIsOpen: (value: boolean) => void
-  handleAddColumn: (column: ColumnWithoutIdAndOrderAndTasksType) => void
-  handleUpdateColumn: (column: ColumnType) => void
-  handleDeleteColumn: (columnId: ColumnType["id"]) => void
-  handleAddTask: (
-    task: CreateUserRequest,
-  ) => void
-  handleUpdateTask: (task: TaskType) => void
-  handleDeleteTask: (taskId: TaskType["id"]) => void
-  handleReorderColumns: (sourceIndex: number, destinationIndex: number) => void
-  handleReorderTasks: (
-    sourceColumnId: string,
-    sourceIndex: number,
-    destinationColumnId: string,
-    destinationIndex: number
-  ) => void
-  // handleSelectColumn: (column: ColumnType | undefined) => void
-  handleSelectTask: (task: TaskType | undefined) => void
+export interface UserContextType {
+  userState: UserStateType
+  addUserSidebarIsOpen: boolean
+  setAddUserSidebarIsOpen: (value: boolean) => void
+  updateUserSidebarIsOpen: boolean
+  setUpdateUserSidebarIsOpen: (value: boolean) => void
+  handleAddUser: (user: CreateUserRequest) => void
+  handleUpdateUser: (user: UpdateUserRequest) => void
+  handleDeleteUser: (UserId: UserType["id"]) => void
+  handleSelectUser: (task: UserType | undefined) => void
 }
 
-export type KanbanColumnFormType = z.infer<typeof KanbanColumnSchema>
-
-export type AddUserFormType = Omit<z.infer<typeof AddUserSchema> , "attachments">
+export type AddUserFormType = Omit<z.infer<typeof AddUserSchema>, "attachments">
 
 export interface MetricType {
   value: number
@@ -163,7 +146,7 @@ export interface CustomerInsightsType {
   vipCustomers: number
 }
 
-export interface InvoiceType {
+export interface UsersInfoType {
   invoiceId: string
   customerName: string
   orderDate: string
