@@ -3,6 +3,9 @@ import type { ComponentType, SVGAttributes } from "react"
 import type { i18n } from "./configs/i18n"
 import type { radii, themes } from "./configs/themes"
 
+import { SignInSchema } from "./schemas/sign-in-schema"
+import { z } from "zod"
+
 export type LayoutType = "vertical" | "horizontal"
 
 export type ModeType = "light" | "dark" | "system"
@@ -74,6 +77,12 @@ export interface NavigationType {
   items: NavigationRootItem[]
 }
 
+export interface OAuthLinkType {
+  href: string
+  label: string
+  icon: IconType
+}
+
 export type NavigationRootItem =
   | NavigationRootItemWithHrefType
   | NavigationRootItemWithItemsType
@@ -130,3 +139,5 @@ export interface NavigationNestedItemWithItemsType
 export type NavigationNestedItem =
   | NavigationNestedItemWithHrefType
   | NavigationNestedItemWithItemsType
+
+export type SignInFormType = z.infer<typeof SignInSchema>

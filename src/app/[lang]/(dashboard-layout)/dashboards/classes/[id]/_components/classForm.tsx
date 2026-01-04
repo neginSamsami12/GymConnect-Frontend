@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { InputFile } from "@/components/ui/input-file"
 import { InputPhone } from "@/components/ui/input-phone"
 import {
   Select,
@@ -32,6 +33,9 @@ type FormType = z.infer<typeof FormLayoutsSchema>
 export function ClassForm() {
   const form = useForm<FormType>({
     resolver: zodResolver(FormLayoutsSchema),
+    defaultValues: {
+      file: undefined,
+    },
   })
 
   const { isSubmitting, isDirty } = form.formState
@@ -47,6 +51,31 @@ export function ClassForm() {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-y-3">
+            <FormField
+              control={form.control}
+              name="file"
+              render={({ field }) => (
+                <FormItem className="grid grid-cols-8 items-center gap-x-3">
+                  <FormLabel className="col-span-2 md:col-span-1">
+                    فایل
+                  </FormLabel>
+
+                  <FormControl className="col-start-3 col-span-full md:col-start-2">
+                    <CardContent className="p-0">
+                      <InputFile
+                        placeholder="فایلی انتخاب نشده"
+                        accept="image/*"
+                        value={field.value}
+                        onValueChange={field.onChange}
+                      />
+                    </CardContent>
+                  </FormControl>
+
+                  <FormMessage className="col-start-3 col-span-full md:col-start-2" />
+                </FormItem>
+              )}
+            />
+
             <FormField
               control={form.control}
               name="className"

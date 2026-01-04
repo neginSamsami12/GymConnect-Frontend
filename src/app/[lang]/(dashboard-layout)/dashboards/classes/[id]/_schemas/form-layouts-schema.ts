@@ -1,6 +1,7 @@
 import { z } from "zod"
 
 export const FormLayoutsSchema = z.object({
+  file: z.custom<FileList>(),
   className: z
     .string({
       required_error: "نام کلاس الزامی است.",

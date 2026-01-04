@@ -73,7 +73,7 @@ export function ClassCard() {
         {/* Footer */}
         <CardFooter className="p-0 gap-x-3 justify-center md:justify-start">
           <Button>پرداخت و ثبت نام</Button>
-          <Button variant="secondary">جزئیات بیشتر</Button>
+          <Button variant="secondary">هزینه </Button>
         </CardFooter>
       </div>
     </Card>
