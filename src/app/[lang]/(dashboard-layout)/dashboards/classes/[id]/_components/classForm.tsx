@@ -3,8 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
-import type { z } from "zod"
-
 import { FormLayoutsSchema } from "../_schemas/form-layouts-schema"
 
 import { ButtonLoading } from "@/components/ui/button"
@@ -19,7 +17,6 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { InputFile } from "@/components/ui/input-file"
-import { InputPhone } from "@/components/ui/input-phone"
 import {
   Select,
   SelectContent,
@@ -27,21 +24,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { CreateClassRequest } from "@/services/classes/mutations/createClasses"
+import { useCreateClass } from "@/services/classes/useClassesApis"
 
-type FormType = z.infer<typeof FormLayoutsSchema>
+type FormType = CreateClassRequest
 
 export function ClassForm() {
   const form = useForm<FormType>({
     resolver: zodResolver(FormLayoutsSchema),
     defaultValues: {
-      file: undefined,
+      image: undefined,
     },
   })
 
   const { isSubmitting, isDirty } = form.formState
   const isDisabled = isSubmitting || !isDirty
+  const mutation = useCreateClass()
 
-  async function onSubmit(_data: FormType) {}
+  async function onSubmit(data: FormType) {
+    mutation.mutate(data)
+  }
 
   return (
     <Card>
@@ -53,7 +55,7 @@ export function ClassForm() {
           <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-y-3">
             <FormField
               control={form.control}
-              name="file"
+              name="image"
               render={({ field }) => (
                 <FormItem className="grid grid-cols-8 items-center gap-x-3">
                   <FormLabel className="col-span-2 md:col-span-1">
@@ -67,6 +69,7 @@ export function ClassForm() {
                         accept="image/*"
                         value={field.value}
                         onValueChange={field.onChange}
+                        buttonLabel="انتخاب کنید"
                       />
                     </CardContent>
                   </FormControl>
@@ -78,7 +81,7 @@ export function ClassForm() {
 
             <FormField
               control={form.control}
-              name="className"
+              name="title"
               render={({ field }) => (
                 <FormItem className="grid grid-cols-8 items-center gap-x-3">
                   <FormLabel className="col-span-2 md:col-span-1">
@@ -108,7 +111,7 @@ export function ClassForm() {
             />
             <FormField
               control={form.control}
-              name="hours"
+              name="scheduleTime"
               render={({ field }) => (
                 <FormItem className="grid grid-cols-8 items-center gap-x-3">
                   <FormLabel className="col-span-2 md:col-span-1">
@@ -123,7 +126,7 @@ export function ClassForm() {
             />
             <FormField
               control={form.control}
-              name="coaches"
+              name="trainerId"
               render={({ field }) => (
                 <FormItem className="grid grid-cols-8 items-center gap-x-3">
                   <FormLabel className="col-span-2 md:col-span-1">
@@ -138,10 +141,11 @@ export function ClassForm() {
                         <SelectValue placeholder="مربی مورد نظر را انتخاب کنید" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="california">نگین صمصامی</SelectItem>
-                        <SelectItem value="texas"> محمد اسدی</SelectItem>
-                        <SelectItem value="florida">فاطمه احمدی</SelectItem>
-                        <SelectItem value="new-york">رسول باقری</SelectItem>
+                        <SelectItem value="5ac3d10e-4868-4c43-957e-8fc3d308d5c1">علی حمدی</SelectItem>
+                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa6">نگین صمصامی</SelectItem>
+                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa7">محمد اسدی</SelectItem>
+                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa8">فاطمه احمدی</SelectItem>
+                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa9">رسول باقری</SelectItem>
                       </SelectContent>
                     </Select>
                   </FormControl>
@@ -158,7 +162,7 @@ export function ClassForm() {
                     ظرفیت کلاس
                   </FormLabel>
                   <FormControl className="col-start-3 col-span-full md:col-start-2">
-                    <Input type="number" placeholder="ظرفیت کلاس" {...field} />
+                    <Input type="number" placeholder="ظرفیت کلاس" min={1} {...field} />
                   </FormControl>
                   <FormMessage className="col-start-3 col-span-full md:col-start-2" />
                 </FormItem>
@@ -166,7 +170,7 @@ export function ClassForm() {
             />
             <FormField
               control={form.control}
-              name="expense"
+              name="price"
               render={({ field }) => (
                 <FormItem className="grid grid-cols-8 items-center gap-x-3">
                   <FormLabel className="col-span-2 md:col-span-1">
@@ -181,7 +185,7 @@ export function ClassForm() {
             />
             <FormField
               control={form.control}
-              name="startdate"
+              name="startDate"
               render={({ field }) => (
                 <FormItem className="grid grid-cols-8 items-center gap-x-3">
                   <FormLabel className="col-span-2 md:col-span-1">
@@ -197,7 +201,7 @@ export function ClassForm() {
 
             <FormField
               control={form.control}
-              name="dateEnd"
+              name="endDate"
               render={({ field }) => (
                 <FormItem className="grid grid-cols-8 items-center gap-x-3">
                   <FormLabel className="col-span-2 md:col-span-1">

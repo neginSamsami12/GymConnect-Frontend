@@ -1,8 +1,8 @@
 import { z } from "zod"
 
 export const FormLayoutsSchema = z.object({
-  file: z.custom<FileList>(),
-  className: z
+  image: z.custom<FileList>(),
+  title: z
     .string({
       required_error: "نام کلاس الزامی است.",
     })
@@ -14,15 +14,13 @@ export const FormLayoutsSchema = z.object({
     .string({
       required_error: "روزهای برگزاری الزامی است.",
     })
-    .trim()
-    .min(1, { message: "روزهای برگزاری باید حداقل 1 روز باشد." })
-    .max(3, { message: "روزهای برگزاری باید حداکثر 3 روز باشد." }),
+    .trim(),
 
-  hours: z.string({
+  scheduleTime: z.string({
     required_error: "ساعت برگزاری الزامی است.",
   }),
 
-  coaches: z
+  trainerId: z
     .string({
       required_error: "نام مربی الزامی است.",
     })
@@ -39,7 +37,7 @@ export const FormLayoutsSchema = z.object({
     .min(10, { message: "ظرفیت کلاس باید حداقل 10 نفر باشد." })
     .max(25, { message: "ظرفیت کلاس باید حداکثر 25 نفر باشد." }),
 
-  expense: z
+  price: z
     .string({
       required_error: "هزینه الزامی است.",
     })
@@ -47,11 +45,11 @@ export const FormLayoutsSchema = z.object({
     .min(2, { message: "هزینه باید حداقل 2 کاراکتر باشد." })
     .max(50, { message: "هزینه باید حداکثر 50 کاراکتر باشد." }),
 
-  startdate: z.string({
+  startDate: z.string({
     required_error: "تاریخ شروع الزامی است.",
   }),
 
-  dateEnd: z.string({
+  endDate: z.string({
     required_error: "تاریخ پایان الزامی است.",
   }),
 
