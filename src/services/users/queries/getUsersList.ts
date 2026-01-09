@@ -4,11 +4,13 @@ import { BASE_URL, CONTROLLERS } from "@/configs/api-config"
 import baseAxios from "@/configs/axios/BaseAxios"
 
 import { ApiResponse } from "../../apiTypes"
+import { Gender } from "@/types"
 
 export interface UserInfo {
   id: string
   firstName: string
   lastName: string
+  gender: Gender
   email: string
   phone: string
   birthDate: string

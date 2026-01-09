@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useReducer, useState } from "react"
+import { createContext, useState } from "react"
 import { CreateUserRequest } from "@/services/users/mutations/createUsers"
 import { UpdateUserRequest } from "@/services/users/mutations/updateUsers"
 import { useCreateUser, useUpdateUser } from "@/services/users/useUsersApis"
@@ -8,19 +8,10 @@ import { useQueryClient } from "@tanstack/react-query"
 
 import type { ReactNode } from "react"
 import type {
-  ColumnType,
-  ColumnWithoutIdAndOrderAndTasksType,
-  TaskType,
-  TaskWithoutIdAndOrderAndColumnIdType,
   UserContextType,
-  UserType,
 } from "../types"
+import { UserInfo } from "@/services/users/queries/getUsersList"
 
-import { teamMembersData } from "../_data/team-members"
-
-import { UserReducer } from "../_reducers/user-reducer"
-
-// Create Kanban context
 export const UserContext = createContext<UserContextType | undefined>(undefined)
 
 interface UserProviderProps {
@@ -28,18 +19,11 @@ interface UserProviderProps {
 }
 
 export function UserProvider({ children }: UserProviderProps) {
-  // Reducer to manage Kanban state
-  const [userState, dispatch] = useReducer(UserReducer, {
-    teamMembers: teamMembersData,
-    selectedColumn: undefined,
-    selectedUser: undefined,
-  })
 
-  // Sidebar state management
   const [addUserSidebarIsOpen, setAddUserSidebarIsOpen] = useState(false)
   const [updateUserSidebarIsOpen, setUpdateUserSidebarIsOpen] = useState(false)
+  const [selectedUser, setSelectedUser] = useState<UserInfo | undefined>(undefined)
 
-  // Handlers for task actions
   const queryClient = useQueryClient()
   const addUserMutation = useCreateUser()
   const updateUserMutation = useUpdateUser()
@@ -55,8 +39,8 @@ export function UserProvider({ children }: UserProviderProps) {
     })
   }
 
-  const handleUpdateUser = (user: UpdateUserRequest) => {
-    updateUserMutation.mutate(user, {
+  const handleUpdateUser = (user: UpdateUserRequest, id: string) => {
+    updateUserMutation.mutate({data: user, id: id}, {
       onSuccess: (data) => {
         queryClient.invalidateQueries({ queryKey: ["GetUserInfo"] })
       },
@@ -66,18 +50,13 @@ export function UserProvider({ children }: UserProviderProps) {
     })
   }
 
-  const handleDeleteUser = (taskId: UserType["id"]) => {
-    dispatch({ type: "deleteTask", taskId })
-  }
-
-  const handleSelectUsers = (user: UserType | undefined) => {
-    dispatch({ type: "selectTask", user })
+  const handleDeleteUser = (userId: UserInfo["id"]) => {
+    
   }
 
   return (
     <UserContext.Provider
       value={{
-        userState,
         addUserSidebarIsOpen,
         setAddUserSidebarIsOpen,
         updateUserSidebarIsOpen,
@@ -85,7 +64,8 @@ export function UserProvider({ children }: UserProviderProps) {
         handleAddUser,
         handleUpdateUser,
         handleDeleteUser,
-        handleSelectUsers,
+        selectedUser,
+        setSelectedUser,
       }}
     >
       {children}

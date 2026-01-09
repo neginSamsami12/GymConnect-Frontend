@@ -1,15 +1,13 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Grid2x2Plus } from "lucide-react"
 
 import type { AddUserFormType } from "../../types"
 
-import { labelsData } from "../../_data/labels"
-
-import { AddUserSchema } from "../../_schemas/add-user-schema"
+import { UserSchema } from "../../_schemas/user-schema"
 
 import { useUserContext } from "../../_hooks/use-user-context"
 import { ButtonLoading } from "@/components/ui/button"
@@ -24,7 +22,6 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { InputTagsWithSuggestions } from "@/components/ui/input-tags"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   Select,
@@ -41,6 +38,8 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet"
 import { Textarea } from "@/components/ui/textarea"
+import { Gender, GenderRecords } from "@/types"
+import { findItemByValue } from "@/lib/utils"
 
 const defaultValues = {
   firstName: "",
@@ -49,29 +48,28 @@ const defaultValues = {
   nationalId: "",
   email: "",
   address: "",
-  dueDate: new Date(),
-  attachments: [],
+  birthDate: new Date(),
+  image: [],
 }
 
 export function UpdateUserSidebar() {
   const {
-    userState,
+    selectedUser,
     updateUserSidebarIsOpen,
     setUpdateUserSidebarIsOpen,
     handleUpdateUser,
-    handleSelectUser,
+    setSelectedUser,
   } = useUserContext()
 
   const form = useForm<AddUserFormType>({
-    resolver: zodResolver(AddUserSchema),
+    resolver: zodResolver(UserSchema),
     defaultValues,
   })
 
-  const { teamMembers, selectedUser } = userState
   const { isSubmitting, isDirty } = form.formState
   const isDisabled = isSubmitting || !isDirty // Disable button if form is unchanged or submitting
 
-  // Reset the form with the current selected task's values whenever `selectedTask` changes
+  // Reset the form with the current selected user's values whenever `selectedUser` changes
   useEffect(() => {
     if (selectedUser) {
       form.reset({
@@ -79,29 +77,44 @@ export function UpdateUserSidebar() {
         lastName: selectedUser.lastName,
         nationalId: selectedUser.nationalId,
         phone: selectedUser.phone,
+        gender: selectedUser.gender,
         email: selectedUser.email,
-        birthDate: selectedUser.birthDate,
+        birthDate: new Date(selectedUser.birthDate),
         address: selectedUser.address,
-        attachments: selectedUser.attachments,
+        image: [],
       })
     }
   }, [selectedUser, form])
 
   function onSubmit(data: AddUserFormType) {
-    const payload = {
-      ...data,
-      birthDate: data.birthDate ? data.birthDate.toISOString() : "",
+    if (selectedUser) {
+      const payload = {
+        ...data,
+        image: Array.isArray(data.image) && data.image.length > 0 && data.image[0] instanceof File ? data.image[0] : undefined,
+        birthDate: data.birthDate ? data.birthDate.toISOString() : "",
+        gender: GenderRecords.find(g => g.label === data.gender)?.value,
+      }
+      handleUpdateUser(payload, selectedUser.id)
     }
-    handleUpdateUser(payload)
 
     handleSidebarClose()
   }
 
   const handleSidebarClose = () => {
     form.reset(defaultValues) // Reset the form to the initial values
-    handleSelectUser(undefined) // Unselect the current user
+    setSelectedUser(undefined) // Unselect the current user
     setUpdateUserSidebarIsOpen(false) // Close the sidebar
   }
+
+  const genderOptions = useMemo(
+    () =>
+      GenderRecords.map((gender) => (
+        <SelectItem key={gender.value} value={gender.label}>
+          {gender.label}
+        </SelectItem>
+      )),
+    []
+  )
 
   return (
     <Sheet
@@ -112,7 +125,9 @@ export function UpdateUserSidebar() {
         <ScrollArea className="h-full p-4">
           <SheetHeader>
             <SheetTitle>افزوردن کاربر</SheetTitle>
-            <SheetDescription>ویرایش اطلاعات</SheetDescription>
+            <SheetDescription>
+              ویرایش اطلاعات {selectedUser?.firstName + " " + selectedUser?.lastName}
+            </SheetDescription>
           </SheetHeader>
           <Form {...form}>
             <form
@@ -141,6 +156,28 @@ export function UpdateUserSidebar() {
                     <FormControl>
                       <Input placeholder="نام خانوادگی کاربر" {...field} />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="gender"
+                // defaultValue={findItemByValue(GenderRecords, field)}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>جنسیت</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={findItemByValue(GenderRecords, field.value)?.label}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="انتخاب کنید" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>{genderOptions}</SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -216,7 +253,7 @@ export function UpdateUserSidebar() {
               />
               <FormField
                 control={form.control}
-                name="attachments"
+                name="image"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>تصویر کاربر</FormLabel>

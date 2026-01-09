@@ -4,9 +4,7 @@ import { useState } from "react"
 import { EllipsisVertical } from "lucide-react"
 
 import type { Row } from "@tanstack/react-table"
-import type { UsersInfoType } from "../types"
-
-import { deliveryStatusesData } from "../_data/users-info"
+import { UserInfo } from "@/services/users/queries/getUsersList"
 
 import { useUserContext } from "../_hooks/use-user-context"
 import { Button } from "@/components/ui/button"
@@ -30,12 +28,12 @@ interface UsersInfoTableRowActionsProps<TData> {
 export function UsersInfoTableRowActions<TData>({
   row,
 }: UsersInfoTableRowActionsProps<TData>) {
-  const invoice = row.original as UsersInfoType
+  const user = row.original as UserInfo
 
   const [open, onOpenChange] = useState(false)
   const {
     setUpdateUserSidebarIsOpen,
-    handleSelectUser,
+    setSelectedUser,
     handleDeleteUser,
   } = useUserContext()
 
@@ -55,29 +53,13 @@ export function UsersInfoTableRowActions<TData>({
         <DropdownMenuContent align="end" className="w-[160px]">
           <DropdownMenuItem
             onClick={() => {
-              // handleSelectTask(invoice)
+              setSelectedUser(user)
               onOpenChange(false)
               setUpdateUserSidebarIsOpen(true)
             }}
           >
             ویرایش
           </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuSub>
-            <DropdownMenuSubContent>
-              <DropdownMenuRadioGroup value={invoice.deliveryStatus}>
-                {deliveryStatusesData.map((status) => (
-                  <DropdownMenuRadioItem
-                    key={status.value}
-                    value={status.value}
-                  >
-                    {status.label}
-                  </DropdownMenuRadioItem>
-                ))}
-              </DropdownMenuRadioGroup>
-            </DropdownMenuSubContent>
-          </DropdownMenuSub>
-          <DropdownMenuSeparator />
           <DropdownMenuItem className="text-destructive focus:text-destructive">
             حذف
           </DropdownMenuItem>

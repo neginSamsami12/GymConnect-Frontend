@@ -1,34 +1,42 @@
 import { BASE_URL, CONTROLLERS } from "@/configs/api-config"
 import baseAxios from "@/configs/axios/BaseAxios"
-
-
 import { ApiResponse } from "../../apiTypes"
+import { Gender } from "@/types"
 
-export interface CreateUserRequest {
+export interface CreateUserRequestData {
   firstName: string
   lastName: string
-  phone: string
+  gender: Gender
+  email?: string
+  phone?: string
+  birthDate: string // "YYYY-MM-DD"
+  address?: string
   nationalId: string
-  birthDate: string
-  email: string
-  address: string
 }
 
-export type CreateUserResponse =
-  ApiResponse<unknown>
+export interface CreateUserRequest extends CreateUserRequestData {
+  image?: File
+}
 
-export async function createUser(
-  data: CreateUserRequest
-) {
-  const response = await baseAxios.post(`${BASE_URL}/${CONTROLLERS.USER}`, {
-    firstName: data.firstName,
-    lastName: data.lastName,
-    phone: data.phone,
-    nationalId: data.nationalId,
-    birthDate: data.birthDate,
-    email: data.email,
-    address: data.address,
-  })
+export type CreateUserResponse = ApiResponse<unknown>
+
+export async function createUser(req: CreateUserRequest): Promise<CreateUserResponse> {
+  const form = new FormData()
+  
+  const { image, ...userData } = req
+  form.set(
+    "data",
+    new Blob([JSON.stringify(userData)], { type: "application/json" })
+  )
+
+  if (req.image) {
+    form.append("image", req.image)
+  }
+
+  const response = await baseAxios.post(
+    `${BASE_URL}/${CONTROLLERS.USER}`,
+    form
+  )
 
   return response.data
 }

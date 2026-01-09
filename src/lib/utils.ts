@@ -3,7 +3,7 @@ import { format, formatDistanceToNow, intervalToDuration } from "date-fns"
 import { twMerge } from "tailwind-merge"
 import { z } from "zod"
 
-import type { FormatStyleType, LocaleType } from "@/types"
+import type { FormatStyleType, LocaleType, SelectType } from "@/types"
 import type { ClassValue } from "clsx"
 
 export function cn(...inputs: ClassValue[]) {
@@ -339,4 +339,8 @@ export function getDictionaryValue(
   }
 
   return value
+}
+
+export function findItemByValue(dataSet?: SelectType[], valueToFind?: number | boolean | string) {
+  return dataSet?.find((record) => record.value === valueToFind);
 }

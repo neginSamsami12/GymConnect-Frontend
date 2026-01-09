@@ -1,6 +1,6 @@
-import type { UserType } from "../types"
+import type { CreateUserRequest } from "../types"
 
-export const teamMembersData: UserType[] = [
+export const teamMembersData: CreateUserRequest[] = [
   {
     id: "member-0",
     username: "john.doe",

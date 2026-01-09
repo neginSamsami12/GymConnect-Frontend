@@ -37,6 +37,23 @@ export type IconType = ComponentType<IconProps> | LucideIcon
 
 export type DynamicIconNameType = keyof typeof icons
 
+export interface SelectType {
+  value: any;
+  label: any;
+};
+
+export type Gender = "MALE" | "FEMALE"
+
+export interface GenderRecordType extends SelectType {
+  value: Gender;
+  label: string;
+}
+
+export const GenderRecords: GenderRecordType[] = [
+  { value: "MALE", label: "مرد" },
+  { value: "FEMALE", label: "زن" }
+]
+
 export interface UserType {
   id: string
   firstName: string

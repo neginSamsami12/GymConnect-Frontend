@@ -1,12 +1,11 @@
 "use client"
 
-import { UserInfo } from "@/services/users/queries/getUsersList"
 import { ShieldCheck, ShieldMinus } from "lucide-react"
 
 import type { ColumnDef } from "@tanstack/react-table"
-import type { UsersInfoType } from "../types"
+import type { UsersInfoColumnType } from "../types"
 
-import { formatCurrency, formatDate } from "@/lib/utils"
+import { formatDate } from "@/lib/utils"
 
 import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -18,9 +17,9 @@ const deliveryStatusIcons = {
   DeActive: ShieldMinus,
 }
 
-export const UsersInfoTableColumns: ColumnDef<UserInfo>[] = [
+export const UsersInfoTableColumns: ColumnDef<UsersInfoColumnType>[] = [
   {
-    id: "نام",
+    id: "select",
     header: ({ table }) => (
       <Checkbox
         checked={
@@ -57,11 +56,10 @@ export const UsersInfoTableColumns: ColumnDef<UserInfo>[] = [
   {
     accessorKey: "fullName",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="نام خانوادگی" />
+      <DataTableColumnHeader column={column} title="نام" />
     ),
     cell: ({ row }) => {
       const customerName =
-        // row.original.firstName as string
         `${row.original.firstName} ${row.original.lastName}`
 
       return (

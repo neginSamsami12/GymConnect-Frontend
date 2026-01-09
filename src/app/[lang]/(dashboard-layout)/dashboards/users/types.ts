@@ -1,100 +1,23 @@
 import { CreateUserRequest } from "@/services/users/mutations/createUsers"
 import { UpdateUserRequest } from "@/services/users/mutations/updateUsers"
 
-import type { FileType, UserType } from "@/types"
 import type { z } from "zod"
-import type { AddUserSchema } from "./_schemas/add-user-schema"
-import type { UserColumnSchema } from "./_schemas/user-column-schema"
-
-export interface UserType {
-  id: string
-  username: string
-  name: string
-  avatar?: string
-}
-
-export interface CommentType {
-  id: string
-  userId: string
-  text: string
-  createdAt: Date
-}
-
-export interface TaskType {
-  id: string
-  columnId: string
-  order: number
-  title: string
-  description?: string
-  label: string
-  comments: CommentType[]
-  assigned: UserType[]
-  dueDate: Date
-  attachments: FileType[]
-}
-
-export interface ColumnType {
-  id: string
-  order: number
-  title: string
-  tasks: TaskType[]
-}
-
-export type ColumnWithoutIdAndOrderAndTasksType = Omit<
-  ColumnType,
-  "id" | "order" | "tasks"
->
-
-export type TaskWithoutIdAndOrderAndColumnIdType = Omit<
-  TaskType,
-  "id" | "order" | "columnId"
->
-
-export interface UserStateType {
-  columns: ColumnType[]
-  teamMembers: UserType[]
-  selectedColumn?: ColumnType
-  selectedUser?: UserType
-}
-
-export interface LabelType {
-  id: string
-  name: string
-}
-
-export type UserActionType =
-  | { type: "addColumn"; column: ColumnWithoutIdAndOrderAndTasksType }
-  | { type: "updateColumn"; column: ColumnType }
-  | { type: "deleteColumn"; columnId: string }
-  | {
-      type: "addTask"
-      task: TaskWithoutIdAndOrderAndColumnIdType
-      columnId: string
-    }
-  | { type: "updateTask"; task: TaskType }
-  | { type: "deleteTask"; taskId: string }
-  | { type: "reorderColumns"; sourceIndex: number; destinationIndex: number }
-  | {
-      type: "reorderTasks"
-      source: { columnId: string; index: number }
-      destination: { columnId: string; index: number }
-    }
-  | { type: "selectColumn"; column?: ColumnType }
-  | { type: "selectTask"; task?: TaskType }
+import type { UserSchema } from "./_schemas/user-schema"
+import { UserInfo } from "@/services/users/queries/getUsersList"
 
 export interface UserContextType {
-  userState: UserStateType
   addUserSidebarIsOpen: boolean
   setAddUserSidebarIsOpen: (value: boolean) => void
   updateUserSidebarIsOpen: boolean
   setUpdateUserSidebarIsOpen: (value: boolean) => void
   handleAddUser: (user: CreateUserRequest) => void
-  handleUpdateUser: (user: UpdateUserRequest) => void
-  handleDeleteUser: (UserId: UserType["id"]) => void
-  handleSelectUser: (task: UserType | undefined) => void
+  handleUpdateUser: (user: UpdateUserRequest, id: string) => void
+  handleDeleteUser: (UserId: UserInfo["id"]) => void
+  selectedUser: UserInfo | undefined
+  setSelectedUser: (value: UserInfo | undefined) => void
 }
 
-export type AddUserFormType = Omit<z.infer<typeof AddUserSchema>, "attachments">
+export type AddUserFormType = z.infer<typeof UserSchema>
 
 export interface MetricType {
   value: number
@@ -146,14 +69,10 @@ export interface CustomerInsightsType {
   vipCustomers: number
 }
 
-export interface UsersInfoType {
-  invoiceId: string
-  customerName: string
-  orderDate: string
-  dueDate: string
-  totalAmount: number
-  deliveryStatus: "Active" | "DeActive"
-}
+export type UsersInfoColumnType = Omit<
+  UserInfo,
+  "gender" | "email" | "birthDate" | "address"
+>
 
 export interface RevenueBySourceType {
   period: string

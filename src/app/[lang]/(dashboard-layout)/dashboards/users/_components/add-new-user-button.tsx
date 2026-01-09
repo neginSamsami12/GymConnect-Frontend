@@ -2,14 +2,8 @@
 
 import { Plus } from "lucide-react"
 
-import type { ColumnType } from "../types"
-
 import { useUserContext } from "../_hooks/use-user-context"
 import { Button } from "@/components/ui/button"
-
-interface KanbanTaskListProps {
-  column: ColumnType
-}
 
 export function AddNewUserSidebarButton() {
   const { setAddUserSidebarIsOpen } = useUserContext()

@@ -6,7 +6,7 @@ import { ApiResponse } from "../../apiTypes"
 export interface UpdateUserRequest {
   firstName: string
   lastName: string
-  phone: number
+  phone: string
   birthDate: string
   email: string
   address: string

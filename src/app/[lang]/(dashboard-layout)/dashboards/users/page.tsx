@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 
 import { UserProvider } from "./_contexts/user-context"
 import { AddNewUserSidebarButton } from "./_components/add-new-user-button"
-import { KanbanSidebar } from "./_components/user-sidebar/index"
+import { UserSidebar } from "./_components/user-sidebar/index"
 import { UserInfo } from "./_components/users-info"
 
 // Define metadata for the page
@@ -18,7 +18,7 @@ export default function EcommercePage() {
       <UserProvider>
         <div className="col-span-full grid gap-4 md:grid-cols-4"></div>
 
-        <KanbanSidebar />
+        <UserSidebar />
         <AddNewUserSidebarButton />
         <UserInfo />
       </UserProvider>

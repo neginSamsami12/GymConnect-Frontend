@@ -1,10 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import {
-  UserInfo,
-  UserInfoListResponse,
-} from "@/services/users/queries/getUsersList"
 import { useGetUserInfo } from "@/services/users/useUsersApis"
 import {
   flexRender,
@@ -20,7 +16,6 @@ import type {
   SortingState,
   VisibilityState,
 } from "@tanstack/react-table"
-import type { UsersInfoType } from "../types"
 
 import {
   Card,
@@ -39,13 +34,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { AddNewUserSidebarButton } from "./add-new-user-button"
 import { UsersInfoTableColumns } from "./users-info-table-columns"
 import { UsersInfoTableToolbar } from "./users-info-table-toolbar"
-
-interface UsersInfoTableProps {
-  data?: UserInfo[]
-}
 
 export function UsersInfoTable() {
   const [sorting, setSorting] = useState<SortingState>([])
@@ -77,7 +67,6 @@ export function UsersInfoTable() {
     <Card>
       <CardHeader className="flex-row justify-between items-center gap-x-1.5 space-y-0">
         <CardTitle>اطلاعات کاربران</CardTitle>
-        {/* <KanbanAddNewTaskButton /> */}
         <UsersInfoTableToolbar table={table} />
       </CardHeader>
       <CardContent className="p-0">
@@ -94,9 +83,9 @@ export function UsersInfoTable() {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   ))}
                 </TableRow>
