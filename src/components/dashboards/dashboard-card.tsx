@@ -42,7 +42,7 @@ export const cardContentVariants = cva(
 
 interface DashboardCardProps extends ComponentProps<"div"> {
   title: string
-  period?: string
+  description?: string
   action?: ReactNode
   contentClassName?: string
   size?: VariantProps<typeof cardContentVariants>["size"]
@@ -50,7 +50,7 @@ interface DashboardCardProps extends ComponentProps<"div"> {
 
 export function DashboardCard({
   title,
-  period,
+  description,
   action,
   children,
   contentClassName,
@@ -63,7 +63,7 @@ export function DashboardCard({
         <div className="flex justify-between p-6">
           <div>
             <CardTitle>{title}</CardTitle>
-            {period && <CardDescription>{period}</CardDescription>}
+            {description && <CardDescription>{description}</CardDescription>}
           </div>
           {action}
         </div>

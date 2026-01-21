@@ -10,7 +10,7 @@ export function Sales() {
   return (
     <DashboardCard
       title="روند فروش"
-      period={salesTrendData.period}
+      description={salesTrendData.period}
       action={<DashboardCardActionsDropdown />}
       className="col-span-full md:col-span-3"
     >

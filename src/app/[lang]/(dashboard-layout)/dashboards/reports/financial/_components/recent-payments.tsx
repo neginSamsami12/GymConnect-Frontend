@@ -10,7 +10,7 @@ export function RecentPayments() {
   return (
     <DashboardCard
       title="پرداختی‌های اخیر "
-      period={RecentPaymentsData.period}
+      description={RecentPaymentsData.period}
       action={<DashboardCardActionsDropdown />}
     >
       <TopSalesRepresentativesList

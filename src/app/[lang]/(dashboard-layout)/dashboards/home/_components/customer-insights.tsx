@@ -10,7 +10,7 @@ export function CustomerInsights() {
   return (
     <DashboardCard
       title="آمار کاربران"
-      period={customerInsightsData.period}
+      description={customerInsightsData.period}
       action={<DashboardCardActionsDropdown />}
       size="xs"
       className="md:col-span-3"

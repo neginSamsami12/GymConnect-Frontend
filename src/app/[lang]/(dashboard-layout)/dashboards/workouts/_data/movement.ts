@@ -1,39 +1,78 @@
-import type { MovementType } from "../types"
+import { WorkoutInfoListResponse } from "@/services/workout/queries/getWorkoutsList"
 
-export const movementData: MovementType = {
-  period: "Last month",
-  movements: [
-    {
-      name: "Bluetooth Headphones",
-      sku: "BH-001",
-      sales: { value: 85, percentageChange: 0.15 },
-      revenue: { value: 340000, percentageChange: 0.1 },
-      order: 1,
-      image: "/images/misc/product-01.jpg",
-    },
-    {
-      name: "Smartwatch",
-      sku: "SW-002",
-      sales: { value: 72, percentageChange: 0.2 },
-      revenue: { value: 576000, percentageChange: 0.12 },
-      order: 2,
-      image: "/images/misc/product-02.jpg",
-    },
-    {
-      name: "Mirrorless Camera",
-      sku: "MC-003",
-      sales: { value: 54, percentageChange: -0.05 },
-      revenue: { value: 162000, percentageChange: 0.08 },
-      order: 3,
-      image: "/images/misc/product-03.jpg",
-    },
-    {
-      name: "Smartphone",
-      sku: "SP-004",
-      sales: { value: 67, percentageChange: 0.1 },
-      revenue: { value: 134000, percentageChange: 0.07 },
-      order: 4,
-      image: "/images/misc/product-04.jpg",
-    },
-  ],
+export const movementData: WorkoutInfoListResponse = {
+  success: true,
+  timestamp: "",
+  data:
+    [
+      {
+        id: "۱",
+        athleteName: "ورزشکار ۱",
+        trainerName: "مربی ۱",
+        title: "عنوان ۱",
+        description: "توضیحات ۱",
+        exercises: [
+          {
+            index: 1,
+            exerciseName: "اسکات بلغاری",
+            sets: 3,
+            reps: 12,
+            description: "توضیحات اسکات بلغاری"
+          },
+        ],
+      },
+      {
+        id: "۲",
+        athleteName: "ورزشکار ۲",
+        trainerName: "مربی ۲",
+        title: "عنوان ۲",
+        description: "توضیحات ۲",
+        exercises: [
+          {
+            index: 1,
+            exerciseName: "اسکات بلغاری",
+            sets: 3,
+            reps: 12,
+            description: "توضیحات اسکات بلغاری"
+          },
+          {
+            index: 2,
+            exerciseName: "اسکات بلغاری",
+            sets: 3,
+            reps: 12,
+            description: "توضیحات اسکات بلغاری"
+          },
+        ],
+      },
+      {
+        id: "۳",
+        athleteName: "ورزشکار ۳",
+        trainerName: "مربی ۳",
+        title: "عنوان ۳",
+        description: "توضیحات ۳",
+        exercises: [
+          {
+            index: 1,
+            exerciseName: "اسکات بلغاری",
+            sets: 3,
+            reps: 12,
+            description: "توضیحات اسکات بلغاری"
+          },
+          {
+            index: 2,
+            exerciseName: "اسکات بلغاری",
+            sets: 3,
+            reps: 12,
+            description: "توضیحات اسکات بلغاری"
+          },
+          {
+            index: 3,
+            exerciseName: "اسکات بلغاری",
+            sets: 3,
+            reps: 12,
+            description: "توضیحات اسکات بلغاری"
+          }
+        ],
+      },
+    ]
 }

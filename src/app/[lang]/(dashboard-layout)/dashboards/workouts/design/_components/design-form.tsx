@@ -5,8 +5,6 @@ import { useForm } from "react-hook-form"
 
 import type { z } from "zod"
 
-import { movementData } from "../../_data/movement"
-
 import { DesignFormsSchema } from "../_schemas/design-form-schema"
 
 import { ButtonLoading } from "@/components/ui/button"
@@ -20,7 +18,6 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { InputPhone } from "@/components/ui/input-phone"
 import {
   Select,
   SelectContent,
@@ -31,18 +28,48 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { MovementList } from "../../_components/movement-list"
 import { AddMovement } from "./add-movement"
+import { Exercise } from "@/models/workout"
+import { useState } from "react"
+import { useCreateWorkout } from "@/services/workout/useWorkoutApis"
 
 type FormType = z.infer<typeof DesignFormsSchema>
 
 export function DesignForm() {
   const form = useForm<FormType>({
     resolver: zodResolver(DesignFormsSchema),
+    defaultValues: {
+      athlete: "",
+      title: "",
+      description: "",
+    },
   })
 
   const { isSubmitting, isDirty } = form.formState
-  const isDisabled = isSubmitting || !isDirty // Disable button if form is unchanged or submitting
+  const isDisabled = isSubmitting || !isDirty
+  const [exercises, setExercises] = useState<Exercise[]>([])
+  const { mutate } = useCreateWorkout()
 
-  async function onSubmit(_data: FormType) {}
+  const handleAddExercise = (exercise: Exercise) => {
+    setExercises(prevExercises => [...prevExercises,
+    {
+      index: prevExercises.length,
+      ...exercise,
+    }
+    ]);
+  }
+
+  async function onSubmit(_data: FormType) {
+    console.log("data: ", _data)
+    mutate(
+      {
+        title: _data.title,
+        athleteId: _data.athlete,
+        exercises,
+        description: _data.description,
+
+      }
+    )
+  }
 
   return (
     <Card>
@@ -57,23 +84,24 @@ export function DesignForm() {
           >
             <FormField
               control={form.control}
-              name="coaches"
+              name="athlete"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>ورزشکار</FormLabel>
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={field.value}
+                      value={field.value}
                     >
                       <SelectTrigger className="col-start-3 col-span-full md:col-start-2">
                         <SelectValue placeholder="ورزشکار مورد نظر را انتخاب کنید" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="california">نگین صمصامی</SelectItem>
-                        <SelectItem value="texas"> محمد اسدی</SelectItem>
-                        <SelectItem value="florida">فاطمه احمدی</SelectItem>
-                        <SelectItem value="new-york">رسول باقری</SelectItem>
+                        <SelectItem value="5ac3d10e-4868-4c43-957e-8fc3d308d5c1">علی حمدی</SelectItem>
+                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa6">نگین صمصامی</SelectItem>
+                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa7">محمد اسدی</SelectItem>
+                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa8">فاطمه احمدی</SelectItem>
+                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa9">رسول باقری</SelectItem>
                       </SelectContent>
                     </Select>
                   </FormControl>
@@ -107,21 +135,21 @@ export function DesignForm() {
                 </FormItem>
               )}
             />
+            <div className="mt-6 col-span-full">
+              <MovementList data={exercises} />
+            </div>
+            <div className="mt-2 col-span-full flex justify-center align-middle">
+              <AddMovement submitFunction={handleAddExercise} />
+            </div>
+            <ButtonLoading
+              isLoading={isSubmitting}
+              disabled={isDisabled}
+              className="w-fit mt-2"
+            >
+              ذخیره تغییرات
+            </ButtonLoading>
           </form>
         </Form>
-        <div className="mt-6 col-span-full">
-          <MovementList data={movementData.movements} />
-        </div>
-        <div className="mt-6 flex justify-center align-middle">
-          <AddMovement />
-        </div>
-        <ButtonLoading
-          isLoading={isSubmitting}
-          disabled={isDisabled}
-          className="w-fit mt-2"
-        >
-          ذخیره تغییرات
-        </ButtonLoading>
       </CardContent>
     </Card>
   )

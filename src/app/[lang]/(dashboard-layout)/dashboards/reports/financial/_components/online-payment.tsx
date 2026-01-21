@@ -11,7 +11,7 @@ export function OnlinePayment() {
   return (
     <DashboardCard
       title="پرداخت آنلاین"
-      period={onlinePaymentnData.period}
+      description={onlinePaymentnData.period}
       action={<DashboardCardActionsDropdown />}
       contentClassName="h-auto items-center gap-6 md:h-64 md:flex-row"
     >

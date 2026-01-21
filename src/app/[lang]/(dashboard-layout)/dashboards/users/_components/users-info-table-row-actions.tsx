@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { EllipsisVertical } from "lucide-react"
 
 import type { Row } from "@tanstack/react-table"
@@ -12,12 +11,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
@@ -30,7 +23,6 @@ export function UsersInfoTableRowActions<TData>({
 }: UsersInfoTableRowActionsProps<TData>) {
   const user = row.original as UserInfo
 
-  const [open, onOpenChange] = useState(false)
   const {
     setUpdateUserSidebarIsOpen,
     setSelectedUser,
@@ -54,7 +46,6 @@ export function UsersInfoTableRowActions<TData>({
           <DropdownMenuItem
             onClick={() => {
               setSelectedUser(user)
-              onOpenChange(false)
               setUpdateUserSidebarIsOpen(true)
             }}
           >

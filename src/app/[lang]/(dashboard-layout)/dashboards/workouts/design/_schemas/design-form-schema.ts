@@ -1,7 +1,7 @@
 import { z } from "zod"
 
 export const DesignFormsSchema = z.object({
-  firstName: z
+  athlete: z
     .string({
       required_error: "نام ورزشکار الزامی است.",
     })
@@ -14,13 +14,7 @@ export const DesignFormsSchema = z.object({
     })
     .trim()
     .min(2, { message: "عنوان برنامه باید حداقل 2 کاراکتر باشد." })
-    .max(10, { message: "عنوان برنامه باید حداکثر 10 کاراکتر باشد." }),
-  coaches: z
-    .string({
-      required_error: "نام مربی الزامی است.",
-    })
-    .toLowerCase()
-    .trim(),
+    .max(50, { message: "عنوان برنامه باید حداکثر 50 کاراکتر باشد." }),
   description: z.string({
     required_error: "توضیحات الزامی است.",
   }),
