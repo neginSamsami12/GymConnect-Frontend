@@ -1,5 +1,11 @@
-import { useMutation, UseMutationResult } from "@tanstack/react-query"
-import { createClass, CreateClassRequest, CreateClassResponse } from "./mutations/createClasses"
+import { UseMutationResult, useMutation, useQuery } from "@tanstack/react-query"
+
+import {
+  CreateClassRequest,
+  CreateClassResponse,
+  createClass,
+} from "./mutations/createClasses"
+import { ClassInfoListResponse, getClassInfo } from "./queries/getClassesList"
 
 export const useCreateClass = (): UseMutationResult<
   CreateClassResponse,
@@ -12,4 +18,25 @@ export const useCreateClass = (): UseMutationResult<
   })
 
   return query
+}
+
+export const useGetClassesInfo = () => {
+  const query = useQuery<ClassInfoListResponse>({
+    queryKey: ["GetClassesInfo"],
+    queryFn: () => getClassInfo(),
+  })
+  return query
+}
+
+export const useGetClassesInfoMutate = () => {
+  return useMutation<
+    ClassInfoListResponse,
+    Error,
+    {
+      id: string
+    }
+    >({
+    mutationKey: ["GetClassesInfoMutate"],
+    mutationFn: ({ id }) => getClassInfo(id),
+  })
 }
