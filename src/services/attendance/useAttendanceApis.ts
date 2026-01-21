@@ -5,6 +5,10 @@ import {
   AttendanceRegistrationResponse,
   attendanceRegistration,
 } from "./mutations/attendanceRegistration"
+import {
+  AttendanceInfoListResponse,
+  getAttendanceInfo,
+} from "./queries/getAttendanceList"
 
 export const useAttendanceRegistration = (): UseMutationResult<
   AttendanceRegistrationResponse,
@@ -16,10 +20,18 @@ export const useAttendanceRegistration = (): UseMutationResult<
     Error,
     AttendanceRegistrationRequest
   >({
-    mutationKey: ["CreateClass"],
+    mutationKey: ["AttendanceRegistration"],
     mutationFn: (data: AttendanceRegistrationRequest) =>
       attendanceRegistration(data),
   })
 
+  return query
+}
+
+export const useAttendanceInfo = () => {
+  const query = useQuery<AttendanceInfoListResponse>({
+    queryKey: ["GetAttendanceInfo"],
+    queryFn: () => getAttendanceInfo(),
+  })
   return query
 }

@@ -2,13 +2,12 @@
 
 import type { DynamicIconNameType } from "@/types"
 import type { ColumnDef } from "@tanstack/react-table"
-import type { UserEnteranceType } from "../types"
-
 import { formatDuration, formatPercent } from "@/lib/utils"
 
 import { DataTableColumnHeader } from "@/components/ui/data-table/data-table-column-header"
 import { Progress } from "@/components/ui/progress"
 import { DynamicIcon } from "@/components/dynamic-icon"
+import { AttendanceInfo } from "@/services/attendance/queries/getAttendanceList"
 
 function RenderPercentageValue({ value }: { value: number }) {
   const formattedpercentage = formatPercent(value)
@@ -36,18 +35,18 @@ function RenderValueWithIcon({
   )
 }
 
-export const UserEnteranceTableColumns: ColumnDef<UserEnteranceType>[] =
+export const UserEnteranceTableColumns: ColumnDef<AttendanceInfo>[] =
   [
     {
-      id: "deviceType",
-      accessorKey: "deviceType",
+      id: "firstName",
+      accessorKey: "firstName",
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="نام" className="ms-4" />
       ),
       cell: ({ row }) => {
-        const deviceType = row.getValue("deviceType") as string
+        const firstName = row.getValue("firstName") as string
 
-        return <span className="ms-4 text-primary">{deviceType}</span>
+        return <span className="ms-4 text-primary">{firstName}</span>
       },
     },
     {
@@ -67,8 +66,8 @@ export const UserEnteranceTableColumns: ColumnDef<UserEnteranceType>[] =
       },
     },
     {
-      id: "bounceRate",
-      accessorKey: "bounceRate",
+      id: "className",
+      accessorKey: "className",
       header: ({ column }) => (
         <DataTableColumnHeader
           column={column}
@@ -77,40 +76,40 @@ export const UserEnteranceTableColumns: ColumnDef<UserEnteranceType>[] =
         />
       ),
       cell: ({ row }) => {
-        const bounceRate = row.getValue("bounceRate") as string
+        const className = row.getValue("className") as string
 
-        return <span className="ms-4 text-primary">{bounceRate}</span>
+        return <span className="ms-4 text-primary">{className}</span>
       },
     },
     {
-      id: "sessionDuration",
-      accessorKey: "sessionDuration",
+      id: "checkInTime",
+      accessorKey: "checkInTime",
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="زمان ورود" />
       ),
       cell: ({ row }) => {
-        const sessionDuration = row.getValue("sessionDuration") as number
+        const checkInTime = row.getValue("checkInTime") as number
 
         return (
           <RenderValueWithIcon
-            value={sessionDuration}
+            value={checkInTime}
             iconName="Clock"
           />
         )
       },
     },
     {
-      id: "leaveTime",
-      accessorKey: "leaveTime",
+      id: "checkOutTime",
+      accessorKey: "checkOutTime",
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="زمان خروج" />
       ),
       cell: ({ row }) => {
-        const leaveTime = row.getValue("leaveTime") as number
+        const checkOutTime = row.getValue("checkOutTime") as number
 
         return (
           <RenderValueWithIcon
-            value={leaveTime}
+            value={checkOutTime}
             iconName="Clock"
           />
         )

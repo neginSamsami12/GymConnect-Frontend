@@ -36,17 +36,6 @@ export interface TrafficSourcesType {
   }>
 }
 
-export interface UserEnteranceType {
-  deviceType: string
-  lastName: string
-  leaveTime: string
-  sessionDuration: string
-  pagesPerSession: number
-  bounceRate: string
-  userPercentage: number
-  conversionRate: number
-}
-
 export type ConversionFunnelType = {
   period: string
   funnelSteps: Array<{
