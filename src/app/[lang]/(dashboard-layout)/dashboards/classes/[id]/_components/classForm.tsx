@@ -1,5 +1,7 @@
 "use client"
 
+import { CreateClassRequest } from "@/services/classes/mutations/createClasses"
+import { useCreateClass } from "@/services/classes/useClassesApis"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
@@ -24,8 +26,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { CreateClassRequest } from "@/services/classes/mutations/createClasses"
-import { useCreateClass } from "@/services/classes/useClassesApis"
 
 type FormType = CreateClassRequest
 
@@ -141,11 +141,21 @@ export function ClassForm() {
                         <SelectValue placeholder="مربی مورد نظر را انتخاب کنید" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="5ac3d10e-4868-4c43-957e-8fc3d308d5c1">علی حمدی</SelectItem>
-                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa6">نگین صمصامی</SelectItem>
-                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa7">محمد اسدی</SelectItem>
-                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa8">فاطمه احمدی</SelectItem>
-                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa9">رسول باقری</SelectItem>
+                        <SelectItem value="5ac3d10e-4868-4c43-957e-8fc3d308d5c1">
+                          علی حمدی
+                        </SelectItem>
+                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa6">
+                          نگین صمصامی
+                        </SelectItem>
+                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa7">
+                          محمد اسدی
+                        </SelectItem>
+                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa8">
+                          فاطمه احمدی
+                        </SelectItem>
+                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa9">
+                          رسول باقری
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   </FormControl>
@@ -162,7 +172,12 @@ export function ClassForm() {
                     ظرفیت کلاس
                   </FormLabel>
                   <FormControl className="col-start-3 col-span-full md:col-start-2">
-                    <Input type="number" placeholder="ظرفیت کلاس" min={1} {...field} />
+                    <Input
+                      type="number"
+                      placeholder="ظرفیت کلاس"
+                      min={1}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage className="col-start-3 col-span-full md:col-start-2" />
                 </FormItem>
