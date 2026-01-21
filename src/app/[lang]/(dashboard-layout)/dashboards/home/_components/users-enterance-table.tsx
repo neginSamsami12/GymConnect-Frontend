@@ -27,6 +27,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Registration } from "./customer-registration"
 import { UserEnteranceTableColumns } from "./users-enterance-table-columns"
 import { UserEnteranceTableToolbar } from "./users-enterance-table-toolbar"
 
@@ -34,9 +35,7 @@ interface UserEnteranceTableProps {
   data: UserEnteranceType[]
 }
 
-export function UserEnteranceTable({
-  data,
-}: UserEnteranceTableProps) {
+export function UserEnteranceTable({ data }: UserEnteranceTableProps) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -66,6 +65,7 @@ export function UserEnteranceTable({
       <CardHeader className="flex-row justify-between items-center gap-x-1.5 space-y-0">
         <CardTitle>آمار حضور کاربران</CardTitle>
         <UserEnteranceTableToolbar table={table} />
+        <Registration />
       </CardHeader>
       <CardContent className="p-0">
         <ScrollArea
