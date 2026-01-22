@@ -92,7 +92,7 @@ export function UpdateUserSidebar() {
         ...data,
         image: Array.isArray(data.image) && data.image.length > 0 && data.image[0] instanceof File ? data.image[0] : undefined,
         birthDate: data.birthDate ? data.birthDate.toISOString() : "",
-        gender: GenderRecords.find(g => g.label === data.gender)?.value,
+        gender: GenderRecords.find(g => g.label === data.gender)?.value as Gender,
       }
       handleUpdateUser(payload, selectedUser.id)
     }
