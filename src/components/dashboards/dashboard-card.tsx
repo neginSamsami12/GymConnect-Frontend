@@ -28,6 +28,7 @@ export const cardContentVariants = cva(
   {
     variants: {
       size: {
+        empty: "",
         xs: "h-32",
         sm: "h-64",
         default: "h-96",
