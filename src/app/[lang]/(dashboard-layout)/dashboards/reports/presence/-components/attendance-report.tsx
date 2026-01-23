@@ -1,6 +1,6 @@
-import type { AttendanceReportType } from "../types"
+"use client"
 
-import { attendanceReportData } from "../_data/invoices"
+import { useAttendanceWeeklyInfo } from "@/services/attendance/useAttendanceApis"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
@@ -12,38 +12,33 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const statusClasses: Record<AttendanceReportType["status"], string> = {
-  Paid: "bg-green-100 text-green-700 hover:bg-green-200",
-  Pending: "bg-yellow-100 text-yellow-700 hover:bg-yellow-200",
-  Overdue: "bg-red-100 text-red-700 hover:bg-red-200",
-}
-
 export default function AttendanceReport() {
+  const { data } = useAttendanceWeeklyInfo()
   return (
     <Card className="overflow-hidden m-3">
       <CardHeader>
-        <CardTitle>Contextual Classes</CardTitle>
+        <CardTitle>آمار حضور هفتگی ورزشکاران</CardTitle>
       </CardHeader>
       <CardContent className="p-0">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Invoice</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Method</TableHead>
-              <TableHead className="text-right">Amount</TableHead>
+              <TableHead className="w-[100px]">نام</TableHead>
+              <TableHead>نام خانوادگی</TableHead>
+              <TableHead> کلاس</TableHead>
+              <TableHead className="text-right">تاریخ حضور</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {attendanceReportData.map((invoice) => (
+            {data?.data?.map((info) => (
               <TableRow
-                key={invoice.id}
-                className={statusClasses[invoice.status]}
+                key={info.id}
+                className={"bg-green-100 text-green-700 hover:bg-green-200"}
               >
-                <TableCell className="font-medium">{invoice.id}</TableCell>
-                <TableCell>{invoice.status}</TableCell>
-                <TableCell>{invoice.method}</TableCell>
-                <TableCell className="text-right">{invoice.amount}</TableCell>
+                <TableCell className="font-medium">{info.firstName}</TableCell>
+                <TableCell>{info.lastName}</TableCell>
+                <TableCell>{info.className}</TableCell>
+                <TableCell className="text-right">{info.date}</TableCell>
               </TableRow>
             ))}
           </TableBody>

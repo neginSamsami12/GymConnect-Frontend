@@ -1,5 +1,9 @@
-import ContextualClasses from "./-components/attendance-report"
+import AttendanceTable from "./-components/attendance-report"
 
 export default function PresenceReportPage() {
-  return <ContextualClasses />
+  return (
+    <div className="p-2">
+      <AttendanceTable />
+    </div>
+  )
 }

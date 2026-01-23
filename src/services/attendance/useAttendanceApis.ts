@@ -13,6 +13,10 @@ import {
   AttendanceInfoListResponse,
   getAttendanceInfo,
 } from "./queries/getAttendanceList"
+import {
+  AttendanceWeeklyInfoListResponse,
+  getAttendanceWeeklyInfo,
+} from "./queries/getWeeklyAttendanceList"
 
 export const useAttendanceRegistration = (): UseMutationResult<
   AttendanceRegistrationResponse,
@@ -50,5 +54,13 @@ export const useAttendanceCheckOut = (): UseMutationResult<
     mutationFn: (id: string) => AttendanceCheckOut(id),
   })
 
+  return query
+}
+
+export const useAttendanceWeeklyInfo = () => {
+  const query = useQuery<AttendanceWeeklyInfoListResponse>({
+    queryKey: ["GetAttendanceWeeklyInfo"],
+    queryFn: () => getAttendanceWeeklyInfo(),
+  })
   return query
 }
