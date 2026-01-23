@@ -54,7 +54,7 @@ export function AddMovement({ submitFunction }: Props) {
       {isDesktop ? (
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button variant="outline">افزودن حرکت جدید</Button>
+            <Button type="button" variant="outline">افزودن حرکت جدید</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
@@ -66,7 +66,7 @@ export function AddMovement({ submitFunction }: Props) {
       ) : (
         <Drawer open={open} onOpenChange={setOpen}>
           <DrawerTrigger asChild>
-            <Button variant="outline">افزودن حرکت جدید</Button>
+            <Button type="button" variant="outline">افزودن حرکت جدید</Button>
           </DrawerTrigger>
           <DrawerContent>
             <DrawerHeader className="text-left">
@@ -98,7 +98,7 @@ function PopUpForm({ className, submitFunction }: Props) {
     reps: 0,
     sets: 0
   }
-  
+
   const form = useForm<FormType>({
     resolver: zodResolver(ExerciseFormsSchema),
     defaultValues
@@ -116,7 +116,6 @@ function PopUpForm({ className, submitFunction }: Props) {
     <>
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(handleSubmit)}
           className={cn("grid items-start gap-4", className)}
         >
           <FormField
@@ -175,6 +174,8 @@ function PopUpForm({ className, submitFunction }: Props) {
             isLoading={isSubmitting}
             disabled={isDisabled}
             className="mt-2"
+            type="button"
+            onClick={form.handleSubmit(handleSubmit)}
           >
             افزودن حرکت
           </ButtonLoading>

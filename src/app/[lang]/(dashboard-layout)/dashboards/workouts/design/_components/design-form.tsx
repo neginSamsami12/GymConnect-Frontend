@@ -59,14 +59,17 @@ export function DesignForm() {
   }
 
   async function onSubmit(_data: FormType) {
-    console.log("data: ", _data)
-    mutate(
-      {
+    mutate({
         title: _data.title,
         athleteId: _data.athlete,
         exercises,
         description: _data.description,
 
+      }, {
+        onSuccess: () => {
+          setExercises([])
+          form.reset()
+        }
       }
     )
   }
