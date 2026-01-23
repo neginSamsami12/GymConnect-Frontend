@@ -26,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { useRouter } from "next/navigation"
 
 type FormType = CreateClassRequest
 
@@ -40,9 +41,12 @@ export function ClassForm() {
   const { isSubmitting, isDirty } = form.formState
   const isDisabled = isSubmitting || !isDirty
   const mutation = useCreateClass()
+  const router = useRouter()
 
   async function onSubmit(data: FormType) {
-    mutation.mutate(data)
+    mutation.mutate(data, {
+      onSuccess: () => router.push("/dashboards/classes")
+    })
   }
 
   return (

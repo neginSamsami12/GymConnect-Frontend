@@ -8,7 +8,7 @@ export const FormLayoutsSchema = z.object({
     })
     .trim()
     .min(2, { message: "نام کلاس باید حداقل 2 کاراکتر باشد." })
-    .max(6, { message: "نام کلاس باید حداکثر 6 کاراکتر باشد." }),
+    .max(50, { message: "نام کلاس باید حداکثر 50 کاراکتر باشد." }),
 
   days: z
     .string({
