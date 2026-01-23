@@ -1,16 +1,19 @@
 import Image from "next/image"
+import { ClassInfo } from "@/services/classes/queries/getClassesList"
+
+import { formatCurrency, formatDateShort, formatTime } from "@/lib/utils"
 
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card"
 
-export function ClassCard() {
+export function ClassCard({ data }: { data: ClassInfo }) {
   return (
     <Card className="rounded-2xl">
       <div className="flex flex-col gap-y-6 p-6">
         {/* Class Name */}
         <CardTitle className="text-xl font-bold text-primary">
-          کلاس کراس‌فیت پیشرفته
+          {data.title}
         </CardTitle>
 
         {/* Image + Info */}
@@ -33,7 +36,9 @@ export function ClassCard() {
               {/* Coach */}
               <div className="flex flex-col items-center gap-1">
                 <span className="text-xs font-medium text-blue-600">مربی</span>
-                <span className="text-sm font-semibold">علی رضایی</span>
+                <span className="text-sm font-semibold">
+                  {data.trainerName}
+                </span>
               </div>
 
               {/* Days */}
@@ -41,7 +46,7 @@ export function ClassCard() {
                 <span className="text-xs font-medium text-green-600">
                   روزهای برگزاری
                 </span>
-                <span className="text-sm">شنبه، دوشنبه، چهارشنبه</span>
+                <span className="text-sm">{data.days}</span>
               </div>
 
               {/* Time */}
@@ -49,7 +54,7 @@ export function ClassCard() {
                 <span className="text-xs font-medium text-orange-600">
                   ساعت برگزاری
                 </span>
-                <span className="text-sm">۱۸:۰۰ تا ۱۹:۳۰</span>
+                <span className="text-sm">{formatTime(data.scheduleTime)}</span>
               </div>
 
               {/* Duration */}
@@ -57,7 +62,9 @@ export function ClassCard() {
                 <span className="text-xs font-medium text-purple-600">
                   مدت دوره
                 </span>
-                <span className="text-sm">۱ فروردین ۱۴۰۳ تا ۳۰ خرداد ۱۴۰۳</span>
+                <span className="text-sm">
+                  {data.startDate} تا {data.endDate}
+                </span>
               </div>
             </div>
           </div>
@@ -66,14 +73,14 @@ export function ClassCard() {
         {/* Description */}
         <CardContent className="p-0">
           <p className="text-sm leading-6 text-muted-foreground text-center md:text-right">
-            تمرینات حرفه‌ای کراس‌فیت برای افزایش قدرت، استقامت و آمادگی جسمانی.
+            {data.description}
           </p>
         </CardContent>
 
         {/* Footer */}
         <CardFooter className="p-0 gap-x-3 justify-center md:justify-start">
           <Button>پرداخت و ثبت نام</Button>
-          <Button variant="secondary">هزینه </Button>
+          <Button variant="secondary">{formatCurrency(data.price)} </Button>
         </CardFooter>
       </div>
     </Card>
