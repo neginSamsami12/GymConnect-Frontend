@@ -16,7 +16,8 @@ export interface UserInfo {
   birthDate: string
   address: string
   nationalId: string
-  createdAt: string
+  registrationDate: string
+  isActive: boolean
 }
 
 export type UserInfoListResponse = ApiResponse<UserInfo[]>

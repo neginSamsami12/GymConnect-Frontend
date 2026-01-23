@@ -1,10 +1,14 @@
 import { clsx } from "clsx"
 import { format, formatDistanceToNow, intervalToDuration } from "date-fns"
+// import dayjs from "dayjs"
+// import jalaali from "dayjs-jalali"
 import { twMerge } from "tailwind-merge"
 import { z } from "zod"
 
 import type { FormatStyleType, LocaleType, SelectType } from "@/types"
 import type { ClassValue } from "clsx"
+
+// dayjs.extend(jalaali);
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -135,6 +139,10 @@ export function formatRelativeDate(value?: string | number | Date) {
 
   return formatDate(value)
 }
+
+// export function formatDateJalaliShort(value: string | number | Date) {
+//   return dayjs(value).format("jMMMM jD");
+// }
 
 export function formatDateWithTime(value: string | number | Date) {
   return format(value, "PP hh:mm a")

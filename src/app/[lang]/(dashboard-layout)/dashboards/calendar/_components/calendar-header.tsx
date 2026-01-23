@@ -1,8 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import dayjs from "dayjs"
-import jalaliday from "jalaliday"
+// import dayjs from "dayjs"
+// import jalaliday from "jalaliday"
 import { CalendarPlus, ChevronLeft, ChevronRight } from "lucide-react"
 
 import { useCalendarContext } from "../_hooks/calendar-context"

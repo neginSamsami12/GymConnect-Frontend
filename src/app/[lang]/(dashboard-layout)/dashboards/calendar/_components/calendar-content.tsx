@@ -9,8 +9,6 @@ import listPlugin from "@fullcalendar/list"
 import FullCalendar from "@fullcalendar/react"
 import timeGridPlugin from "@fullcalendar/timegrid"
 import { useDirection } from "@radix-ui/react-direction"
-import dayjs from "dayjs"
-import jalaliday from "jalaliday"
 
 import type { DateInput, EventSourceInput } from "@fullcalendar/core/index.js"
 import type { EventImpl } from "@fullcalendar/core/internal"

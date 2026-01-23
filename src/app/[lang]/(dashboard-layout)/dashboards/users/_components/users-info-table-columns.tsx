@@ -70,12 +70,12 @@ export const UsersInfoTableColumns: ColumnDef<UsersInfoColumnType>[] = [
     },
   },
   {
-    accessorKey: "createdAt",
+    accessorKey: "registrationDate",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="تاریخ ثبت نام" />
     ),
     cell: ({ row }) => {
-      const registerDate = row.original.createdAt as string
+      const registerDate = row.original.registrationDate as string
 
       return registerDate ? formatDate(registerDate) : null
     },
@@ -103,19 +103,18 @@ export const UsersInfoTableColumns: ColumnDef<UsersInfoColumnType>[] = [
     },
   },
   {
-    accessorKey: "firstName",
+    accessorKey: "isActive",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="وضعیت" />
     ),
     cell: ({ row }) => {
-      const st = row.original.createdAt
-      const status = st ? "Active" : "DeActive"
-      const Icon = deliveryStatusIcons[status]
+      const status = row.original.isActive
+      const Icon = deliveryStatusIcons[status ? "Active" : "DeActive"]
 
       return (
         <Badge>
           <Icon className="me-2 h-4 w-4" />
-          <span>{status}</span>
+          <span>{status ? "فعال" : "غیرفعال"}</span>
         </Badge>
       )
     },
