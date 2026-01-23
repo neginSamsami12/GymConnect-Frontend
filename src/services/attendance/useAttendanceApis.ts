@@ -1,6 +1,10 @@
 import { UseMutationResult, useMutation, useQuery } from "@tanstack/react-query"
 
 import {
+  AttendanceCheckOut,
+  AttendanceCheckOutResponse,
+} from "./mutations/attendanceCheckOut"
+import {
   AttendanceRegistrationRequest,
   AttendanceRegistrationResponse,
   attendanceRegistration,
@@ -33,5 +37,18 @@ export const useAttendanceInfo = () => {
     queryKey: ["GetAttendanceInfo"],
     queryFn: () => getAttendanceInfo(),
   })
+  return query
+}
+
+export const useAttendanceCheckOut = (): UseMutationResult<
+  AttendanceCheckOutResponse,
+  Error,
+  string
+> => {
+  const query = useMutation<AttendanceCheckOutResponse, Error, string>({
+    mutationKey: ["AttendanceCheckOut"],
+    mutationFn: (id: string) => AttendanceCheckOut(id),
+  })
+
   return query
 }
