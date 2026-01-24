@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { AttendanceInfo } from "@/services/attendance/queries/getAttendanceList"
 import {
   flexRender,
   getCoreRowModel,
@@ -15,7 +16,6 @@ import type {
   SortingState,
   VisibilityState,
 } from "@tanstack/react-table"
-import type { UserEnteranceType } from "../types"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -32,7 +32,7 @@ import { UserEnteranceTableColumns } from "./users-enterance-table-columns"
 import { UserEnteranceTableToolbar } from "./users-enterance-table-toolbar"
 
 interface UserEnteranceTableProps {
-  data: UserEnteranceType[]
+  data?: AttendanceInfo[]
 }
 
 export function UserEnteranceTable({ data }: UserEnteranceTableProps) {
@@ -42,7 +42,7 @@ export function UserEnteranceTable({ data }: UserEnteranceTableProps) {
   const [rowSelection, setRowSelection] = useState({})
 
   const table = useReactTable({
-    data: data,
+    data: data ?? [],
     columns: UserEnteranceTableColumns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),

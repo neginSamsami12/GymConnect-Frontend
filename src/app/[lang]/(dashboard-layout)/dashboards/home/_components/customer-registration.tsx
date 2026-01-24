@@ -37,6 +37,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { useQueryClient } from "@tanstack/react-query"
 
 type UserSelectItem = {
   id: string
@@ -160,16 +161,21 @@ function ProfileForm({
   }, [selectedUserId, mutateAsync])
 
   const mutation = useAttendanceRegistration()
+  const queryClient = useQueryClient()
 
   function handleSubmit(e: any) {
     e.preventDefault() // جلوگیری از رفرش شدن صفحه
-
+    
     const data = {
       userId: selectedUserId,
       classId: selectedClassId,
     } as AttendanceRegistrationRequest
-    mutation.mutate(data)
-  }
+    mutation.mutate(data, {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries({ queryKey: ["GetAttendanceInfo"] })
+      }
+    })
+    }
 
   return (
     <form

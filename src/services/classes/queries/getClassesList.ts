@@ -7,7 +7,7 @@ import { ApiResponse } from "../../apiTypes"
 
 export interface ClassInfo {
   id: string
-  trainerId: string
+  trainerName: string
   title: string
   description: string
   capacity: number

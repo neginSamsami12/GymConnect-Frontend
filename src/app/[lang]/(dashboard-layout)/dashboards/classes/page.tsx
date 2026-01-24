@@ -5,8 +5,10 @@ import { Plus } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { ClassCard } from "./_components/classCard"
+import { useGetClassesInfo } from "@/services/classes/useClassesApis"
 
 export default function BasicCardsPage() {
+  const { data } = useGetClassesInfo();
   const router = useRouter()
 
   return (
@@ -22,12 +24,9 @@ export default function BasicCardsPage() {
 
       <div className="space-y-4 md:col-span-full">
         <div className="grid grid-cols-1 gap-4">
-          <ClassCard />
-          <ClassCard />
-          <ClassCard />
-          <ClassCard />
-          <ClassCard />
-          <ClassCard />
+          {data?.data?.map((classInfo) => (
+            <ClassCard key={classInfo.id} data={classInfo} />
+          ))}
         </div>
       </div>
     </section>

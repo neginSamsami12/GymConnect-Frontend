@@ -105,7 +105,7 @@ export function ratingToPercentage(
 
 export function formatCurrency(
   value: number,
-  locales: LocaleType = "en",
+  locales: LocaleType = "fa",
   currency: string = "USD"
 ) {
   return new Intl.NumberFormat(locales, {
@@ -153,8 +153,19 @@ export function formatDateShort(value: string | number | Date) {
 }
 
 export function formatTime(value: string | number | Date) {
-  return format(value, "h:mm a")
+  if (typeof value === 'string') {
+    // اگر ورودی رشته بود
+    const [hours, minutes, seconds] = value.split(':').map(Number);
+    
+    // به فرمت UTC تبدیل می‌شود
+    const utcDate = new Date(Date.UTC(1970, 0, 1, hours, minutes, seconds));
+    return format(utcDate, "h:mm a");
+  }
+  
+  // اگر ورودی عدد یا شی Date بود
+  return format(value, "h:mm a");
 }
+
 
 export function formatDuration(value: string | number | Date) {
   const numberValue = Number(value)
@@ -349,6 +360,9 @@ export function getDictionaryValue(
   return value
 }
 
-export function findItemByValue(dataSet?: SelectType[], valueToFind?: number | boolean | string) {
-  return dataSet?.find((record) => record.value === valueToFind);
+export function findItemByValue(
+  dataSet?: SelectType[],
+  valueToFind?: number | boolean | string
+) {
+  return dataSet?.find((record) => record.value === valueToFind)
 }
