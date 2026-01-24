@@ -11,7 +11,7 @@ export function AddNewUserSidebarButton() {
   return (
     <Button
       variant="outline"
-      className="w-fit my-2"
+      className="w-fit"
       onClick={() => {
         setAddUserSidebarIsOpen(true)
       }}

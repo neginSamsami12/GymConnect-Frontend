@@ -15,7 +15,7 @@ import {
 export default function AttendanceReport() {
   const { data } = useAttendanceWeeklyInfo()
   return (
-    <Card className="overflow-hidden m-3">
+    <Card className="overflow-hidden">
       <CardHeader>
         <CardTitle>آمار حضور هفتگی ورزشکاران</CardTitle>
       </CardHeader>

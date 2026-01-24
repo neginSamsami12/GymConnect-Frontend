@@ -14,10 +14,8 @@ export const metadata: Metadata = {
 
 export default function EcommercePage() {
   return (
-    <section className="container grid gap-4 p-4 md:grid-cols-2">
+    <section className="container grid gap-3 p-3 md:grid-cols-2">
       <UserProvider>
-        <div className="col-span-full grid gap-4 md:grid-cols-4"></div>
-
         <UserSidebar />
         <AddNewUserSidebarButton />
         <UserInfo />

@@ -9,5 +9,9 @@ export const metadata: Metadata = {
 }
 
 export default function FormLayoutsPage() {
-  return <DesignForm />
+  return (
+    <div className="p-3">
+      <DesignForm />
+    </div>
+  )
 }
