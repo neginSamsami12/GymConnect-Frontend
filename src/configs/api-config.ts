@@ -5,4 +5,5 @@ export const CONTROLLERS = {
   Attendance: "attendance",
   CLASSES: "classes",
   WORKOUT: "workouts",
+  REPORTS: "reports",
 }

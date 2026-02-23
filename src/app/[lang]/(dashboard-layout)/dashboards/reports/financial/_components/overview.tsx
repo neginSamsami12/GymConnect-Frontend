@@ -1,44 +1,40 @@
+"use client"
+
+import { useGetSummaryReportsInfo } from "@/services/reports/useReportsApis"
 import { BadgePercent, HandCoins, Users } from "lucide-react"
-
-import { overviewData } from "../_data/overview"
-
 import {
-  DashboardCardActionsDropdown,
   DashboardOverviewCard,
 } from "@/components/dashboards/dashboard-card"
 
 export function Overview() {
+  const { data } = useGetSummaryReportsInfo()
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:col-span-2 md:grid-cols-4">
       <DashboardOverviewCard
-        data={overviewData.totalSales}
+        data={data?.data?.totalSells || 0}
         title=" فروش کل"
-        period={overviewData.totalSales.period}
-        action={<DashboardCardActionsDropdown />}
+        period={"ماه گذشته"}
         icon={BadgePercent}
         formatStyle="currency"
       />
       <DashboardOverviewCard
-        data={overviewData.totalProfit}
+        data={data?.data?.totalProfit || 0}
         title=" سود کل"
-        period={overviewData.totalProfit.period}
-        action={<DashboardCardActionsDropdown />}
+        period={"ماه گذشته"}
         icon={HandCoins}
         formatStyle="currency"
       />
       <DashboardOverviewCard
-        data={overviewData.revenueGrowth}
+        data={data?.data?.incomeGrowth || 0}
         title="رشد درآمد"
-        period={overviewData.revenueGrowth.period}
-        action={<DashboardCardActionsDropdown />}
+        period={"ماه گذشته"}
         icon={HandCoins}
         formatStyle="currency"
       />
       <DashboardOverviewCard
-        data={overviewData.newCustomers}
+        data={data?.data?.newUser || 0}
         title="کاربران جدید"
-        period={overviewData.newCustomers.period}
-        action={<DashboardCardActionsDropdown />}
+        period={"ماه گذشته"}
         icon={Users}
       />
     </div>

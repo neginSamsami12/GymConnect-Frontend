@@ -79,10 +79,7 @@ export function DashboardCard({
 }
 
 interface DashboardOverviewCardProps extends ComponentProps<"div"> {
-  data: {
-    value: number
-    percentageChange: number
-  }
+  data: number
   title: string
   period?: string
   action?: ReactNode
@@ -102,7 +99,7 @@ export function DashboardOverviewCard({
   contentClassName,
   ...props
 }: DashboardOverviewCardProps) {
-  const value = formatOverviewCardValue(data.value, formatStyle)
+  const value = formatOverviewCardValue(data, formatStyle)
 
   return (
     <Card
@@ -123,7 +120,6 @@ export function DashboardOverviewCard({
         </div>
         <CardContent className={cn("space-y-1", contentClassName)}>
           <p className="text-2xl font-semibold break-all">{value}</p>
-          <PercentageChangeBadge value={data.percentageChange} />
         </CardContent>
       </article>
     </Card>
