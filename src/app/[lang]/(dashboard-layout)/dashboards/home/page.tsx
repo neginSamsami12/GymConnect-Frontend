@@ -2,8 +2,8 @@
 // More info: https://nextjs.org/docs/app/building-your-application/optimizing/metadata
 
 import { CustomerInsights } from "./_components/customer-insights"
-import { UserEnterance } from "./_components/users-enterance"
 import { GenderDistribution } from "./_components/gender-distribution"
+import { UserEnterance } from "./_components/users-enterance"
 import { VisitOverTime } from "./_components/visitOverTime"
 
 export default function HomePage() {

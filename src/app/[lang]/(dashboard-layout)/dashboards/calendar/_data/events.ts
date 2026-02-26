@@ -9,7 +9,8 @@ export const eventsData: EventType[] = [
     end: new Date(new Date().setDate(new Date().getDate())),
     extendedProps: {
       category: "کلاس‌ها",
-      description: "کلاس بدنسازی عمومی همراه با مربی. لطفاً ۱۰ دقیقه زودتر حضور داشته باشید.",
+      description:
+        "کلاس بدنسازی عمومی همراه با مربی. لطفاً ۱۰ دقیقه زودتر حضور داشته باشید.",
     },
   },
   {
@@ -31,7 +32,8 @@ export const eventsData: EventType[] = [
     end: new Date(new Date().setDate(new Date().getDate() - 3)),
     extendedProps: {
       category: "کلاس‌ها",
-      description: "کلاس یوگا (سطح متوسط). همراه داشتن زیرانداز پیشنهاد می‌شود.",
+      description:
+        "کلاس یوگا (سطح متوسط). همراه داشتن زیرانداز پیشنهاد می‌شود.",
     },
   },
   {
@@ -42,7 +44,8 @@ export const eventsData: EventType[] = [
     end: new Date(new Date().setDate(new Date().getDate() + 7)),
     extendedProps: {
       category: "نگهداری",
-      description: "بازبینی و سرویس دستگاه‌ها. ممکن است برخی بخش‌ها موقتاً غیرفعال شوند.",
+      description:
+        "بازبینی و سرویس دستگاه‌ها. ممکن است برخی بخش‌ها موقتاً غیرفعال شوند.",
     },
   },
   {
@@ -68,4 +71,3 @@ export const eventsData: EventType[] = [
     },
   },
 ]
-

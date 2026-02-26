@@ -149,12 +149,14 @@ export function EventSidebar() {
         <ScrollArea className="h-full p-4">
           <SheetHeader>
             <SheetTitle>
-              {selectedEvent ? "Update Event" : "Add New Event"}
+              {selectedEvent
+                ? "بروزرسانی تاریخ رویداد"
+                : "اضافه کردن رویداد جدید به تقویم"}
             </SheetTitle>
             <SheetDescription>
               {selectedEvent
-                ? "Update the details of the selected event."
-                : "Add a new event to your calendar."}
+                ? "بروزرسانی جزئیات رویداد."
+                : "اضافه کردن رویداد جدید."}
             </SheetDescription>
           </SheetHeader>
           <Form {...form}>
@@ -169,7 +171,7 @@ export function EventSidebar() {
                   <FormItem>
                     <FormLabel>Title</FormLabel>
                     <FormControl>
-                      <Input placeholder="Event title" {...field} />
+                      <Input placeholder="موضوع رویداد" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -193,25 +195,23 @@ export function EventSidebar() {
                 name="category"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Category</FormLabel>
+                    <FormLabel>دسته بندی</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a category" />
+                          <SelectValue placeholder="یک دسته بندی را انتخاب کنید" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="Business">Business</SelectItem>
-                        <SelectItem value="Personal">Personal</SelectItem>
-                        <SelectItem value="Family">Family</SelectItem>
-                        <SelectItem value="Holiday">Holiday</SelectItem>
-                        <SelectItem value="Health">Health</SelectItem>
-                        <SelectItem value="Miscellaneous">
-                          Miscellaneous
-                        </SelectItem>
+                        <SelectItem value="Business">تجاری</SelectItem>
+                        <SelectItem value="Personal">شخصی</SelectItem>
+                        <SelectItem value="Family">خانواده</SelectItem>
+                        <SelectItem value="Holiday">تعطیلات</SelectItem>
+                        <SelectItem value="Health">سلامت</SelectItem>
+                        <SelectItem value="Miscellaneous">متفرقه</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -223,7 +223,7 @@ export function EventSidebar() {
                 name="start"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel>Start Date</FormLabel>
+                    <FormLabel>تاریخ شروع رویداد</FormLabel>
                     <FormControl>
                       <DatePicker
                         formatStr="PPP"
@@ -240,7 +240,7 @@ export function EventSidebar() {
                 name="end"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel>End Date</FormLabel>
+                    <FormLabel>تاریخ پایان رویداد</FormLabel>
                     <FormControl>
                       <DatePicker
                         formatStr="PPP"
@@ -260,7 +260,7 @@ export function EventSidebar() {
                     <div className="space-y-0.5">
                       <FormLabel className="text-base">All Day</FormLabel>
                       <FormDescription>
-                        Is this an all-day event?
+                        آیا این رویداد تمام روز برگزار خواهد شد؟
                       </FormDescription>
                     </div>
                     <FormControl>
@@ -277,10 +277,10 @@ export function EventSidebar() {
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>توضیحات</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Event description"
+                        placeholder="توضیح رویداد"
                         className="resize-none"
                         {...field}
                       />
@@ -296,7 +296,7 @@ export function EventSidebar() {
                 className="w-full"
                 icon={CalendarCheck2}
               >
-                Save
+                ذخیره
               </ButtonLoading>
 
               {/* Display the delete button only when an event is selected to avoid showing it during event creation */}
@@ -308,7 +308,7 @@ export function EventSidebar() {
                   onClick={handleOnDeleteEvent}
                   icon={CalendarMinus}
                 >
-                  Delete
+                  حذف
                 </ButtonLoading>
               )}
             </form>

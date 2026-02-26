@@ -140,33 +140,6 @@ export function formatRelativeDate(value?: string | number | Date) {
   return formatDate(value)
 }
 
-// export function formatDateJalaliShort(value: string | number | Date) {
-//   return dayjs(value).format("jMMMM jD");
-// }
-
-export function formatDateWithTime(value: string | number | Date) {
-  return format(value, "PP hh:mm a")
-}
-
-export function formatDateShort(value: string | number | Date) {
-  return format(value, "MMM dd")
-}
-
-export function formatTime(value: string | number | Date) {
-  if (typeof value === 'string') {
-    // اگر ورودی رشته بود
-    const [hours, minutes, seconds] = value.split(':').map(Number);
-    
-    // به فرمت UTC تبدیل می‌شود
-    const utcDate = new Date(Date.UTC(1970, 0, 1, hours, minutes, seconds));
-    return format(utcDate, "h:mm a");
-  }
-  
-  // اگر ورودی عدد یا شی Date بود
-  return format(value, "h:mm a");
-}
-
-
 export function formatDuration(value: string | number | Date) {
   const numberValue = Number(value)
   const isNegative = numberValue < 0
