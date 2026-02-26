@@ -13,12 +13,12 @@ export function Hero() {
 
 function HeroImage() {
   return (
-    <Card className="bg-accent p-2 md:p-6">
+    <Card id="demo" className="bg-accent p-2 md:p-6">
       <Card
         className="pointer-events-none bg-muted p-6 overflow-hidden"
         asChild
       >
-        <AspectRatio ratio={16 / 9}>
+        <AspectRatio ratio={25.5 / 12}>
           <Image
             src="/images/misc/hero.png"
             alt=""
@@ -28,7 +28,7 @@ function HeroImage() {
             className="block object-cover object-top dark:hidden"
           />
           <Image
-            src="/images/misc/hero-dark.png"
+            src="/images/misc/hero.png"
             alt=""
             fill
             sizes="(max-width: 768px) 640px, 1080px"

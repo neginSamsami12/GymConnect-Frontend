@@ -39,13 +39,13 @@ export function LandingHeader({ dictionary }: { dictionary: DictionaryType }) {
           className="place-self-center w-fit flex text-foreground font-black hover:text-primary/90 lg:place-self-auto"
         >
           <Image
-            src="/images/icons/shadboard.svg"
+            src="/images/icons/GymConnect.svg"
             alt=""
             height={24}
             width={24}
             className="dark:invert"
           />
-          <span>Shadboard</span>
+          <span>GymConnect</span>
         </Link>
         <nav className="hidden lg:block">
           <ul className="place-self-center flex gap-2">
@@ -74,7 +74,7 @@ export function LandingHeader({ dictionary }: { dictionary: DictionaryType }) {
             className={cn(buttonVariants(), "hidden lg:flex")}
           >
             <LogIn className="me-2 h-4 w-4" />
-            <span>Register</span>
+            <span>ثبت نام</span>
           </Link>
         </div>
       </div>

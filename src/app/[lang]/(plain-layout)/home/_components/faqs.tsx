@@ -7,7 +7,7 @@ import { FaqsList } from "./faqs-list"
 
 export function Faqs() {
   return (
-    <section id="faqs" className="container grid gap-8 md:grid-cols-3">
+    <section id="questions" className="container grid gap-8 md:grid-cols-3">
       <div className="text-center mx-auto space-y-1.5 md:text-start">
         <h2 className="text-4xl font-semibold">سوالات متداول</h2>
         <p className="max-w-prose text-sm text-muted-foreground">

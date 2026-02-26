@@ -51,7 +51,7 @@ export function LandingSidebar({ fullPathname }: { fullPathname: string }) {
           <PanelLeft className="h-4 w-4" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="p-0" aria-describedby={undefined}>
+      <SheetContent side="right" className="p-0" aria-describedby={undefined}>
         <SheetHeader>
           <SheetTitle className="sr-only">Navigation Sidebar</SheetTitle>
           <SidebarHeader>
@@ -61,20 +61,20 @@ export function LandingSidebar({ fullPathname }: { fullPathname: string }) {
               onClick={() => isMobile && setOpenMobile(!openMobile)}
             >
               <Image
-                src="/images/icons/shadboard.svg"
+                src="/images/icons/GymConnect.svg"
                 alt=""
                 height={24}
                 width={24}
                 className="dark:invert"
               />
-              <span>Shadboard</span>
+              <span>GymConnect</span>
             </Link>
             <Link
               href={ensureLocalizedPathname("/register", locale)}
               className={buttonVariants({ size: "lg" })}
             >
               <LogIn className="me-2 h-4 w-4" />
-              <span>Register</span>
+              <span>ثبت نام</span>
             </Link>
           </SidebarHeader>
         </SheetHeader>
