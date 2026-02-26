@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 
-
 import { UserProvider } from "./_contexts/user-context"
 import { AddNewUserSidebarButton } from "./_components/add-new-user-button"
 import { UserSidebar } from "./_components/user-sidebar/index"

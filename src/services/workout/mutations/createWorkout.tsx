@@ -1,7 +1,9 @@
+import { Exercise } from "@/models/workout"
+
 import { BASE_URL, CONTROLLERS } from "@/configs/api-config"
 import baseAxios from "@/configs/axios/BaseAxios"
+
 import { ApiResponse } from "../../apiTypes"
-import { Exercise } from "@/models/workout"
 
 export interface CreateWorkoutRequest {
   athleteId: string
@@ -10,12 +12,9 @@ export interface CreateWorkoutRequest {
   exercises: Exercise[]
 }
 
-export type CreateWorkoutResponse =
-  ApiResponse<unknown>
+export type CreateWorkoutResponse = ApiResponse<unknown>
 
-export async function createWorkout(
-  data: CreateWorkoutRequest
-) {
+export async function createWorkout(data: CreateWorkoutRequest) {
   const response = await baseAxios.post(`${BASE_URL}/${CONTROLLERS.WORKOUT}`, {
     athleteId: data.athleteId,
     title: data.title,

@@ -1,5 +1,9 @@
 import { useQuery } from "@tanstack/react-query"
-import { getSummaryReportsInfo, SummaryReportsInfoResponse } from "./queries/getSummaryReports"
+
+import {
+  SummaryReportsInfoResponse,
+  getSummaryReportsInfo,
+} from "./queries/getSummaryReports"
 
 export const useGetSummaryReportsInfo = () => {
   const query = useQuery<SummaryReportsInfoResponse>({

@@ -7,8 +7,8 @@ const baseAxios: AxiosInstance = axios.create({
   baseURL: "/portal", // Replace with your API base URL
   // timeout: 10000, // Optional: Set request timeout
   // headers: {
-    // "Content-Type": "application/json",
-    // Add any default headers here
+  // "Content-Type": "application/json",
+  // Add any default headers here
   // },
 })
 

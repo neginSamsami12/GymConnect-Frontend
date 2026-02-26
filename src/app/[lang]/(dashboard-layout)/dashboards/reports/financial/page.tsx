@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 
 import { OnlinePayment } from "./_components/online-payment"
 import { Overview } from "./_components/overview"
+import { RecentPayments } from "./_components/recent-payments"
 import { RevenueTrend } from "./_components/revenue"
 import { Sales } from "./_components/sales"
-import { RecentPayments } from "./_components/recent-payments"
 
 // Define metadata for the page
 // More info: https://nextjs.org/docs/app/building-your-application/optimizing/metadata

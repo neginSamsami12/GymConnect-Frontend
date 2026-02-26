@@ -4,11 +4,7 @@ import { Exercise } from "@/models/workout"
 
 import { Card } from "@/components/ui/card"
 
-export function MovementItem({
-  movement,
-}: {
-  movement: Exercise
-}) {
+export function MovementItem({ movement }: { movement: Exercise }) {
   return (
     <Card className="grid overflow-hidden mt-5" asChild>
       <li>
@@ -23,15 +19,11 @@ export function MovementItem({
         <div className="flex justify-between bg-accent p-2 truncate">
           <p className="text-accent-foreground">
             <span className="text-muted-foreground">تعداد ست: </span>
-            <span className="font-semibold">
-              {movement.sets}
-            </span>
+            <span className="font-semibold">{movement.sets}</span>
           </p>
           <p className="text-accent-foreground">
             <span className="text-muted-foreground">تعداد تکرار: </span>
-            <span className="font-semibold">
-              {movement.reps}
-            </span>
+            <span className="font-semibold">{movement.reps}</span>
           </p>
         </div>
       </li>

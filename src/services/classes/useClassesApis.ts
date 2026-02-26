@@ -35,7 +35,7 @@ export const useGetClassesInfoMutate = () => {
     {
       id: string
     }
-    >({
+  >({
     mutationKey: ["GetClassesInfoMutate"],
     mutationFn: ({ id }) => getClassInfo(id),
   })

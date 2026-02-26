@@ -1,5 +1,8 @@
 "use client"
 
+import { useState } from "react"
+import { Exercise } from "@/models/workout"
+import { useCreateWorkout } from "@/services/workout/useWorkoutApis"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
@@ -28,9 +31,6 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { MovementList } from "../../_components/movement-list"
 import { AddMovement } from "./add-movement"
-import { Exercise } from "@/models/workout"
-import { useState } from "react"
-import { useCreateWorkout } from "@/services/workout/useWorkoutApis"
 
 type FormType = z.infer<typeof DesignFormsSchema>
 
@@ -50,26 +50,28 @@ export function DesignForm() {
   const { mutate } = useCreateWorkout()
 
   const handleAddExercise = (exercise: Exercise) => {
-    setExercises(prevExercises => [...prevExercises,
-    {
-      index: prevExercises.length,
-      ...exercise,
-    }
-    ]);
+    setExercises((prevExercises) => [
+      ...prevExercises,
+      {
+        index: prevExercises.length,
+        ...exercise,
+      },
+    ])
   }
 
   async function onSubmit(_data: FormType) {
-    mutate({
+    mutate(
+      {
         title: _data.title,
         athleteId: _data.athlete,
         exercises,
         description: _data.description,
-
-      }, {
+      },
+      {
         onSuccess: () => {
           setExercises([])
           form.reset()
-        }
+        },
       }
     )
   }
@@ -92,19 +94,26 @@ export function DesignForm() {
                 <FormItem>
                   <FormLabel>ورزشکار</FormLabel>
                   <FormControl>
-                    <Select
-                      onValueChange={field.onChange}
-                      value={field.value}
-                    >
+                    <Select onValueChange={field.onChange} value={field.value}>
                       <SelectTrigger className="col-start-3 col-span-full md:col-start-2">
                         <SelectValue placeholder="ورزشکار مورد نظر را انتخاب کنید" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="5ac3d10e-4868-4c43-957e-8fc3d308d5c1">علی حمدی</SelectItem>
-                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa6">نگین صمصامی</SelectItem>
-                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa7">محمد اسدی</SelectItem>
-                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa8">فاطمه احمدی</SelectItem>
-                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa9">رسول باقری</SelectItem>
+                        <SelectItem value="5ac3d10e-4868-4c43-957e-8fc3d308d5c1">
+                          علی حمدی
+                        </SelectItem>
+                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa6">
+                          نگین صمصامی
+                        </SelectItem>
+                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa7">
+                          محمد اسدی
+                        </SelectItem>
+                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa8">
+                          فاطمه احمدی
+                        </SelectItem>
+                        <SelectItem value="3fa85f64-5717-4562-b3fc-2c963f66afa9">
+                          رسول باقری
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   </FormControl>

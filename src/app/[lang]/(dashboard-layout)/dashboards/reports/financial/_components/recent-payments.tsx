@@ -11,11 +11,8 @@ export function RecentPayments() {
     <DashboardCard
       title="پرداختی‌های اخیر "
       description={RecentPaymentsData.period}
-      action={<DashboardCardActionsDropdown />}
     >
-      <TopSalesRepresentativesList
-        data={RecentPaymentsData.payments}
-      />
+      <TopSalesRepresentativesList data={RecentPaymentsData.payments} />
     </DashboardCard>
   )
 }

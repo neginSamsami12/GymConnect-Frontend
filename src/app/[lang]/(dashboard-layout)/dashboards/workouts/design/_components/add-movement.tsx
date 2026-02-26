@@ -1,12 +1,17 @@
 "use client"
 
 import { useState } from "react"
+import { Exercise } from "@/models/workout"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
 import { useMedia } from "react-use"
+import { z } from "zod"
+
+import { ExerciseFormsSchema } from "../_schemas/exercise-form-schema"
 
 import { cn } from "@/lib/utils"
 
 import { Button, ButtonLoading } from "@/components/ui/button"
-import { z } from "zod"
 import {
   Dialog,
   DialogContent,
@@ -24,9 +29,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Exercise } from "@/models/workout"
 import {
   Form,
   FormControl,
@@ -35,10 +37,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { ExerciseFormsSchema } from "../_schemas/exercise-form-schema"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
 
 type Props = {
   submitFunction: (exercise: Exercise) => void
@@ -48,13 +49,15 @@ type Props = {
 export function AddMovement({ submitFunction }: Props) {
   const [open, setOpen] = useState(false)
   const isDesktop = useMedia("(min-width: 768px)")
-  
+
   return (
     <>
       {isDesktop ? (
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button type="button" variant="outline">افزودن حرکت جدید</Button>
+            <Button type="button" variant="outline">
+              افزودن حرکت جدید
+            </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
@@ -66,7 +69,9 @@ export function AddMovement({ submitFunction }: Props) {
       ) : (
         <Drawer open={open} onOpenChange={setOpen}>
           <DrawerTrigger asChild>
-            <Button type="button" variant="outline">افزودن حرکت جدید</Button>
+            <Button type="button" variant="outline">
+              افزودن حرکت جدید
+            </Button>
           </DrawerTrigger>
           <DrawerContent>
             <DrawerHeader className="text-left">
@@ -91,17 +96,16 @@ export function AddMovement({ submitFunction }: Props) {
 type FormType = z.infer<typeof ExerciseFormsSchema>
 
 function PopUpForm({ className, submitFunction }: Props) {
-
   const defaultValues: FormType = {
     exerciseName: "",
     description: "",
     reps: 0,
-    sets: 0
+    sets: 0,
   }
 
   const form = useForm<FormType>({
     resolver: zodResolver(ExerciseFormsSchema),
-    defaultValues
+    defaultValues,
   })
 
   const handleSubmit = (data: Exercise) => {
@@ -115,9 +119,7 @@ function PopUpForm({ className, submitFunction }: Props) {
   return (
     <>
       <Form {...form}>
-        <form
-          className={cn("grid items-start gap-4", className)}
-        >
+        <form className={cn("grid items-start gap-4", className)}>
           <FormField
             control={form.control}
             name="exerciseName"
@@ -138,7 +140,13 @@ function PopUpForm({ className, submitFunction }: Props) {
               <FormItem className="grid gap-2">
                 <FormLabel>تعداد ست</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="تعداد ست" {...field} min={1} max={3} />
+                  <Input
+                    type="number"
+                    placeholder="تعداد ست"
+                    {...field}
+                    min={1}
+                    max={3}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -151,7 +159,13 @@ function PopUpForm({ className, submitFunction }: Props) {
               <FormItem className="grid gap-2">
                 <FormLabel>تعداد تکرار</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="تعداد تکرار" {...field} min={5} max={15} />
+                  <Input
+                    type="number"
+                    placeholder="تعداد تکرار"
+                    {...field}
+                    min={5}
+                    max={15}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

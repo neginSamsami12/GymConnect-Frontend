@@ -1,9 +1,9 @@
 import { CreateUserRequest } from "@/services/users/mutations/createUsers"
 import { UpdateUserRequest } from "@/services/users/mutations/updateUsers"
+import { UserInfo } from "@/services/users/queries/getUsersList"
 
 import type { z } from "zod"
 import type { UserSchema } from "./_schemas/user-schema"
-import { UserInfo } from "@/services/users/queries/getUsersList"
 
 export interface UserContextType {
   addUserSidebarIsOpen: boolean

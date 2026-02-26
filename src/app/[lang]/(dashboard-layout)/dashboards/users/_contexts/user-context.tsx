@@ -3,14 +3,12 @@
 import { createContext, useState } from "react"
 import { CreateUserRequest } from "@/services/users/mutations/createUsers"
 import { UpdateUserRequest } from "@/services/users/mutations/updateUsers"
+import { UserInfo } from "@/services/users/queries/getUsersList"
 import { useCreateUser, useUpdateUser } from "@/services/users/useUsersApis"
 import { useQueryClient } from "@tanstack/react-query"
 
 import type { ReactNode } from "react"
-import type {
-  UserContextType,
-} from "../types"
-import { UserInfo } from "@/services/users/queries/getUsersList"
+import type { UserContextType } from "../types"
 
 export const UserContext = createContext<UserContextType | undefined>(undefined)
 
@@ -19,10 +17,11 @@ interface UserProviderProps {
 }
 
 export function UserProvider({ children }: UserProviderProps) {
-
   const [addUserSidebarIsOpen, setAddUserSidebarIsOpen] = useState(false)
   const [updateUserSidebarIsOpen, setUpdateUserSidebarIsOpen] = useState(false)
-  const [selectedUser, setSelectedUser] = useState<UserInfo | undefined>(undefined)
+  const [selectedUser, setSelectedUser] = useState<UserInfo | undefined>(
+    undefined
+  )
 
   const queryClient = useQueryClient()
   const addUserMutation = useCreateUser()
@@ -40,19 +39,20 @@ export function UserProvider({ children }: UserProviderProps) {
   }
 
   const handleUpdateUser = (user: UpdateUserRequest, id: string) => {
-    updateUserMutation.mutate({data: user, id: id}, {
-      onSuccess: (data) => {
-        queryClient.invalidateQueries({ queryKey: ["GetUserInfo"] })
-      },
-      onError: (error) => {
-        console.error("Error adding user:", error)
-      },
-    })
+    updateUserMutation.mutate(
+      { data: user, id: id },
+      {
+        onSuccess: (data) => {
+          queryClient.invalidateQueries({ queryKey: ["GetUserInfo"] })
+        },
+        onError: (error) => {
+          console.error("Error adding user:", error)
+        },
+      }
+    )
   }
 
-  const handleDeleteUser = (userId: UserInfo["id"]) => {
-    
-  }
+  const handleDeleteUser = (userId: UserInfo["id"]) => {}
 
   return (
     <UserContext.Provider

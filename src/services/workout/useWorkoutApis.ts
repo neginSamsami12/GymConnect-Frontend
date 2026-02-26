@@ -1,18 +1,28 @@
 "use client"
 
 import { UseMutationResult, useMutation, useQuery } from "@tanstack/react-query"
-import { createWorkout, CreateWorkoutRequest, CreateWorkoutResponse } from "./mutations/createWorkout"
-import { getWorkoutList, WorkoutInfoListResponse } from "./queries/getWorkoutsList"
+
+import {
+  CreateWorkoutRequest,
+  CreateWorkoutResponse,
+  createWorkout,
+} from "./mutations/createWorkout"
+import {
+  WorkoutInfoListResponse,
+  getWorkoutList,
+} from "./queries/getWorkoutsList"
 
 export const useCreateWorkout = (): UseMutationResult<
   CreateWorkoutResponse,
   Error,
   CreateWorkoutRequest
 > => {
-  const query = useMutation<CreateWorkoutResponse, Error, CreateWorkoutRequest>({
-    mutationKey: ["CreateWorkout"],
-    mutationFn: (data: CreateWorkoutRequest) => createWorkout(data),
-  })
+  const query = useMutation<CreateWorkoutResponse, Error, CreateWorkoutRequest>(
+    {
+      mutationKey: ["CreateWorkout"],
+      mutationFn: (data: CreateWorkoutRequest) => createWorkout(data),
+    }
+  )
 
   return query
 }

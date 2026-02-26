@@ -1,10 +1,11 @@
+import { z } from "zod"
+
 import type { LucideIcon, icons } from "lucide-react"
 import type { ComponentType, SVGAttributes } from "react"
 import type { i18n } from "./configs/i18n"
 import type { radii, themes } from "./configs/themes"
 
 import { SignInSchema } from "./schemas/sign-in-schema"
-import { z } from "zod"
 
 export type LayoutType = "vertical" | "horizontal"
 
@@ -38,20 +39,20 @@ export type IconType = ComponentType<IconProps> | LucideIcon
 export type DynamicIconNameType = keyof typeof icons
 
 export interface SelectType {
-  value: any;
-  label: any;
-};
+  value: any
+  label: any
+}
 
 export type Gender = "MALE" | "FEMALE"
 
 export interface GenderRecordType extends SelectType {
-  value: Gender;
-  label: string;
+  value: Gender
+  label: string
 }
 
 export const GenderRecords: GenderRecordType[] = [
   { value: "MALE", label: "مرد" },
-  { value: "FEMALE", label: "زن" }
+  { value: "FEMALE", label: "زن" },
 ]
 
 export interface UserType {

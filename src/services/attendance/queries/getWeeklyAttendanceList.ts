@@ -10,10 +10,12 @@ export interface AttendanceWeeklyInfo {
   firstName: string
   lastName: string
   className: string
-  date : string
+  date: string
 }
 
-export type AttendanceWeeklyInfoListResponse = ApiResponse<AttendanceWeeklyInfo[]>
+export type AttendanceWeeklyInfoListResponse = ApiResponse<
+  AttendanceWeeklyInfo[]
+>
 
 export async function getAttendanceWeeklyInfo() {
   const response = await baseAxios.get(

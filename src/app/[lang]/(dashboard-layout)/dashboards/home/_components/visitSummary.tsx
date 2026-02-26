@@ -6,11 +6,7 @@ import type { VisitOverTimeType } from "../types"
 
 import { Badge } from "@/components/ui/badge"
 
-export function VisitSummary({
-  data,
-}: {
-  data: VisitOverTimeType["summary"]
-}) {
+export function VisitSummary({ data }: { data: VisitOverTimeType["summary"] }) {
   return (
     <ul className="grid grid-cols-2 place-items-center gap-x-3">
       <li className="flex gap-x-2">

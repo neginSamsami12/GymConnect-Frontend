@@ -1,6 +1,7 @@
 import { BASE_URL, CONTROLLERS } from "@/configs/api-config"
-import { ApiResponse } from "../../apiTypes"
 import baseAxios from "@/configs/axios/BaseAxios"
+
+import { ApiResponse } from "../../apiTypes"
 
 export type LocalTimeInput =
   | string
@@ -33,7 +34,7 @@ function pickFirstFile(image?: File | FileList | null): File | undefined {
   if (!image) return undefined
   if (image instanceof File) return image
   // FileList
-  return image.length > 0 ? image.item(0) ?? undefined : undefined
+  return image.length > 0 ? (image.item(0) ?? undefined) : undefined
 }
 
 export async function createClass(req: CreateClassRequest) {
@@ -43,7 +44,10 @@ export async function createClass(req: CreateClassRequest) {
 
   const jsonData = {
     ...rest,
-    scheduleTime: rest.scheduleTime.length === 5 ? `${rest.scheduleTime}:00` : rest.scheduleTime,
+    scheduleTime:
+      rest.scheduleTime.length === 5
+        ? `${rest.scheduleTime}:00`
+        : rest.scheduleTime,
   }
 
   const form = new FormData()
@@ -57,6 +61,9 @@ export async function createClass(req: CreateClassRequest) {
     form.append("image", imageFile)
   }
 
-  const response = await baseAxios.post(`${BASE_URL}/${CONTROLLERS.CLASSES}`, form)
+  const response = await baseAxios.post(
+    `${BASE_URL}/${CONTROLLERS.CLASSES}`,
+    form
+  )
   return response.data
 }

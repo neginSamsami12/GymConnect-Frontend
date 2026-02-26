@@ -41,10 +41,7 @@ function PerformanceOverTimeActionButton() {
 
 export function VisitOverTime() {
   return (
-    <DashboardCard
-      title="آمار بازدید"
-      action={<PerformanceOverTimeActionButton />}
-    >
+    <DashboardCard title="آمار بازدید">
       <VisitSummary data={performanceOverTimeData.summary} />
       <VisitCharts data={performanceOverTimeData.performance} />
     </DashboardCard>

@@ -1,13 +1,10 @@
 "use client"
 
 import { Exercise } from "@/models/workout"
+
 import { MovementItem } from "./movement-item"
 
-export function MovementList({
-  data,
-}: {
-  data: Exercise[]
-}) {
+export function MovementList({ data }: { data: Exercise[] }) {
   return (
     <ul>
       {data.map((exercise) => (

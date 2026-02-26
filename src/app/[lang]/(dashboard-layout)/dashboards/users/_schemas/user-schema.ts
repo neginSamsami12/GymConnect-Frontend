@@ -1,7 +1,8 @@
 import { z } from "zod"
 
-import { MAX_SIZE } from "../constants"
 import { GenderRecords } from "@/types"
+
+import { MAX_SIZE } from "../constants"
 
 const FileSchema = z.object({
   id: z.string(),
@@ -37,14 +38,12 @@ export const UserSchema = z.object({
     .string()
     .trim()
     .length(11, { message: "شماره تلفن را به درستی وارد کنید." }),
-  email: z
-    .string()
-    .trim()
-    .email({ message: "ایمیل را به درستی وارد کنید." }),
-  birthDate: z.date({
-    required_error: "تاریخ تولد را وارد کنید.",
-    invalid_type_error: "تاریخ تولد نامعتبر است.",
-  })
+  email: z.string().trim().email({ message: "ایمیل را به درستی وارد کنید." }),
+  birthDate: z
+    .date({
+      required_error: "تاریخ تولد را وارد کنید.",
+      invalid_type_error: "تاریخ تولد نامعتبر است.",
+    })
     .max(new Date(), {
       message: "تاریخ تولد نامعتبر است.",
     }),

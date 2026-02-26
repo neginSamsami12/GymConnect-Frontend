@@ -6,6 +6,7 @@ import { useAttendanceRegistration } from "@/services/attendance/useAttendanceAp
 import { ClassInfo } from "@/services/classes/queries/getClassesList"
 import { useGetClassesInfoMutate } from "@/services/classes/useClassesApis"
 import { useGetUserInfo } from "@/services/users/useUsersApis"
+import { useQueryClient } from "@tanstack/react-query"
 import { useMedia } from "react-use"
 
 import type { ComponentProps } from "react"
@@ -37,7 +38,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { useQueryClient } from "@tanstack/react-query"
 
 type UserSelectItem = {
   id: string
@@ -165,7 +165,7 @@ function ProfileForm({
 
   function handleSubmit(e: any) {
     e.preventDefault() // جلوگیری از رفرش شدن صفحه
-    
+
     const data = {
       userId: selectedUserId,
       classId: selectedClassId,
@@ -173,9 +173,9 @@ function ProfileForm({
     mutation.mutate(data, {
       onSuccess: (data) => {
         queryClient.invalidateQueries({ queryKey: ["GetAttendanceInfo"] })
-      }
+      },
     })
-    }
+  }
 
   return (
     <form

@@ -1,14 +1,14 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useGetClassesInfo } from "@/services/classes/useClassesApis"
 import { Plus } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { ClassCard } from "./_components/classCard"
-import { useGetClassesInfo } from "@/services/classes/useClassesApis"
 
 export default function BasicCardsPage() {
-  const { data } = useGetClassesInfo();
+  const { data } = useGetClassesInfo()
   const router = useRouter()
 
   return (

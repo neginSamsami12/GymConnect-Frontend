@@ -38,11 +38,7 @@ function ModifiedChartTooltipContent(
   )
 }
 
-export function RevenueChart({
-  data,
-}: {
-  data: RevenueType["revenueTrends"]
-}) {
+export function RevenueChart({ data }: { data: RevenueType["revenueTrends"] }) {
   const radius = useRadius()
   const isRtl = useIsRtl()
 

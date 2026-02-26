@@ -2,9 +2,8 @@
 
 import { useGetSummaryReportsInfo } from "@/services/reports/useReportsApis"
 import { BadgePercent, HandCoins, Users } from "lucide-react"
-import {
-  DashboardOverviewCard,
-} from "@/components/dashboards/dashboard-card"
+
+import { DashboardOverviewCard } from "@/components/dashboards/dashboard-card"
 
 export function Overview() {
   const { data } = useGetSummaryReportsInfo()

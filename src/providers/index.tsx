@@ -1,13 +1,14 @@
+import { QueryClientProvider } from "@tanstack/react-query"
+
 import type { DirectionType, LocaleType } from "@/types"
 import type { ReactNode } from "react"
 
-import { QueryClientProvider } from '@tanstack/react-query';
+import QueryProvider from "@/contexts/query-context"
 import { SettingsProvider } from "@/contexts/settings-context"
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { DirectionProvider } from "./direction-provider"
 import { ModeProvider } from "./mode-provider"
 import { ThemeProvider } from "./theme-provider"
-import QueryProvider from "@/contexts/query-context"
 
 export function Providers({
   locale,
@@ -19,7 +20,7 @@ export function Providers({
   children: ReactNode
 }>) {
   return (
-     <QueryProvider>
+    <QueryProvider>
       <SettingsProvider locale={locale}>
         <ModeProvider>
           <ThemeProvider>
@@ -29,6 +30,6 @@ export function Providers({
           </ThemeProvider>
         </ModeProvider>
       </SettingsProvider>
-     </QueryProvider>
+    </QueryProvider>
   )
 }
