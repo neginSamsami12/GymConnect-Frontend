@@ -11,7 +11,6 @@ export function CustomerInsights() {
     <DashboardCard
       title="آمار کاربران"
       description={customerInsightsData.period}
-      action={<DashboardCardActionsDropdown />}
       size="xs"
       className="md:col-span-3"
       contentClassName="justify-center"

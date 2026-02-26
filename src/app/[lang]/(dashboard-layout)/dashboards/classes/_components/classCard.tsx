@@ -1,7 +1,11 @@
 import Image from "next/image"
 import { ClassInfo } from "@/services/classes/queries/getClassesList"
 
-import { formatCurrency, formatDateShort, formatTime } from "@/lib/utils"
+import {
+  formatCurrency,
+  formatDateJalali,
+  formatIranTime,
+} from "@/lib/utils"
 
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Button } from "@/components/ui/button"
@@ -54,7 +58,9 @@ export function ClassCard({ data }: { data: ClassInfo }) {
                 <span className="text-xs font-medium text-orange-600">
                   ساعت برگزاری
                 </span>
-                <span className="text-sm">{formatTime(data.scheduleTime)}</span>
+                <span className="text-sm">
+                  {formatIranTime(data.scheduleTime)}
+                </span>
               </div>
 
               {/* Duration */}
@@ -63,7 +69,8 @@ export function ClassCard({ data }: { data: ClassInfo }) {
                   مدت دوره
                 </span>
                 <span className="text-sm">
-                  {data.startDate} تا {data.endDate}
+                  {formatDateJalali(data.startDate)} تا{" "}
+                  {formatDateJalali(data.endDate)}
                 </span>
               </div>
             </div>

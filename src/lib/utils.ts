@@ -1,12 +1,20 @@
 import { clsx } from "clsx"
 import { format, formatDistanceToNow, intervalToDuration } from "date-fns"
-// import dayjs from "dayjs"
-// import jalaali from "dayjs-jalali"
+import dayjs from "dayjs"
+import jalaliday from "jalaliday"
+
+import "dayjs/locale/fa"
+
 import { twMerge } from "tailwind-merge"
 import { z } from "zod"
 
 import type { FormatStyleType, LocaleType, SelectType } from "@/types"
 import type { ClassValue } from "clsx"
+
+dayjs.extend(jalaliday)
+dayjs.locale("fa")
+
+export default dayjs
 
 // dayjs.extend(jalaali);
 
@@ -103,16 +111,8 @@ export function ratingToPercentage(
   return result
 }
 
-export function formatCurrency(
-  value: number,
-  locales: LocaleType = "fa",
-  currency: string = "USD"
-) {
-  return new Intl.NumberFormat(locales, {
-    style: "currency",
-    currency,
-    maximumFractionDigits: 0,
-  }).format(value)
+export function formatCurrency(value: number) {
+  return `${new Intl.NumberFormat("fa-IR").format(value)} تومان`
 }
 
 export function formatPercent(value: number, locales: LocaleType = "en") {
@@ -154,6 +154,46 @@ export function formatDuration(value: string | number | Date) {
   const formattedDuration = `${hours} ${minutes} ${seconds}`.trim()
 
   return isNegative ? `-${formattedDuration}` : formattedDuration
+}
+
+export function formatDateJalali(value: string | number | Date) {
+  const date = new Date(value)
+
+  return new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "Asia/Tehran",
+  }).format(date)
+}
+
+export function formatIranTime(value: string | number | Date) {
+  if (
+    typeof value === "string" &&
+    value.includes(":") &&
+    !value.includes("T")
+  ) {
+    const [h, m, s] = value.split(":").map((x) => Number(x))
+    const date = new Date()
+    date.setHours(h || 0, m || 0, s || 0, 0)
+
+    return new Intl.DateTimeFormat("fa-IR", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone: "Asia/Tehran",
+    }).format(date)
+  }
+
+  const date = value instanceof Date ? value : new Date(value)
+  if (Number.isNaN(date.getTime())) return "—"
+
+  return new Intl.DateTimeFormat("fa-IR", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    timeZone: "Asia/Tehran",
+  }).format(date)
 }
 
 export function formatDistance(value: string | number | Date) {

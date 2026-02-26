@@ -1,9 +1,9 @@
 "use client"
 
+import { UserInfo } from "@/services/users/queries/getUsersList"
 import { EllipsisVertical } from "lucide-react"
 
 import type { Row } from "@tanstack/react-table"
-import { UserInfo } from "@/services/users/queries/getUsersList"
 
 import { useUserContext } from "../_hooks/use-user-context"
 import { Button } from "@/components/ui/button"
@@ -23,11 +23,8 @@ export function UsersInfoTableRowActions<TData>({
 }: UsersInfoTableRowActionsProps<TData>) {
   const user = row.original as UserInfo
 
-  const {
-    setUpdateUserSidebarIsOpen,
-    setSelectedUser,
-    handleDeleteUser,
-  } = useUserContext()
+  const { setUpdateUserSidebarIsOpen, setSelectedUser, handleDeleteUser } =
+    useUserContext()
 
   return (
     <div className="flex justify-end me-4">

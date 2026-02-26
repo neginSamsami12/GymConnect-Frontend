@@ -43,7 +43,7 @@ export const UsersInfoTableColumns: ColumnDef<UsersInfoColumnType>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "profilePicture",
+    accessorKey: "تصویر کاربر",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="تصویر کاربر" />
     ),
@@ -54,13 +54,12 @@ export const UsersInfoTableColumns: ColumnDef<UsersInfoColumnType>[] = [
     },
   },
   {
-    accessorKey: "fullName",
+    accessorKey: "نام",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="نام" />
     ),
     cell: ({ row }) => {
-      const customerName =
-        `${row.original.firstName} ${row.original.lastName}`
+      const customerName = `${row.original.firstName} ${row.original.lastName}`
 
       return (
         <span className="inline-block max-w-44 break-all truncate">
@@ -70,7 +69,7 @@ export const UsersInfoTableColumns: ColumnDef<UsersInfoColumnType>[] = [
     },
   },
   {
-    accessorKey: "registrationDate",
+    accessorKey: "تاریخ ثبت نام",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="تاریخ ثبت نام" />
     ),

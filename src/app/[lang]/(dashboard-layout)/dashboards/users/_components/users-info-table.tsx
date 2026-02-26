@@ -83,9 +83,9 @@ export function UsersInfoTable() {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   ))}
                 </TableRow>
@@ -114,7 +114,7 @@ export function UsersInfoTable() {
                     colSpan={UsersInfoTableColumns.length}
                     className="h-24 text-center"
                   >
-                    No results.
+                    نتیجه ای یافت نشد{" "}
                   </TableCell>
                 </TableRow>
               )}

@@ -26,12 +26,12 @@ export function DataTablePagination<TData>({
   return (
     <div className="flex flex-col items-center justify-between gap-2 py-4 md:flex-row">
       <div className="flex-1 text-sm text-muted-foreground">
-        {table.getFilteredSelectedRowModel().rows.length} of{" "}
-        {table.getFilteredRowModel().rows.length} row(s) selected.
+        {table.getFilteredSelectedRowModel().rows.length} از{" "}
+        {table.getFilteredRowModel().rows.length} ردیف انتخاب شده.
       </div>
       <div className="flex items-center gap-x-6">
         <div className="hidden items-center gap-x-2 md:flex">
-          <p className="text-sm font-medium">Rows per page</p>
+          <p className="text-sm font-medium">ردیف ها </p>
           <Select
             value={`${table.getState().pagination.pageSize}`}
             onValueChange={(value) => {
@@ -65,7 +65,7 @@ export function DataTablePagination<TData>({
             className="h-8 w-8 p-0"
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
-            aria-label="Go to first page"
+            aria-label="برو به صفحه اول"
           >
             <ChevronsLeft className="h-4 w-4" />
           </Button>
@@ -74,7 +74,7 @@ export function DataTablePagination<TData>({
             className="h-8 w-8 p-0"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
-            aria-label="Go to previous page"
+            aria-label="صفحه قبلی"
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
@@ -83,7 +83,7 @@ export function DataTablePagination<TData>({
             className="h-8 w-8 p-0"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
-            aria-label="Go to next page"
+            aria-label="صفحه بعدی"
           >
             <ChevronRight className="h-4 w-4" />
           </Button>
@@ -92,7 +92,7 @@ export function DataTablePagination<TData>({
             className="h-8 w-8 p-0"
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}
-            aria-label="Go to last page"
+            aria-label="آخرین صفحه"
           >
             <ChevronsRight className="h-4 w-4" />
           </Button>

@@ -1,5 +1,6 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { CreateClassRequest } from "@/services/classes/mutations/createClasses"
 import { useCreateClass } from "@/services/classes/useClassesApis"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -26,7 +27,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { useRouter } from "next/navigation"
 
 type FormType = CreateClassRequest
 
@@ -45,7 +45,7 @@ export function ClassForm() {
 
   async function onSubmit(data: FormType) {
     mutation.mutate(data, {
-      onSuccess: () => router.push("/dashboards/classes")
+      onSuccess: () => router.push("/dashboards/classes"),
     })
   }
 

@@ -11,7 +11,6 @@ export function Sales() {
     <DashboardCard
       title="روند فروش"
       description={salesTrendData.period}
-      action={<DashboardCardActionsDropdown />}
       className="col-span-full md:col-span-3"
     >
       <SalesChart data={salesTrendData} />

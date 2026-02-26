@@ -52,16 +52,16 @@ export function DataTableColumnHeader<TData, TValue>({
         <DropdownMenuContent align="start">
           <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
             <ArrowUp className="me-2 h-4 w-4 text-muted-foreground/70" />
-            Asc
+            افزایش
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
             <ArrowDown className="me-2 h-4 w-4 text-muted-foreground/70" />
-            Desc
+            کاهش
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
             <EyeOff className="me-2 h-4 w-4 text-muted-foreground/70" />
-            Hide
+            مخفی کردن
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

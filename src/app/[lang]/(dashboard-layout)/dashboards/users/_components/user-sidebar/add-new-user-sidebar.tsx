@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form"
 import { Grid2x2Plus } from "lucide-react"
 
 import type { AddUserFormType } from "../../types"
+import { Gender, GenderRecords } from "@/types"
 
 import { UserSchema } from "../../_schemas/user-schema"
 
@@ -38,7 +39,6 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet"
 import { Textarea } from "@/components/ui/textarea"
-import { Gender, GenderRecords } from "@/types"
 
 const defaultValues = {
   firstName: "",
@@ -75,9 +75,15 @@ export function AddUserSidebar() {
   function onSubmit(data: AddUserFormType) {
     const payload = {
       ...data,
-      image: Array.isArray(data.image) && data.image.length > 0 && data.image[0] instanceof File ? data.image[0] : undefined,
+      image:
+        Array.isArray(data.image) &&
+        data.image.length > 0 &&
+        data.image[0] instanceof File
+          ? data.image[0]
+          : undefined,
       birthDate: data.birthDate ? data.birthDate.toISOString() : "",
-      gender: GenderRecords.find(g => g.label === data.gender)?.value as Gender,
+      gender: GenderRecords.find((g) => g.label === data.gender)
+        ?.value as Gender,
     }
     handleAddUser(payload)
 

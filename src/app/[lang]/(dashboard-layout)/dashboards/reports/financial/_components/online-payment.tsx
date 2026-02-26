@@ -12,7 +12,6 @@ export function OnlinePayment() {
     <DashboardCard
       title="پرداخت آنلاین"
       description={onlinePaymentnData.period}
-      action={<DashboardCardActionsDropdown />}
       contentClassName="h-auto items-center gap-6 md:h-64 md:flex-row"
     >
       <CustomerSatisfactionChart data={onlinePaymentnData.summary} />
