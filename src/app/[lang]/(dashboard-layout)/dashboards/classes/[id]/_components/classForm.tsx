@@ -4,7 +4,10 @@ import { useRouter } from "next/navigation"
 import { CreateClassRequest } from "@/services/classes/mutations/createClasses"
 import { useCreateClass } from "@/services/classes/useClassesApis"
 import { zodResolver } from "@hookform/resolvers/zod"
+import persian from "react-date-object/calendars/persian"
+import persian_fa from "react-date-object/locales/persian_fa"
 import { useForm } from "react-hook-form"
+import DatePicker from "react-multi-date-picker"
 
 import { FormLayoutsSchema } from "../_schemas/form-layouts-schema"
 
@@ -210,25 +213,47 @@ export function ClassForm() {
                   <FormLabel className="col-span-2 md:col-span-1">
                     تاریخ شروع
                   </FormLabel>
-                  <FormControl className="col-start-3 col-span-full md:col-start-2">
-                    <Input type="date" placeholder="123 Main St" {...field} />
+
+                  <FormControl className="col-start-3 col-span-full md:col-start-2 w-full">
+                    <div className="w-full">
+                      <DatePicker
+                        calendar={persian}
+                        locale={persian_fa}
+                        value={field.value}
+                        onChange={(date) => field.onChange(date?.toDate())}
+                        calendarPosition="bottom-right"
+                        containerClassName="w-full"
+                        inputClass="w-full h-10 px-3 rounded-md border bg-background"
+                      />
+                    </div>
                   </FormControl>
+
                   <FormMessage className="col-start-3 col-span-full md:col-start-2" />
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="endDate"
               render={({ field }) => (
                 <FormItem className="grid grid-cols-8 items-center gap-x-3">
                   <FormLabel className="col-span-2 md:col-span-1">
-                    تاریخ پابان
+                    تاریخ پایان
                   </FormLabel>
-                  <FormControl className="col-start-3 col-span-full md:col-start-2">
-                    <Input type="date" placeholder="تاریخ پابان" {...field} />
+                  <FormControl className="col-start-3 col-span-full md:col-start-2 w-full">
+                    <div className="w-full">
+                      <DatePicker
+                        calendar={persian}
+                        locale={persian_fa}
+                        value={field.value}
+                        onChange={(date) => field.onChange(date?.toDate())}
+                        calendarPosition="bottom-right"
+                        containerClassName="w-full"
+                        inputClass="w-full h-10 px-3 rounded-md border bg-background"
+                      />
+                    </div>
                   </FormControl>
+
                   <FormMessage className="col-start-3 col-span-full md:col-start-2" />
                 </FormItem>
               )}

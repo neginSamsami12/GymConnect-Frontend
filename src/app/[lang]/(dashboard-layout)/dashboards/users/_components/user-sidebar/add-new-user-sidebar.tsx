@@ -2,12 +2,14 @@
 
 import { useEffect, useMemo } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
+
 import { useForm } from "react-hook-form"
 import { Grid2x2Plus } from "lucide-react"
 
+import type { Locale } from "date-fns"
 import type { AddUserFormType } from "../../types"
 import { Gender, GenderRecords } from "@/types"
-
+import { toJalaali } from "jalaali-js"
 import { UserSchema } from "../../_schemas/user-schema"
 
 import { useUserContext } from "../../_hooks/use-user-context"
@@ -216,9 +218,8 @@ export function AddUserSidebar() {
                     <FormLabel>تاریخ تولد</FormLabel>
                     <FormControl>
                       <DatePicker
-                        formatStr="PPP"
                         onValueChange={field.onChange}
-                        {...field}
+                        value={field.value}
                         placeholder="تاریخ را وارد کنید"
                       />
                     </FormControl>

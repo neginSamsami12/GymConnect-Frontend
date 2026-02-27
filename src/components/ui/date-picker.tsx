@@ -1,72 +1,67 @@
 "use client"
 
-import { format } from "date-fns"
+import DateObject from "react-date-object"
+import persian from "react-date-object/calendars/persian"
+import persian_fa from "react-date-object/locales/persian_fa"
+import { Calendar as JalaliCalendar } from "react-multi-date-picker"
 import { CalendarIcon } from "lucide-react"
-
-import type { ComponentProps } from "react"
 
 import { cn } from "@/lib/utils"
 
 import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-type DatePickerProps = Omit<
-  ComponentProps<typeof Calendar>,
-  "mode" | "selected" | "onSelect"
-> & {
+type DatePickerProps = {
   value?: Date
   onValueChange?: (date?: Date) => void
-  formatStr?: string
-  popoverContentClassName?: string
-  popoverContentOptions?: ComponentProps<typeof PopoverContent>
-  buttonClassName?: string
-  buttonOptions?: ComponentProps<typeof Button>
   placeholder?: string
+  buttonClassName?: string
 }
 
 export function DatePicker({
   value,
   onValueChange,
-  formatStr = "yyyy-MM-dd",
-  popoverContentClassName,
-  popoverContentOptions,
+  placeholder = "انتخاب تاریخ",
   buttonClassName,
-  buttonOptions,
-  placeholder = "Pick date",
-  ...props
 }: DatePickerProps) {
+  const formattedValue = value
+    ? new DateObject({
+        date: value,
+        calendar: persian,
+        locale: persian_fa,
+      }).format("YYYY/MM/DD")
+    : ""
+
   return (
     <Popover modal>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
           className={cn("w-full px-3 text-start font-normal", buttonClassName)}
-          {...buttonOptions}
         >
           {value ? (
-            <span>{format(value, formatStr)}</span>
+            <span>{formattedValue}</span>
           ) : (
             <span className="text-muted-foreground">{placeholder}</span>
           )}
           <CalendarIcon className="shrink-0 h-4 w-4 ms-auto text-muted-foreground" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent
-        className={cn("w-auto p-0", popoverContentClassName)}
-        align="start"
-        {...popoverContentOptions}
-      >
-        <Calendar
-          mode="single"
-          selected={value}
-          onSelect={onValueChange}
-          {...props}
-        />
+
+      <PopoverContent className="w-auto p-2" align="start">
+        <div dir="rtl">
+          <JalaliCalendar
+            calendar={persian}
+            locale={persian_fa}
+            value={value}
+            onChange={(d: any) => onValueChange?.(d?.toDate?.())}
+            weekDays={["ش", "ی", "د", "س", "چ", "پ", "ج"]}
+          />
+        </div>
       </PopoverContent>
     </Popover>
   )

@@ -56,7 +56,7 @@ export function DataTablePagination<TData>({
           </Select>
         </div>
         <div className="flex items-center justify-center text-sm font-medium">
-          Page {table.getState().pagination.pageIndex + 1} of{" "}
+          صفحه {table.getState().pagination.pageIndex + 1} از{" "}
           {table.getPageCount()}
         </div>
         <div className="flex items-center gap-x-2 rtl:[&>button>svg]:-scale-100">

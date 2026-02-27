@@ -5,7 +5,7 @@ import { ShieldCheck, ShieldMinus } from "lucide-react"
 import type { ColumnDef } from "@tanstack/react-table"
 import type { UsersInfoColumnType } from "../types"
 
-import { formatDate } from "@/lib/utils"
+import { formatDate, formatDateJalali } from "@/lib/utils"
 
 import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -76,7 +76,7 @@ export const UsersInfoTableColumns: ColumnDef<UsersInfoColumnType>[] = [
     cell: ({ row }) => {
       const registerDate = row.original.registrationDate as string
 
-      return registerDate ? formatDate(registerDate) : null
+      return registerDate ? formatDateJalali(registerDate) : null
     },
   },
   {

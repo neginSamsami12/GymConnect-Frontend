@@ -2,6 +2,8 @@
 
 import { useAttendanceWeeklyInfo } from "@/services/attendance/useAttendanceApis"
 
+import { formatDateJalali } from "@/lib/utils"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Table,
@@ -38,7 +40,9 @@ export default function AttendanceReport() {
                 <TableCell className="font-medium">{info.firstName}</TableCell>
                 <TableCell>{info.lastName}</TableCell>
                 <TableCell>{info.className}</TableCell>
-                <TableCell className="text-right">{info.date}</TableCell>
+                <TableCell className="text-right">
+                  {formatDateJalali(info.date)}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

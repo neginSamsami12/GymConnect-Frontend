@@ -18,7 +18,7 @@ import {
 
 const chartConfig = {
   revenue: {
-    label: "Revenue",
+    label: "درآمد",
   },
 } satisfies ChartConfig
 

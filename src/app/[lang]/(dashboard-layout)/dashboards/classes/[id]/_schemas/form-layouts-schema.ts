@@ -45,11 +45,11 @@ export const FormLayoutsSchema = z.object({
     .min(2, { message: "هزینه باید حداقل 2 کاراکتر باشد." })
     .max(50, { message: "هزینه باید حداکثر 50 کاراکتر باشد." }),
 
-  startDate: z.string({
+  startDate: z.date({
     required_error: "تاریخ شروع الزامی است.",
   }),
 
-  endDate: z.string({
+  endDate: z.date({
     required_error: "تاریخ پایان الزامی است.",
   }),
 
