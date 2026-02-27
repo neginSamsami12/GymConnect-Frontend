@@ -14,6 +14,7 @@ import {
 } from "./mutations/updateUsers"
 import { UserInfoResponse, getUserById } from "./queries/getUserById"
 import { UserInfoListResponse, getUserInfo } from "./queries/getUsersList"
+import { deleteUser } from "./mutations/deleteUsers"
 
 export const useCreateUser = (): UseMutationResult<
   CreateUserResponse,
@@ -39,6 +40,19 @@ export const useUpdateUser = () => {
   >({
     mutationKey: ["UpdateUser"],
     mutationFn: ({ id, data }) => updateUser(id, data),
+  })
+}
+
+export const useDeleteUser = () => {
+  return useMutation<
+    string,
+    Error,
+    {
+      id: string
+    }
+  >({
+    mutationKey: ["DeleteUser"],
+    mutationFn: ({ id }) => deleteUser(id),
   })
 }
 

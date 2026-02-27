@@ -7,6 +7,7 @@ import type { Row } from "@tanstack/react-table"
 
 import { useUserContext } from "../_hooks/use-user-context"
 import { Button } from "@/components/ui/button"
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -48,7 +49,12 @@ export function UsersInfoTableRowActions<TData>({
           >
             ویرایش
           </DropdownMenuItem>
-          <DropdownMenuItem className="text-destructive focus:text-destructive">
+          <DropdownMenuItem
+            className="text-destructive focus:text-destructive"
+            onClick={() => {
+              handleDeleteUser(user.id)
+            }}
+          >
             حذف
           </DropdownMenuItem>
         </DropdownMenuContent>
